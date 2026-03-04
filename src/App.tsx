@@ -27,78 +27,76 @@ interface Service {
 }
 
 const services: Service[] = [
-  { name: "1 pregunta · live", category: "🔴 Live", priceSoles: 8, priceUSD: null, emoji: "🔴" },
-  { name: "Pack 2 preguntas · live", category: "🔴 Live", priceSoles: 10, priceUSD: null, emoji: "🔴" },
   { name: "1 pregunta privada", category: "✦ General", priceSoles: 12, priceUSD: 6, emoji: "✦" },
   { name: "Sesión 20 minutos ⭐", category: "✦ General", priceSoles: 30, priceUSD: 18, emoji: "⭐" },
   { name: "Sesión 45 minutos", category: "✦ General", priceSoles: 50, priceUSD: 30, emoji: "✦" },
   { 
     name: "Tirada del ex", 
-    category: "💗 Amor", 
+    category: "💘 Amor", 
     priceSoles: 20, 
     priceUSD: 10, 
-    emoji: "💗",
+    emoji: "💘",
     description: "Ideal para comprender conexiones que aún no cierran: Qué siente, Qué piensa, Si tiene intención de volver."
   },
   { 
     name: "Tirada de pretendientes", 
-    category: "💗 Amor", 
+    category: "💘 Amor", 
     priceSoles: 20, 
     priceUSD: 10, 
-    emoji: "💗",
+    emoji: "💘",
     description: "Explora las intenciones y sentimientos de hasta 2 personas: Qué sienten por ti, Qué intenciones tiene cada uno, Cuál te conviene más."
   },
   { 
     name: "Tirada del \"casi algo\"", 
-    category: "💗 Amor", 
+    category: "💘 Amor", 
     priceSoles: 20, 
     priceUSD: 10, 
-    emoji: "💗",
+    emoji: "💘",
     description: "Para aclarar vínculos inciertos o en pausa: Qué siente, Qué piensa, Si desea formalizar, Si hay terceros..."
   },
   { 
     name: "Tirada de pareja", 
-    category: "💗 Amor", 
+    category: "💘 Amor", 
     priceSoles: 20, 
     priceUSD: 10, 
-    emoji: "💗",
+    emoji: "💘",
     description: "Conoce la energía de tu relación actual: Qué siente tu pareja, Qué piensa sobre la relación y cómo te ve."
   },
   { 
     name: "Tirada general", 
-    category: "✨ Rápidas", 
+    category: "🔮 Estratégicas", 
     priceSoles: 20, 
     priceUSD: 6, 
-    emoji: "✨",
+    emoji: "🔮",
     description: "Conoce el estado actual de tu energía e influencias: Energía personal, Bloqueos o cargas presentes, Qué estás atrayendo en este momento."
   },
   { 
     name: "Tirada del mes", 
-    category: "✨ Rápidas", 
+    category: "🔮 Estratégicas", 
     priceSoles: 20, 
     priceUSD: 6, 
-    emoji: "✨",
+    emoji: "🔮",
     description: "Ideal para recibir una guía para el mes en curso: Energía predominante del mes, Aspectos destacados, Desafíos y oportunidades."
   },
   { 
     name: "Tirada de evolución personal", 
-    category: "✨ Rápidas", 
+    category: "🔮 Estratégicas", 
     priceSoles: 20, 
     priceUSD: 6, 
-    emoji: "✨",
+    emoji: "🔮",
     description: "Explora los cambios que estás atravesando: Energía de tu proceso actual, Qué estás dejando atrás, Qué estás llamado/a a integrar."
   },
   { 
     name: "Tirada de futuro cercano", 
-    category: "✨ Rápidas", 
+    category: "🔮 Estratégicas", 
     priceSoles: 20, 
     priceUSD: 6, 
-    emoji: "✨",
+    emoji: "🔮",
     description: "Dónde se dirige tu energía próximamente: Situación actual, Influencias o caminos posibles, Resultado o panorama probable."
   },
 ];
 
-const categories = ["🔴 Live", "✦ General", "💗 Amor", "✨ Rápidas"];
+const categories = ["✦ General", "💘 Amor", "🔮 Estratégicas"];
 
 interface PriceItemProps {
   service: Service;
@@ -144,10 +142,12 @@ export default function App() {
   const [view, setView] = useState<View>('home');
   const [currency, setCurrency] = useState<'PEN' | 'USD'>('PEN');
   const [copied, setCopied] = useState(false);
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
   const handleSelectCurrency = (curr: 'PEN' | 'USD') => {
     setCurrency(curr);
     setView('pricing');
+    setExpandedCategory(null);
   };
 
   const copyToClipboard = () => {
@@ -273,38 +273,75 @@ export default function App() {
 
                 if (!hasVisibleServices) return null;
 
+                const isGeneral = cat === "✦ General";
+                const isExpanded = expandedCategory === cat || isGeneral;
+
                 return (
                   <div key={cat} className="flex flex-col gap-2">
-                    <div className="px-1 flex items-center gap-2">
-                      <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#787774] opacity-70">
-                        {cat.split(' ')[1] || cat}
-                      </h2>
-                      <div className="h-[1px] flex-1 bg-[#E9E9E7]" />
-                    </div>
-                    {cat === "🔴 Live" && (
-                      <div className="px-1 mb-1">
-                        <p className="text-[12px] text-[#787774] leading-relaxed italic">
-                          Envía un mensaje con tu nombre, fecha de nacimiento, tu pregunta y la captura de pago. Recibirás la respuesta en un audio.
-                        </p>
-                      </div>
-                    )}
-                    {cat === "✦ General" && (
-                      <div className="px-1 mb-1">
-                        <p className="text-[12px] text-[#787774] leading-relaxed italic">
-                          Las preguntas son privadas y personalizadas según tu situación.
-                          La lectura se envía mediante nota de audio, donde se explica detalladamente la tirada y los mensajes que aparecen.
-                          <br /><br />
-                          Las sesiones se agendan previamente, coordinando un horario disponible para ambas partes.
-                        </p>
-                      </div>
-                    )}
-                    <div className="flex flex-col gap-1.5">
-                      {filteredServices.map((service) => (
-                        <div key={service.name}>
-                          <PriceItem service={service} currency={currency} />
+                    {isGeneral ? (
+                      <>
+                        <div className="px-1 flex items-center gap-2">
+                          <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#787774] opacity-70">
+                            {cat.split(' ')[1] || cat}
+                          </h2>
+                          <div className="h-[1px] flex-1 bg-[#E9E9E7]" />
                         </div>
-                      ))}
-                    </div>
+                        <div className="px-1 mb-1">
+                          <p className="text-[12px] text-[#787774] leading-relaxed italic">
+                            Las preguntas son privadas y personalizadas según tu situación.
+                            La lectura se envía mediante nota de audio, donde se explica detalladamente la tirada y los mensajes que aparecen.
+                            <br /><br />
+                            Las sesiones se agendan previamente, coordinando un horario disponible para ambas partes.
+                          </p>
+                        </div>
+                        <div className="flex flex-col gap-1.5">
+                          {filteredServices.map((service) => (
+                            <div key={service.name}>
+                              <PriceItem service={service} currency={currency} />
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex flex-col gap-2">
+                        <button 
+                          onClick={() => setExpandedCategory(expandedCategory === cat ? null : cat)}
+                          className="notion-card group text-left flex-col items-start gap-1"
+                        >
+                          <div className="flex items-center gap-3 w-full">
+                            <div className="notion-icon text-lg">
+                              {cat.split(' ')[0]}
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="text-[14px] font-bold">{cat}</h3>
+                            </div>
+                            <ChevronRight className={`w-4 h-4 text-[#D3D3D2] transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                          </div>
+                          <p className="text-[12px] text-[#787774] ml-9 leading-snug">
+                            {cat === "💘 Amor" 
+                              ? "Conoce lo que piensa, lo que siente y hacia dónde se dirige la conexión."
+                              : "Analiza tu situación actual y proyecta tu siguiente movimiento con claridad."}
+                          </p>
+                        </button>
+                        
+                        <AnimatePresence>
+                          {isExpanded && (
+                            <motion.div 
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden flex flex-col gap-1.5 pl-4 border-l-2 border-[#E9E9E7] ml-4"
+                            >
+                              {filteredServices.map((service) => (
+                                <div key={service.name}>
+                                  <PriceItem service={service} currency={currency} />
+                                </div>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )}
                   </div>
                 );
               })}

@@ -159,79 +159,78 @@
 
     <script>
         const services = [
-            { name: "1 pregunta · live", category: "🔴 Live", priceSoles: 8, priceUSD: null, emoji: "🔴" },
-            { name: "Pack 2 preguntas · live", category: "🔴 Live", priceSoles: 10, priceUSD: null, emoji: "🔴" },
             { name: "1 pregunta privada", category: "✦ General", priceSoles: 12, priceUSD: 6, emoji: "✦" },
             { name: "Sesión 20 minutos ⭐", category: "✦ General", priceSoles: 30, priceUSD: 18, emoji: "⭐" },
             { name: "Sesión 45 minutos", category: "✦ General", priceSoles: 50, priceUSD: 30, emoji: "✦" },
             { 
                 name: "Tirada del ex", 
-                category: "💗 Amor", 
+                category: "💘 Amor", 
                 priceSoles: 20, 
                 priceUSD: 10, 
-                emoji: "💗",
+                emoji: "💘",
                 description: "Ideal para comprender conexiones que aún no cierran: Qué siente, Qué piensa, Si tiene intención de volver."
             },
             { 
                 name: "Tirada de pretendientes", 
-                category: "💗 Amor", 
+                category: "💘 Amor", 
                 priceSoles: 20, 
                 priceUSD: 10, 
-                emoji: "💗",
+                emoji: "💘",
                 description: "Explora las intenciones y sentimientos de hasta 2 personas: Qué sienten por ti, Qué intenciones tiene cada uno, Cuál te conviene más."
             },
             { 
                 name: "Tirada del \"casi algo\"", 
-                category: "💗 Amor", 
+                category: "💘 Amor", 
                 priceSoles: 20, 
                 priceUSD: 10, 
-                emoji: "💗",
+                emoji: "💘",
                 description: "Para aclarar vínculos inciertos o en pausa: Qué siente, Qué piensa, Si desea formalizar, Si hay terceros..."
             },
             { 
                 name: "Tirada de pareja", 
-                category: "💗 Amor", 
+                category: "💘 Amor", 
                 priceSoles: 20, 
                 priceUSD: 10, 
-                emoji: "💗",
+                emoji: "💘",
                 description: "Conoce la energía de tu relación actual: Qué siente tu pareja, Qué piensa sobre la relación y cómo te ve."
             },
             { 
                 name: "Tirada general", 
-                category: "✨ Rápidas", 
+                category: "🔮 Estratégicas", 
                 priceSoles: 20, 
                 priceUSD: 6, 
-                emoji: "✨",
+                emoji: "🔮",
                 description: "Conoce el estado actual de tu energía e influencias: Energía personal, Bloqueos o cargas presentes, Qué estás atrayendo en este momento."
             },
             { 
                 name: "Tirada del mes", 
-                category: "✨ Rápidas", 
+                category: "🔮 Estratégicas", 
                 priceSoles: 20, 
                 priceUSD: 6, 
-                emoji: "✨",
+                emoji: "🔮",
                 description: "Ideal para recibir una guía para el mes en curso: Energía predominante del mes, Aspectos destacados, Desafíos y oportunidades."
             },
             { 
                 name: "Tirada de evolución personal", 
-                category: "✨ Rápidas", 
+                category: "🔮 Estratégicas", 
                 priceSoles: 20, 
                 priceUSD: 6, 
-                emoji: "✨",
+                emoji: "🔮",
                 description: "Explora los cambios que estás atravesando: Energía de tu proceso actual, Qué estás dejando atrás, Qué estás llamado/a a integrar."
             },
             { 
                 name: "Tirada de futuro cercano", 
-                category: "✨ Rápidas", 
+                category: "🔮 Estratégicas", 
                 priceSoles: 20, 
                 priceUSD: 6, 
-                emoji: "✨",
+                emoji: "🔮",
                 description: "Dónde se dirige tu energía próximamente: Situación actual, Influencias o caminos posibles, Resultado o panorama probable."
             }
         ];
 
-        const categories = ["🔴 Live", "✦ General", "💗 Amor", "✨ Rápidas"];
+        const categories = ["✦ General", "💘 Amor", "🔮 Estratégicas"];
         let currentCurrency = 'PEN';
+        let expandedCategory = null;
 
         function showHome() {
             document.getElementById('home-view').classList.remove('hidden');
@@ -240,9 +239,15 @@
 
         function showPricing(currency) {
             currentCurrency = currency;
+            expandedCategory = null;
             document.getElementById('home-view').classList.add('hidden');
             document.getElementById('pricing-view').classList.remove('hidden');
             
+            renderPricing();
+        }
+
+        function toggleCategory(cat) {
+            expandedCategory = expandedCategory === cat ? null : cat;
             renderPricing();
         }
 
@@ -275,30 +280,20 @@
 
                 if (!hasVisible) return;
 
+                const isGeneral = cat === "✦ General";
+                const isExpanded = expandedCategory === cat || isGeneral;
+
                 const catDiv = document.createElement('div');
                 catDiv.className = 'flex flex-col gap-2';
                 
-                let catHeader = `
-                    <div class="px-1 flex items-center gap-2">
-                        <h2 class="text-[11px] font-bold uppercase tracking-wider text-[#787774] opacity-70">
-                            ${cat.split(' ')[1] || cat}
-                        </h2>
-                        <div class="h-[1px] flex-1 bg-[#E9E9E7]"></div>
-                    </div>
-                `;
-
-                if (cat === "🔴 Live") {
-                    catHeader += `
-                        <div class="px-1 mb-1">
-                            <p class="text-[12px] text-[#787774] leading-relaxed italic">
-                                Envía un mensaje con tu nombre, fecha de nacimiento, tu pregunta y la captura de pago. Recibirás la respuesta en un audio.
-                            </p>
+                if (isGeneral) {
+                    let catHeader = `
+                        <div class="px-1 flex items-center gap-2">
+                            <h2 class="text-[11px] font-bold uppercase tracking-wider text-[#787774] opacity-70">
+                                ${cat.split(' ')[1] || cat}
+                            </h2>
+                            <div class="h-[1px] flex-1 bg-[#E9E9E7]"></div>
                         </div>
-                    `;
-                }
-
-                if (cat === "✦ General") {
-                    catHeader += `
                         <div class="px-1 mb-1">
                             <p class="text-[12px] text-[#787774] leading-relaxed italic">
                                 Las preguntas son privadas y personalizadas según tu situación.
@@ -308,35 +303,83 @@
                             </p>
                         </div>
                     `;
+
+                    let servicesHtml = '<div class="flex flex-col gap-1.5">';
+                    filtered.forEach(service => {
+                        const price = currentCurrency === 'PEN' 
+                            ? `S/ ${service.priceSoles}` 
+                            : (service.priceUSD ? `$${service.priceUSD}` : null);
+
+                        if (currentCurrency === 'USD' && !price) return;
+
+                        const whatsappMsg = encodeURIComponent(`Hola Gabriel, me interesa la lectura: ${service.name}`);
+                        const whatsappUrl = `https://wa.me/51960260123?text=${whatsappMsg}`;
+
+                        servicesHtml += `
+                            <a href="${whatsappUrl}" target="_blank" class="notion-card flex-col items-start gap-1 transition-colors">
+                                <div class="flex items-center gap-3 w-full">
+                                    <div class="notion-icon text-lg">${service.emoji}</div>
+                                    <div class="flex-1">
+                                        <h3 class="text-[14px] font-medium leading-tight">${service.name}</h3>
+                                    </div>
+                                    <div class="text-[14px] font-semibold text-[#37352F]">${price}</div>
+                                </div>
+                                ${service.description ? `<p class="text-[12px] text-[#787774] ml-9 leading-snug">${service.description}</p>` : ''}
+                            </a>
+                        `;
+                    });
+                    servicesHtml += '</div>';
+                    catDiv.innerHTML = catHeader + servicesHtml;
+                } else {
+                    const description = cat === "💘 Amor" 
+                        ? "Conoce lo que piensa, lo que siente y hacia dónde se dirige la conexión."
+                        : "Analiza tu situación actual y proyecta tu siguiente movimiento con claridad.";
+                    
+                    let catHeader = `
+                        <button onclick="toggleCategory('${cat}')" class="notion-card text-left flex-col items-start gap-1">
+                            <div class="flex items-center gap-3 w-full">
+                                <div class="notion-icon text-lg">${cat.split(' ')[0]}</div>
+                                <div class="flex-1">
+                                    <h3 class="text-[14px] font-bold">${cat}</h3>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#D3D3D2] transition-transform ${isExpanded ? 'rotate-90' : ''}"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                            <p class="text-[12px] text-[#787774] ml-9 leading-snug">${description}</p>
+                        </button>
+                    `;
+
+                    if (isExpanded) {
+                        let servicesHtml = '<div class="flex flex-col gap-1.5 pl-4 border-l-2 border-[#E9E9E7] ml-4 mt-1">';
+                        filtered.forEach(service => {
+                            const price = currentCurrency === 'PEN' 
+                                ? `S/ ${service.priceSoles}` 
+                                : (service.priceUSD ? `$${service.priceUSD}` : null);
+
+                            if (currentCurrency === 'USD' && !price) return;
+
+                            const whatsappMsg = encodeURIComponent(`Hola Gabriel, me interesa la lectura: ${service.name}`);
+                            const whatsappUrl = `https://wa.me/51960260123?text=${whatsappMsg}`;
+
+                            servicesHtml += `
+                                <a href="${whatsappUrl}" target="_blank" class="notion-card flex-col items-start gap-1 transition-colors">
+                                    <div class="flex items-center gap-3 w-full">
+                                        <div class="notion-icon text-lg">${service.emoji}</div>
+                                        <div class="flex-1">
+                                            <h3 class="text-[14px] font-medium leading-tight">${service.name}</h3>
+                                        </div>
+                                        <div class="text-[14px] font-semibold text-[#37352F]">${price}</div>
+                                    </div>
+                                    ${service.description ? `<p class="text-[12px] text-[#787774] ml-9 leading-snug">${service.description}</p>` : ''}
+                                </a>
+                            `;
+                        });
+                        servicesHtml += '</div>';
+                        catDiv.innerHTML = catHeader + servicesHtml;
+                    } else {
+                        catDiv.innerHTML = catHeader;
+                    }
                 }
 
-                let servicesHtml = '<div class="flex flex-col gap-1.5">';
-                filtered.forEach(service => {
-                    const price = currentCurrency === 'PEN' 
-                        ? `S/ ${service.priceSoles}` 
-                        : (service.priceUSD ? `$${service.priceUSD}` : null);
-
-                    if (currentCurrency === 'USD' && !price) return;
-
-                    const whatsappMsg = encodeURIComponent(`Hola Gabriel, me interesa la lectura: ${service.name}`);
-                    const whatsappUrl = `https://wa.me/51960260123?text=${whatsappMsg}`;
-
-                    servicesHtml += `
-                        <a href="${whatsappUrl}" target="_blank" class="notion-card flex-col items-start gap-1 transition-colors">
-                            <div class="flex items-center gap-3 w-full">
-                                <div class="notion-icon text-lg">${service.emoji}</div>
-                                <div class="flex-1">
-                                    <h3 class="text-[14px] font-medium leading-tight">${service.name}</h3>
-                                </div>
-                                <div class="text-[14px] font-semibold text-[#37352F]">${price}</div>
-                            </div>
-                            ${service.description ? `<p class="text-[12px] text-[#787774] ml-9 leading-snug">${service.description}</p>` : ''}
-                        </a>
-                    `;
-                });
-                servicesHtml += '</div>';
-
-                catDiv.innerHTML = catHeader + servicesHtml;
                 list.appendChild(catDiv);
             });
         }
