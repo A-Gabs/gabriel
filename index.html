@@ -318,8 +318,11 @@
 
                     if (currentCurrency === 'USD' && !price) return;
 
+                    const whatsappMsg = encodeURIComponent(`Hola Gabriel, me interesa la lectura: ${service.name}`);
+                    const whatsappUrl = `https://wa.me/51960260123?text=${whatsappMsg}`;
+
                     servicesHtml += `
-                        <div class="notion-card flex-col items-start gap-1 cursor-default">
+                        <a href="${whatsappUrl}" target="_blank" class="notion-card flex-col items-start gap-1 transition-colors">
                             <div class="flex items-center gap-3 w-full">
                                 <div class="notion-icon text-lg">${service.emoji}</div>
                                 <div class="flex-1">
@@ -328,7 +331,7 @@
                                 <div class="text-[14px] font-semibold text-[#37352F]">${price}</div>
                             </div>
                             ${service.description ? `<p class="text-[12px] text-[#787774] ml-9 leading-snug">${service.description}</p>` : ''}
-                        </div>
+                        </a>
                     `;
                 });
                 servicesHtml += '</div>';

@@ -107,11 +107,17 @@ interface PriceItemProps {
 
 const PriceItem = ({ service, currency }: PriceItemProps) => {
   const price = currency === 'PEN' ? `S/ ${service.priceSoles}` : (service.priceUSD ? `$${service.priceUSD}` : '—');
+  const whatsappUrl = `https://wa.me/51960260123?text=${encodeURIComponent(`Hola Gabriel, me interesa la lectura: ${service.name}`)}`;
   
   if (currency === 'USD' && service.priceUSD === null) return null;
 
   return (
-    <div className="notion-card group cursor-default flex-col items-start gap-1">
+    <a 
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="notion-card group flex-col items-start gap-1 hover:bg-[#F1F1EF] transition-colors"
+    >
       <div className="flex items-center gap-3 w-full">
         <div className="notion-icon text-lg">
           {service.emoji}
@@ -128,7 +134,7 @@ const PriceItem = ({ service, currency }: PriceItemProps) => {
           {service.description}
         </p>
       )}
-    </div>
+    </a>
   );
 };
 
