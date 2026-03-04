@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel - Tarot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #37352F;
+        }
+        .notion-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background-color: #FFFFFF;
+            border: 1px solid #E9E9E7;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+        .notion-card:hover {
+            background-color: #F1F1EF;
+        }
+        .notion-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: #F7F7F5;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .animate-slide-right {
+            animation: slideInRight 0.3s ease-out forwards;
+        }
+        .animate-slide-left {
+            animation: slideInLeft 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="min-h-screen max-w-[480px] mx-auto px-6 py-12 md:py-20 flex flex-col">
+        <!-- Home View -->
+        <div id="home-view" class="flex flex-col gap-10 animate-slide-left">
+            <header class="flex flex-col items-center text-center gap-4">
+                <div class="w-24 h-24 rounded-full bg-[#F7F7F5] border border-[#E9E9E7] overflow-hidden shadow-sm">
+                    <img src="https://i.pinimg.com/736x/ff/3d/f1/ff3df11884ac374f00a6a29cde6fad88.jpg" alt="Gabriel" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-1">
+                    <h1 class="text-[24px] font-bold tracking-tight">Gabriel</h1>
+                    <p class="text-[14px] text-[#787774] max-w-[280px]">Tarot predictivo y evolutivo</p>
+                </div>
+            </header>
+
+            <nav class="flex flex-col gap-3">
+                <button onclick="showPricing('PEN')" class="notion-card text-left">
+                    <div class="notion-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#37352F]"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-[14px] font-medium">Lecturas en Perú</h3>
+                        <p class="text-[12px] text-[#787774]">Precios locales y medios de pago nacionales</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#D3D3D2]"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+
+                <button onclick="showPricing('USD')" class="notion-card text-left">
+                    <div class="notion-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#37352F]"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-[14px] font-medium">Lecturas Extranjero</h3>
+                        <p class="text-[12px] text-[#787774]">Pagos internacionales vía PayPal</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#D3D3D2]"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+
+                <div class="px-1 mt-6 mb-1">
+                    <h2 class="text-[11px] font-bold uppercase tracking-wider text-[#787774] opacity-70">Contacto</h2>
+                </div>
+
+                <a href="https://wa.me/51960260123" target="_blank" class="notion-card">
+                    <div class="notion-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#25D366]"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-[14px] font-medium">WhatsApp</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#D3D3D2]"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+
+                <a href="https://instagram.com/tis.gabriell" target="_blank" class="notion-card">
+                    <div class="notion-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#E4405F]"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-[14px] font-medium">Instagram</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#D3D3D2]"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Pricing View -->
+        <div id="pricing-view" class="hidden flex flex-col gap-8 animate-slide-right">
+            <div class="flex items-center gap-4">
+                <button onclick="showHome()" class="p-2 -ml-2 hover:bg-[#F1F1EF] rounded-md transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#37352F]"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                </button>
+                <h2 id="pricing-title" class="text-[18px] font-bold">Precios</h2>
+            </div>
+
+            <div id="services-list" class="flex flex-col gap-6">
+                <!-- Categories and Services will be injected here -->
+            </div>
+
+            <div class="mt-4 p-4 bg-[#F7F7F5] border border-[#E9E9E7] rounded-lg flex flex-col gap-4">
+                <div class="space-y-3">
+                    <p id="payment-message" class="text-[13px] text-[#787774] leading-relaxed"></p>
+                    
+                    <div id="yape-container" class="hidden flex items-center justify-between bg-white border border-[#E9E9E7] rounded-md p-2 pl-3">
+                        <span class="text-[14px] font-mono font-medium text-[#37352F]">+51 960 260 123</span>
+                        <button onclick="copyToClipboard()" id="copy-btn" class="p-2 hover:bg-[#F1F1EF] rounded-md transition-colors flex items-center gap-2 text-[12px] font-medium text-[#787774]">
+                            <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                            <span id="copy-text">Copiar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/51960260123" target="_blank" class="w-full flex items-center justify-center gap-2 py-2 bg-[#37352F] text-white rounded-md text-[14px] font-medium hover:bg-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Agendar ahora
+                </a>
+            </div>
+        </div>
+
+        <footer class="mt-auto pt-12 text-center flex flex-col items-center gap-4">
+            <div class="h-[1px] w-full bg-[#E9E9E7]"></div>
+            <p class="text-[12px] text-[#ADACAA]">Tarot de Luna ✨</p>
+        </footer>
+    </div>
+
+    <script>
+        const services = [
+            { name: "1 pregunta · live", category: "🔴 Live", priceSoles: 8, priceUSD: null, emoji: "🔴" },
+            { name: "Pack 2 preguntas · live", category: "🔴 Live", priceSoles: 10, priceUSD: null, emoji: "🔴" },
+            { name: "1 pregunta privada", category: "✦ General", priceSoles: 12, priceUSD: 6, emoji: "✦" },
+            { name: "Sesión 20 minutos ⭐", category: "✦ General", priceSoles: 30, priceUSD: 18, emoji: "⭐" },
+            { name: "Sesión 45 minutos", category: "✦ General", priceSoles: 50, priceUSD: 30, emoji: "✦" },
+            { 
+                name: "Tirada del ex", 
+                category: "💗 Amor", 
+                priceSoles: 20, 
+                priceUSD: 10, 
+                emoji: "💗",
+                description: "Ideal para comprender conexiones que aún no cierran: Qué siente, Qué piensa, Si tiene intención de volver."
+            },
+            { 
+                name: "Tirada de pretendientes", 
+                category: "💗 Amor", 
+                priceSoles: 20, 
+                priceUSD: 10, 
+                emoji: "💗",
+                description: "Explora las intenciones y sentimientos de hasta 2 personas: Qué sienten por ti, Qué intenciones tiene cada uno, Cuál te conviene más."
+            },
+            { 
+                name: "Tirada del \"casi algo\"", 
+                category: "💗 Amor", 
+                priceSoles: 20, 
+                priceUSD: 10, 
+                emoji: "💗",
+                description: "Para aclarar vínculos inciertos o en pausa: Qué siente, Qué piensa, Si desea formalizar, Si hay terceros..."
+            },
+            { 
+                name: "Tirada de pareja", 
+                category: "💗 Amor", 
+                priceSoles: 20, 
+                priceUSD: 10, 
+                emoji: "💗",
+                description: "Conoce la energía de tu relación actual: Qué siente tu pareja, Qué piensa sobre la relación y cómo te ve."
+            },
+            { 
+                name: "Tirada general", 
+                category: "✨ Rápidas", 
+                priceSoles: 20, 
+                priceUSD: 6, 
+                emoji: "✨",
+                description: "Conoce el estado actual de tu energía e influencias: Energía personal, Bloqueos o cargas presentes, Qué estás atrayendo en este momento."
+            },
+            { 
+                name: "Tirada del mes", 
+                category: "✨ Rápidas", 
+                priceSoles: 20, 
+                priceUSD: 6, 
+                emoji: "✨",
+                description: "Ideal para recibir una guía para el mes en curso: Energía predominante del mes, Aspectos destacados, Desafíos y oportunidades."
+            },
+            { 
+                name: "Tirada de evolución personal", 
+                category: "✨ Rápidas", 
+                priceSoles: 20, 
+                priceUSD: 6, 
+                emoji: "✨",
+                description: "Explora los cambios que estás atravesando: Energía de tu proceso actual, Qué estás dejando atrás, Qué estás llamado/a a integrar."
+            },
+            { 
+                name: "Tirada de futuro cercano", 
+                category: "✨ Rápidas", 
+                priceSoles: 20, 
+                priceUSD: 6, 
+                emoji: "✨",
+                description: "Dónde se dirige tu energía próximamente: Situación actual, Influencias o caminos posibles, Resultado o panorama probable."
+            }
+        ];
+
+        const categories = ["🔴 Live", "✦ General", "💗 Amor", "✨ Rápidas"];
+        let currentCurrency = 'PEN';
+
+        function showHome() {
+            document.getElementById('home-view').classList.remove('hidden');
+            document.getElementById('pricing-view').classList.add('hidden');
+        }
+
+        function showPricing(currency) {
+            currentCurrency = currency;
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('pricing-view').classList.remove('hidden');
+            
+            renderPricing();
+        }
+
+        function renderPricing() {
+            const title = document.getElementById('pricing-title');
+            title.innerText = currentCurrency === 'PEN' ? 'Precios Perú' : 'Precios Internacional';
+
+            const message = document.getElementById('payment-message');
+            message.innerText = currentCurrency === 'PEN' 
+                ? "Aceptamos Yape y Agora al número:"
+                : "Pagos seguros vía PayPal. Una vez realizado el pago, envía el comprobante por WhatsApp.";
+
+            const yapeContainer = document.getElementById('yape-container');
+            if (currentCurrency === 'PEN') {
+                yapeContainer.classList.remove('hidden');
+                yapeContainer.classList.add('flex');
+            } else {
+                yapeContainer.classList.add('hidden');
+                yapeContainer.classList.remove('flex');
+            }
+
+            const list = document.getElementById('services-list');
+            list.innerHTML = '';
+
+            categories.forEach(cat => {
+                const filtered = services.filter(s => s.category === cat);
+                const hasVisible = currentCurrency === 'PEN' 
+                    ? filtered.length > 0 
+                    : filtered.some(s => s.priceUSD !== null);
+
+                if (!hasVisible) return;
+
+                const catDiv = document.createElement('div');
+                catDiv.className = 'flex flex-col gap-2';
+                
+                let catHeader = `
+                    <div class="px-1 flex items-center gap-2">
+                        <h2 class="text-[11px] font-bold uppercase tracking-wider text-[#787774] opacity-70">
+                            ${cat.split(' ')[1] || cat}
+                        </h2>
+                        <div class="h-[1px] flex-1 bg-[#E9E9E7]"></div>
+                    </div>
+                `;
+
+                if (cat === "🔴 Live") {
+                    catHeader += `
+                        <div class="px-1 mb-1">
+                            <p class="text-[12px] text-[#787774] leading-relaxed italic">
+                                Envía un mensaje con tu nombre, fecha de nacimiento, tu pregunta y la captura de pago. Recibirás la respuesta en un audio.
+                            </p>
+                        </div>
+                    `;
+                }
+
+                if (cat === "✦ General") {
+                    catHeader += `
+                        <div class="px-1 mb-1">
+                            <p class="text-[12px] text-[#787774] leading-relaxed italic">
+                                Las preguntas son privadas y personalizadas según tu situación.
+                                La lectura se envía mediante nota de audio, donde se explica detalladamente la tirada y los mensajes que aparecen.
+                                <br /><br />
+                                Las sesiones se agendan previamente, coordinando un horario disponible para ambas partes.
+                            </p>
+                        </div>
+                    `;
+                }
+
+                let servicesHtml = '<div class="flex flex-col gap-1.5">';
+                filtered.forEach(service => {
+                    const price = currentCurrency === 'PEN' 
+                        ? `S/ ${service.priceSoles}` 
+                        : (service.priceUSD ? `$${service.priceUSD}` : null);
+
+                    if (currentCurrency === 'USD' && !price) return;
+
+                    servicesHtml += `
+                        <div class="notion-card flex-col items-start gap-1 cursor-default">
+                            <div class="flex items-center gap-3 w-full">
+                                <div class="notion-icon text-lg">${service.emoji}</div>
+                                <div class="flex-1">
+                                    <h3 class="text-[14px] font-medium leading-tight">${service.name}</h3>
+                                </div>
+                                <div class="text-[14px] font-semibold text-[#37352F]">${price}</div>
+                            </div>
+                            ${service.description ? `<p class="text-[12px] text-[#787774] ml-9 leading-snug">${service.description}</p>` : ''}
+                        </div>
+                    `;
+                });
+                servicesHtml += '</div>';
+
+                catDiv.innerHTML = catHeader + servicesHtml;
+                list.appendChild(catDiv);
+            });
+        }
+
+        function copyToClipboard() {
+            const text = "+51960260123";
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('copy-btn');
+                const icon = document.getElementById('copy-icon');
+                const textEl = document.getElementById('copy-text');
+                
+                const originalIcon = icon.innerHTML;
+                icon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
+                icon.classList.add('text-green-600');
+                textEl.innerText = 'Copiado';
+                
+                setTimeout(() => {
+                    icon.innerHTML = '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>';
+                    icon.classList.remove('text-green-600');
+                    textEl.innerText = 'Copiar';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

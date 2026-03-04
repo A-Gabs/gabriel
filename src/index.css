@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  @apply bg-[#FFFFFF] text-[#37352F] selection:bg-[#2EAADC]/30;
+  font-family: var(--font-sans);
+}
+
+.notion-card {
+  @apply transition-colors duration-200 hover:bg-[#F1F1EF] border border-[#E9E9E7] rounded-md p-3 flex items-center gap-3;
+}
+
+.notion-icon {
+  @apply w-6 h-6 flex items-center justify-center text-xl;
+}
