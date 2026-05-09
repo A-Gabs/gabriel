@@ -169,7 +169,7 @@ export default function App() {
           >
             {/* Header */}
             <header className="flex flex-col items-center text-center gap-4">
-              <div className="w-24 h-24 rounded-full bg-[#F7F7F5] border border-[#E9E9E7] overflow-hidden shadow-sm">
+              <div className="w-24 h-24 rounded-full border-2 border-[#E9E9E7] overflow-hidden shadow-sm">
                 <img 
                   src="https://i.pinimg.com/736x/ff/3d/f1/ff3df11884ac374f00a6a29cde6fad88.jpg" 
                   alt="Gabriel" 
@@ -178,67 +178,66 @@ export default function App() {
                 />
               </div>
               <div className="space-y-1">
-                <h1 className="text-[24px] font-bold tracking-tight">Gabriel</h1>
-                <p className="text-[14px] text-[#787774] max-w-[280px]">
+                <h1 className="text-[28px] font-bold tracking-tight">Gabriel</h1>
+                <p className="text-[15px] text-[#787774]">
                   Tarot predictivo y evolutivo
                 </p>
               </div>
+              {/* Social Icons - TikTok & Instagram */}
+              <div className="flex gap-4 mt-2">
+                <a href="https://tiktok.com/@tis.gabriell" target="_blank" className="hover:opacity-70 transition-opacity">
+                  <svg 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor" 
+                    className="w-6 h-6 text-[#37352F]"
+                  >
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                  </svg>
+                </a>
+                <a href="https://instagram.com/tis.gabriell" target="_blank" className="hover:opacity-70 transition-opacity">
+                  <Instagram className="w-6 h-6 text-[#37352F]" />
+                </a>
+              </div>
             </header>
 
-            {/* Main Buttons */}
-            <nav className="flex flex-col gap-3">
-              <button 
-                onClick={() => handleSelectCurrency('PEN')}
-                className="notion-card group text-left"
+            {/* 2 Main Links */}
+            <nav className="flex flex-col gap-6">
+              {/* Card 1: Tarot */}
+              <a 
+                href="https://wa.me/51960260123?text=Deseo%20agendar%20una%20lectura%20🔮" 
+                target="_blank"
+                className="notion-card flex p-0 overflow-hidden min-h-[140px] items-stretch text-left group border-none shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               >
-                <div className="notion-icon">
-                  <MapPin className="w-5 h-5 text-[#37352F]" />
+                <div className="w-[45%] flex-shrink-0">
+                  <img 
+                    src="https://images.unsplash.com/photo-1590477022246-34d024612e0e?q=80&w=800&auto=format&fit=crop" 
+                    className="w-full h-full object-cover" 
+                    alt="Tarot"
+                  />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-[14px] font-medium">Lecturas en Perú</h3>
-                  <p className="text-[12px] text-[#787774]">Precios locales y medios de pago nacionales</p>
+                <div className="flex-1 p-6 flex flex-col justify-center bg-white">
+                  <h3 className="text-xl font-bold text-[#37352F]">Tarot</h3>
+                  <p className="text-[14px] text-[#787774] mt-1">Agenda tu lectura</p>
                 </div>
-                <ChevronRight className="w-4 h-4 text-[#D3D3D2]" />
-              </button>
-
-              <button 
-                onClick={() => handleSelectCurrency('USD')}
-                className="notion-card group text-left"
-              >
-                <div className="notion-icon">
-                  <Globe className="w-5 h-5 text-[#37352F]" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-[14px] font-medium">Lecturas Extranjero</h3>
-                  <p className="text-[12px] text-[#787774]">Pagos internacionales vía PayPal</p>
-                </div>
-                <ChevronRight className="w-4 h-4 text-[#D3D3D2]" />
-              </button>
-
-              <div className="px-1 mt-6 mb-1">
-                <h2 className="text-[11px] font-bold uppercase tracking-wider text-[#787774] opacity-70">
-                  Contacto
-                </h2>
-              </div>
-
-              <a href="https://wa.me/51960260123" target="_blank" className="notion-card group">
-                <div className="notion-icon">
-                  <MessageCircle className="w-5 h-5 text-[#25D366]" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-[14px] font-medium">WhatsApp</h3>
-                </div>
-                <ChevronRight className="w-4 h-4 text-[#D3D3D2]" />
               </a>
 
-              <a href="https://instagram.com/tis.gabriell" target="_blank" className="notion-card group">
-                <div className="notion-icon">
-                  <Instagram className="w-5 h-5 text-[#E4405F]" />
+              {/* Card 2: Community */}
+              <a 
+                href="https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh" 
+                target="_blank"
+                className="notion-card flex p-0 overflow-hidden min-h-[140px] items-stretch text-left group border-none shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <div className="w-[45%] flex-shrink-0">
+                  <img 
+                    src="https://images.unsplash.com/photo-1620310592644-8c1d53086708?q=80&w=800&auto=format&fit=crop" 
+                    className="w-full h-full object-cover" 
+                    alt="Comunidad"
+                  />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-[14px] font-medium">Instagram</h3>
+                <div className="flex-1 p-6 flex flex-col justify-center bg-white">
+                  <h3 className="text-xl font-bold text-[#37352F]">Comunidad Gratuita</h3>
+                  <p className="text-[14px] text-[#787774] mt-1">Espacio seguro para tarot 🔮</p>
                 </div>
-                <ChevronRight className="w-4 h-4 text-[#D3D3D2]" />
               </a>
             </nav>
           </motion.div>
@@ -386,7 +385,7 @@ export default function App() {
       <footer className="mt-auto pt-12 text-center flex flex-col items-center gap-4">
         <div className="h-[1px] w-full bg-[#E9E9E7]" />
         <p className="text-[12px] text-[#ADACAA]">
-          Tarot de Luna ✨
+          Gabriel - Tarot ✨
         </p>
       </footer>
     </div>
