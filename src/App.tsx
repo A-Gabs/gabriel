@@ -105,7 +105,7 @@ interface PriceItemProps {
 
 const PriceItem = ({ service, currency }: PriceItemProps) => {
   const price = currency === 'PEN' ? `S/ ${service.priceSoles}` : (service.priceUSD ? `$${service.priceUSD}` : '—');
-  const whatsappUrl = `https://wa.me/51960260123?text=${encodeURIComponent(`Hola Gabriel, me interesa la lectura: ${service.name}`)}`;
+  const whatsappUrl = `https://wa.me/51960260123?text=${encodeURIComponent(`Hola tarot.anna, me interesa la lectura: ${service.name}`)}`;
   
   if (currency === 'USD' && service.priceUSD === null) return null;
 
@@ -142,6 +142,7 @@ export default function App() {
   const [view, setView] = useState<View>('home');
   const [currency, setCurrency] = useState<'PEN' | 'USD'>('PEN');
   const [copied, setCopied] = useState(false);
+  const [communityCopied, setCommunityCopied] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
   const handleSelectCurrency = (curr: 'PEN' | 'USD') => {
@@ -154,6 +155,12 @@ export default function App() {
     navigator.clipboard.writeText("+51960260123");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const copyCommunityLink = () => {
+    navigator.clipboard.writeText("https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh");
+    setCommunityCopied(true);
+    setTimeout(() => setCommunityCopied(false), 2000);
   };
 
   return (
@@ -172,13 +179,13 @@ export default function App() {
               <div className="w-24 h-24 rounded-full border-2 border-[#E9E9E7] overflow-hidden shadow-sm">
                 <img 
                   src="https://i.pinimg.com/736x/ff/3d/f1/ff3df11884ac374f00a6a29cde6fad88.jpg" 
-                  alt="Gabriel" 
+                  alt="tarot.anna" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
               <div className="space-y-1">
-                <h1 className="text-[28px] font-bold tracking-tight">Gabriel</h1>
+                <h1 className="text-[28px] font-bold tracking-tight">tarot.anna</h1>
                 <p className="text-[15px] text-[#787774]">
                   Tarot predictivo y evolutivo
                 </p>
@@ -203,42 +210,86 @@ export default function App() {
             {/* 2 Main Links */}
             <nav className="flex flex-col gap-6">
               {/* Card 1: Tarot */}
-              <a 
-                href="https://wa.me/51960260123?text=Deseo%20agendar%20una%20lectura%20🔮" 
-                target="_blank"
-                className="notion-card flex p-0 overflow-hidden min-h-[140px] items-stretch text-left group border-none shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              <div 
+                className="notion-card flex p-0 overflow-hidden min-h-[140px] items-stretch text-left border-[#E9E9E7] rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-[45%] flex-shrink-0">
+                <div className="w-[40%] flex-shrink-0 relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1590477022246-34d024612e0e?q=80&w=800&auto=format&fit=crop" 
-                    className="w-full h-full object-cover" 
+                    src="https://i.pinimg.com/736x/3b/76/92/3b7692dfcd49358e911b3bfcf4300fdd.jpg" 
+                    className="absolute inset-0 w-full h-full object-cover object-top" 
                     alt="Tarot"
                   />
                 </div>
-                <div className="flex-1 p-6 flex flex-col justify-center bg-white">
+                <div className="flex-1 p-5 flex flex-col justify-center bg-white">
                   <h3 className="text-xl font-bold text-[#37352F]">Tarot</h3>
-                  <p className="text-[14px] text-[#787774] mt-1">Agenda tu lectura</p>
+                  <p className="text-[14px] text-[#787774] mt-0.5">Agenda tu lectura</p>
+                  
+                  <div className="flex flex-col gap-2 mt-4">
+                    <button 
+                      onClick={copyToClipboard}
+                      className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#F7F7F5] border border-[#E9E9E7] rounded-md text-[13px] font-medium text-[#37352F] hover:bg-[#F1F1EF] transition-colors"
+                    >
+                      {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
+                      {copied ? "Copiado" : "Copiar número"}
+                    </button>
+                    <a 
+                      href="https://wa.me/51960260123?text=Deseo%20agendar%20una%20lectura%20🔮"
+                      target="_blank"
+                      className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#37352F] text-white rounded-md text-[13px] font-medium hover:bg-black transition-colors"
+                    >
+                      <svg 
+                        viewBox="0 0 24 24" 
+                        fill="currentColor" 
+                        className="w-4 h-4"
+                      >
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .011 5.403.011 12.039c0 2.12.553 4.189 1.604 6.039L0 24l6.105-1.602a11.834 11.834 0 005.944 1.599h.005c6.634 0 12.038-5.402 12.038-12.039a11.799 11.799 0 00-3.483-8.52z"/>
+                      </svg>
+                      Agendar lectura
+                    </a>
+                  </div>
                 </div>
-              </a>
+              </div>
 
               {/* Card 2: Community */}
-              <a 
-                href="https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh" 
-                target="_blank"
-                className="notion-card flex p-0 overflow-hidden min-h-[140px] items-stretch text-left group border-none shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              <div 
+                className="notion-card flex p-0 overflow-hidden min-h-[140px] items-stretch text-left border-[#E9E9E7] rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-[45%] flex-shrink-0">
+                <div className="w-[40%] flex-shrink-0 relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1620310592644-8c1d53086708?q=80&w=800&auto=format&fit=crop" 
-                    className="w-full h-full object-cover" 
+                    src="https://i.pinimg.com/1200x/4a/fa/43/4afa433df0056bfd817ef24ffa0e116f.jpg" 
+                    className="absolute inset-0 w-full h-full object-cover object-center" 
                     alt="Comunidad"
                   />
                 </div>
-                <div className="flex-1 p-6 flex flex-col justify-center bg-white">
+                <div className="flex-1 p-5 flex flex-col justify-center bg-white">
                   <h3 className="text-xl font-bold text-[#37352F]">Comunidad Gratuita</h3>
-                  <p className="text-[14px] text-[#787774] mt-1">Espacio seguro para tarot 🔮</p>
+                  <p className="text-[14px] text-[#787774] mt-0.5">Espacio seguro para tarot 🔮</p>
+                  
+                  <div className="flex flex-col gap-2 mt-4">
+                    <button 
+                      onClick={copyCommunityLink}
+                      className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#F7F7F5] border border-[#E9E9E7] rounded-md text-[13px] font-medium text-[#37352F] hover:bg-[#F1F1EF] transition-colors"
+                    >
+                      {communityCopied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
+                      {communityCopied ? "Enlace copiado" : "Copiar enlace"}
+                    </button>
+                    <a 
+                      href="https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh"
+                      target="_blank"
+                      className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#37352F] text-white rounded-md text-[13px] font-medium hover:bg-black transition-colors"
+                    >
+                      <svg 
+                        viewBox="0 0 24 24" 
+                        fill="currentColor" 
+                        className="w-4 h-4"
+                      >
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .011 5.403.011 12.039c0 2.12.553 4.189 1.604 6.039L0 24l6.105-1.602a11.834 11.834 0 005.944 1.599h.005c6.634 0 12.038-5.402 12.038-12.039a11.799 11.799 0 00-3.483-8.52z"/>
+                      </svg>
+                      Unirme al grupo
+                    </a>
+                  </div>
                 </div>
-              </a>
+              </div>
             </nav>
           </motion.div>
         ) : (
@@ -385,7 +436,7 @@ export default function App() {
       <footer className="mt-auto pt-12 text-center flex flex-col items-center gap-4">
         <div className="h-[1px] w-full bg-[#E9E9E7]" />
         <p className="text-[12px] text-[#ADACAA]">
-          Gabriel - Tarot ✨
+          tarot.anna - Tarot ✨
         </p>
       </footer>
     </div>
