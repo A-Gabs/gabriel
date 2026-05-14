@@ -318,7 +318,7 @@ export default function App() {
                 <div className="bg-white border border-[#E9E9E7] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all group">
                   <div className="aspect-[4/3] overflow-hidden relative">
                     <img 
-                      src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800&auto=format&fit=crop" 
+                      src="https://i.pinimg.com/736x/15/68/d7/1568d714f086b3d4e5b15a632b66de64.jpg" 
                       alt="Dones Espirituales"
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -354,7 +354,7 @@ export default function App() {
                 <div className="bg-white border border-[#E9E9E7] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all group">
                   <div className="aspect-[4/3] overflow-hidden relative">
                     <img 
-                      src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop" 
+                      src="https://i.pinimg.com/736x/39/9c/de/399cdeefe42ec07ef632bec40b128b68.jpg" 
                       alt="SAJU"
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
