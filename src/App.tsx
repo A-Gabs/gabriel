@@ -14,7 +14,8 @@ import {
   ChevronRight,
   ArrowLeft,
   Copy,
-  Check
+  Check,
+  X
 } from "lucide-react";
 
 interface Service {
@@ -143,6 +144,7 @@ export default function App() {
   const [currency, setCurrency] = useState<'PEN' | 'USD'>('PEN');
   const [copied, setCopied] = useState(false);
   const [communityCopied, setCommunityCopied] = useState(false);
+  const [modalUrl, setModalUrl] = useState<string | null>(null);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
   const handleSelectCurrency = (curr: 'PEN' | 'USD') => {
@@ -161,6 +163,16 @@ export default function App() {
     navigator.clipboard.writeText("https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh");
     setCommunityCopied(true);
     setTimeout(() => setCommunityCopied(false), 2000);
+  };
+
+  const openModal = (url: string) => {
+    setModalUrl(url);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setModalUrl(null);
+    document.body.style.overflow = 'auto';
   };
 
   return (
@@ -291,6 +303,91 @@ export default function App() {
                 </div>
               </div>
             </nav>
+
+            {/* AUTODESCUBRIMIENTO Section */}
+            <section className="space-y-6">
+              <div className="text-center space-y-2">
+                <h2 className="text-[14px] font-bold uppercase tracking-[0.2em] text-[#787774]">
+                  Autodescubrimiento
+                </h2>
+                <div className="h-[1px] w-12 bg-[#E9E9E7] mx-auto opacity-50" />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Card 1: Dones Espirituales */}
+                <div className="bg-white border border-[#E9E9E7] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all group">
+                  <div className="aspect-[4/3] overflow-hidden relative">
+                    <img 
+                      src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800&auto=format&fit=crop" 
+                      alt="Dones Espirituales"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+              <div className="p-5 flex flex-col flex-1 space-y-4">
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-start gap-2">
+                        <h3 className="font-bold text-[#37352F] leading-[1.3] text-[17px] tracking-tight text-balance">Dones <br /> Espirituales</h3>
+                      </div>
+                      <p className="text-[12px] text-[#787774] font-medium italic">Lectura de carta natal personalizada</p>
+                    </div>
+                    
+                    <div className="space-y-2 pt-2">
+                      <button 
+                        onClick={() => openModal('https://a-gabs.github.io/Dones/')}
+                        className="w-full py-2.5 px-4 text-[13px] font-bold border-2 border-[#E9E9E7] text-[#37352F] rounded-lg hover:bg-[#F1F1EF] transition-colors"
+                      >
+                        Ver ejemplo
+                      </button>
+                      <a 
+                        href="https://www.paypal.com/ncp/payment/XT7LDZ3H4PAM8" 
+                        target="_blank"
+                        className="w-full py-2.5 px-4 text-[13px] font-bold bg-[#37352F] text-white rounded-lg hover:opacity-90 transition-opacity text-center block"
+                      >
+                        Me interesa
+                      </a>
+                      <p className="text-[10px] text-center text-[#ADACAA]">⏱ Entrega en máximo 24 horas</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card 2: SAJU */}
+                <div className="bg-white border border-[#E9E9E7] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all group">
+                  <div className="aspect-[4/3] overflow-hidden relative">
+                    <img 
+                      src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop" 
+                      alt="SAJU"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+              <div className="p-5 flex flex-col flex-1 space-y-4">
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-start gap-2">
+                        <h3 className="font-bold text-[#37352F] leading-[1.3] text-[17px] tracking-tight text-balance">Saju Autoconocimiento</h3>
+                      </div>
+                      <p className="text-[12px] text-[#787774] font-medium italic">Análisis de destino y ciclos de vida</p>
+                    </div>
+                    
+                    <div className="space-y-2 pt-2">
+                      <button 
+                        onClick={() => openModal('https://a-gabs.github.io/Dones/')}
+                        className="w-full py-2.5 px-4 text-[13px] font-bold border-2 border-[#E9E9E7] text-[#37352F] rounded-lg hover:bg-[#F1F1EF] transition-colors"
+                      >
+                        Ver ejemplo
+                      </button>
+                      <a 
+                        href="https://www.paypal.com/ncp/payment/XT7LDZ3H4PAM8" 
+                        target="_blank"
+                        className="w-full py-2.5 px-4 text-[13px] font-bold bg-[#37352F] text-white rounded-lg hover:opacity-90 transition-opacity text-center block"
+                      >
+                        Me interesa
+                      </a>
+                      <p className="text-[10px] text-center text-[#ADACAA]">⏱ Entrega en máximo 24 horas</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
           </motion.div>
         ) : (
           <motion.div
@@ -428,6 +525,39 @@ export default function App() {
                 Agendar ahora
               </a>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {modalUrl && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center sm:p-4 bg-black/70 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-white sm:rounded-2xl w-full max-w-4xl h-full sm:h-auto sm:max-h-[90vh] overflow-hidden relative shadow-2xl"
+            >
+              <button 
+                onClick={closeModal}
+                className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-md text-[#787774] hover:bg-gray-50 transition-colors border border-[#E9E9E7]"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              
+              <div className="w-full h-full sm:h-[600px] sm:max-h-[80vh] pt-14 sm:pt-0">
+                <iframe 
+                  src={modalUrl} 
+                  className="w-full h-full border-none"
+                  title="Ejemplo de lectura"
+                />
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
