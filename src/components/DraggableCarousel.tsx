@@ -28,38 +28,38 @@ export default function DraggableCarousel({
   const isDraggingRef = useRef(false);
   const [isGrabbing, setIsGrabbing] = useState(false);
 
-  // We duplicate the items 5 times to make an infinite looping scroll seamless
-  const multipliedItems = [
-    ...items,
-    ...items,
-    ...items,
-    ...items,
-    ...items
-  ];
+  const shouldLoop = items.length > 3;
+
+  // We duplicate the items 5 times to make an infinite looping scroll seamless, only if shouldLoop is true
+  const multipliedItems = shouldLoop
+    ? [...items, ...items, ...items, ...items, ...items]
+    : items;
 
   useEffect(() => {
     const el = containerRef.current;
-    if (!el || items.length === 0) return;
+    if (!el || items.length === 0 || !shouldLoop) return;
 
     // Set scroll position to the safe middle set on mount
-    const singleSetWidth = el.scrollWidth / 5;
-    el.scrollLeft = singleSetWidth * 2;
-
-    // Dynamic scale adjustment if needed
     const handleResize = () => {
-      const setW = el.scrollWidth / 5;
-      el.scrollLeft = setW * 2;
+      const singleSetWidth = (el.scrollWidth - 48) / 5;
+      el.scrollLeft = singleSetWidth * 2;
     };
 
+    // Run layout centering after components settle
+    const timer = setTimeout(handleResize, 100);
+
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [items.length]);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(timer);
+    };
+  }, [items.length, shouldLoop]);
 
   const handleScroll = () => {
     const el = containerRef.current;
-    if (!el || items.length === 0) return;
+    if (!el || items.length === 0 || !shouldLoop) return;
 
-    const singleSetWidth = el.scrollWidth / 5;
+    const singleSetWidth = (el.scrollWidth - 48) / 5;
 
     // Loop bounds check
     if (el.scrollLeft < singleSetWidth) {

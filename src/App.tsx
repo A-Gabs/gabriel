@@ -80,6 +80,23 @@ const row3: CardItem[] = [
   }
 ];
 
+const rowTarot: CardItem[] = [
+  {
+    id: "tarot-lectura",
+    title: "Tarot",
+    description: "Agenda tu lectura personalizada de tarot predictivo y evolutivo para iluminar tu camino.",
+    image: "https://i.pinimg.com/736x/3b/76/92/3b7692dfcd49358e911b3bfcf4300fdd.jpg",
+    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20agendar%20una%20lectura%20de%20Tarot%20🔮",
+  },
+  {
+    id: "orientaciones",
+    title: "Orientaciones",
+    description: "Orientación espiritual y terapéutica para encontrar claridad y respuestas en tu situación actual.",
+    image: "https://i.pinimg.com/736x/11/04/b8/1104b868e4af414383c274bbfda7df5e.jpg",
+    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20agendar%20una%20sesi%C3%B3n%20de%20Orientaci%C3%B3n%20✨",
+  }
+];
+
 export default function App() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -304,6 +321,23 @@ export default function App() {
 
             <DraggableCarousel 
               items={row2} 
+              activeId={activeId} 
+              setActiveId={setActiveId} 
+              renderCard={renderCard} 
+            />
+          </section>
+
+          {/* Row Tarot — Tarot */}
+          <section className="space-y-4">
+            <div className="text-left space-y-1.5">
+              <h2 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#787774] font-sans">
+                Tarot →
+              </h2>
+              <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
+            </div>
+
+            <DraggableCarousel 
+              items={rowTarot} 
               activeId={activeId} 
               setActiveId={setActiveId} 
               renderCard={renderCard} 

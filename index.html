@@ -408,6 +408,90 @@
                 </div>
             </section>
 
+            <!-- FILA Tarot — "Tarot" -->
+            <section class="space-y-4">
+                <div class="text-left space-y-1.5">
+                    <h2 class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#787774] font-sans">Tarot →</h2>
+                    <div class="h-[1px] w-8 bg-[#1a1a1a]/10"></div>
+                </div>
+
+                <div class="flex overflow-x-auto gap-4 pb-4 px-6 -mx-6 snap-x snap-mandatory no-scrollbar">
+                    <!-- Tarjeta: Tarot -->
+                    <div class="card-container aspect-[3/4] w-[200px] shrink-0 snap-start group" onclick="toggleOverlay(this, event)" id="card-tarot-sec">
+                        <!-- BG Image -->
+                        <img 
+                            src="https://i.pinimg.com/736x/3b/76/92/3b7692dfcd49358e911b3bfcf4300fdd.jpg" 
+                            alt="Lectura de Tarot" 
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        >
+                        <!-- Default Title View -->
+                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
+                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
+                                Tarot
+                            </h3>
+                        </div>
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
+                            <div class="flex justify-end">
+                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="space-y-1">
+                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Tarot</h4>
+                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Agenda tu lectura personalizada de tarot predictivo y evolutivo para iluminar tu camino.</p>
+                                </div>
+                                <a href="https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20agendar%20una%20lectura%20de%20Tarot%20🔮" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
+                                    Cuéntame más &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta: Orientaciones -->
+                    <div class="card-container aspect-[3/4] w-[200px] shrink-0 snap-start group" onclick="toggleOverlay(this, event)" id="card-orientaciones">
+                        <!-- BG Image -->
+                        <img 
+                            src="https://i.pinimg.com/736x/11/04/b8/1104b868e4af414383c274bbfda7df5e.jpg" 
+                            alt="Orientaciones" 
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        >
+                        <!-- Default Title View -->
+                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
+                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
+                                Orientaciones
+                            </h3>
+                        </div>
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
+                            <div class="flex justify-end">
+                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="space-y-1">
+                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Orientaciones</h4>
+                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Orientación espiritual y terapéutica para encontrar claridad y respuestas en tu situación actual.</p>
+                                </div>
+                                <a href="https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20agendar%20una%20sesi%C3%B3n%20de%20Orientaci%C3%B3n%20✨" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
+                                    Cuéntame más &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- FILA 3 — "Free" -->
             <section class="space-y-4">
                 <div class="text-left space-y-1.5">
@@ -607,31 +691,42 @@
                 const originalCards = Array.from(row.children);
                 if (originalCards.length === 0) return;
 
-                // Clone children to create 5 repeated sets for seamless infinite scrolling
-                for (let i = 0; i < 4; i++) {
-                    originalCards.forEach(card => {
-                        const clone = card.cloneNode(true);
-                        // Ensure unique dynamic IDs so state triggers don't collide
-                        if (clone.id) {
-                            clone.id = `${clone.id}-clone-${i}`;
+                const shouldLoop = originalCards.length > 3;
+
+                if (shouldLoop) {
+                    // Clone children to create 5 repeated sets for seamless infinite scrolling
+                    for (let i = 0; i < 4; i++) {
+                        originalCards.forEach(card => {
+                            const clone = card.cloneNode(true);
+                            // Ensure unique dynamic IDs so state triggers don't collide
+                            if (clone.id) {
+                                clone.id = `${clone.id}-clone-${i}`;
+                            }
+                            row.appendChild(clone);
+                        });
+                    }
+
+                    // Calculate correct size subtracting start/end padding (48px total for px-6 borders)
+                    const alignLoop = () => {
+                        const setWidth = (row.scrollWidth - 48) / 5;
+                        row.scrollLeft = setWidth * 2;
+                    };
+
+                    // Align on initial build, window load (images ready), and resize
+                    alignLoop();
+                    window.addEventListener("load", alignLoop);
+                    window.addEventListener("resize", alignLoop);
+
+                    // Infinite wrapping lookups
+                    row.addEventListener("scroll", () => {
+                        const setWidth = (row.scrollWidth - 48) / 5;
+                        if (row.scrollLeft < setWidth) {
+                            row.scrollLeft += setWidth * 2;
+                        } else if (row.scrollLeft > setWidth * 3) {
+                            row.scrollLeft -= setWidth * 2;
                         }
-                        row.appendChild(clone);
                     });
                 }
-
-                // Initial position at center (third set)
-                const singleSetWidth = row.scrollWidth / 5;
-                row.scrollLeft = singleSetWidth * 2;
-
-                // Infinite wrapping lookups
-                row.addEventListener("scroll", () => {
-                    const setWidth = row.scrollWidth / 5;
-                    if (row.scrollLeft < setWidth) {
-                        row.scrollLeft += setWidth * 2;
-                    } else if (row.scrollLeft > setWidth * 3) {
-                        row.scrollLeft -= setWidth * 2;
-                    }
-                });
 
                 // Smooth drag mechanics
                 let isDown = false;
