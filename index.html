@@ -589,7 +589,7 @@
             }
         }
 
-        // Startup popup logic
+        // Startup popup and Infinite looping drag carousel rows logic
         document.addEventListener("DOMContentLoaded", () => {
             const popupDismissed = sessionStorage.getItem("whatsapp_popup_dismissed");
             if (!popupDismissed) {
@@ -600,6 +600,92 @@
                     }
                 }, 800);
             }
+
+            // Carousel setup for all rows
+            const rows = document.querySelectorAll(".overflow-x-auto");
+            rows.forEach(row => {
+                const originalCards = Array.from(row.children);
+                if (originalCards.length === 0) return;
+
+                // Clone children to create 5 repeated sets for seamless infinite scrolling
+                for (let i = 0; i < 4; i++) {
+                    originalCards.forEach(card => {
+                        const clone = card.cloneNode(true);
+                        // Ensure unique dynamic IDs so state triggers don't collide
+                        if (clone.id) {
+                            clone.id = `${clone.id}-clone-${i}`;
+                        }
+                        row.appendChild(clone);
+                    });
+                }
+
+                // Initial position at center (third set)
+                const singleSetWidth = row.scrollWidth / 5;
+                row.scrollLeft = singleSetWidth * 2;
+
+                // Infinite wrapping lookups
+                row.addEventListener("scroll", () => {
+                    const setWidth = row.scrollWidth / 5;
+                    if (row.scrollLeft < setWidth) {
+                        row.scrollLeft += setWidth * 2;
+                    } else if (row.scrollLeft > setWidth * 3) {
+                        row.scrollLeft -= setWidth * 2;
+                    }
+                });
+
+                // Smooth drag mechanics
+                let isDown = false;
+                let startX = 0;
+                let scrollLeft = 0;
+                let isDragging = false;
+
+                row.style.cursor = "grab";
+
+                row.addEventListener("mousedown", (e) => {
+                    isDown = true;
+                    row.style.cursor = "grabbing";
+                    isDragging = false;
+                    startX = e.pageX - row.offsetLeft;
+                    scrollLeft = row.scrollLeft;
+                    row.style.scrollBehavior = "auto";
+                });
+
+                row.addEventListener("mouseleave", () => {
+                    isDown = false;
+                    row.style.cursor = "grab";
+                    row.style.scrollBehavior = "smooth";
+                });
+
+                row.addEventListener("mouseup", () => {
+                    isDown = false;
+                    row.style.cursor = "grab";
+                    row.style.scrollBehavior = "smooth";
+                    // Brief timeout to avoid immediately triggering a card toggle on drag release
+                    setTimeout(() => {
+                        isDragging = false;
+                    }, 50);
+                });
+
+                row.addEventListener("mousemove", (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - row.offsetLeft;
+                    const walk = (x - startX) * 1.5;
+                    
+                    if (Math.abs(walk) > 8) {
+                        isDragging = true;
+                    }
+                    row.scrollLeft = scrollLeft - walk;
+                });
+
+                // Intelligently consume/prevent standard click triggers if the mouse was dragged
+                row.addEventListener("click", (e) => {
+                    if (isDragging) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
+                }, true); // Capture phase is critical to intercept click bubbling
+            });
         });
 
         function dismissWhatsAppPopup() {

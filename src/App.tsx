@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Instagram, X } from "lucide-react";
+import DraggableCarousel from "./components/DraggableCarousel";
 
 interface CardItem {
   id: string;
@@ -111,27 +112,17 @@ export default function App() {
     sessionStorage.setItem("whatsapp_popup_dismissed", "true");
   };
 
-  const handleCardClick = (id: string, e: React.MouseEvent) => {
-    // If we click close button or custom links, let those handlers run natively
-    const target = e.target as HTMLElement;
-    if (target.closest("button") || target.closest("a")) {
-      return;
-    }
-    setActiveId(prev => prev === id ? null : id);
-  };
-
   const closeOverlay = (e: React.MouseEvent) => {
     e.stopPropagation();
     setActiveId(null);
   };
 
-  const renderCard = (card: CardItem) => {
+  const renderCard = (card: CardItem, uniqueId: string) => {
     const isActive = activeId === card.id;
 
     return (
       <div 
-        key={card.id}
-        onClick={(e) => handleCardClick(card.id, e)}
+        key={uniqueId}
         className="relative aspect-[3/4] w-[200px] shrink-0 snap-start group cursor-pointer overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[0.98] active:scale-95 select-none"
       >
         {/* Background Image */}
@@ -294,9 +285,12 @@ export default function App() {
               <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
             </div>
 
-            <div className="flex overflow-x-auto gap-4 pb-4 px-6 -mx-6 snap-x snap-mandatory no-scrollbar">
-              {row1.map(renderCard)}
-            </div>
+            <DraggableCarousel 
+              items={row1} 
+              activeId={activeId} 
+              setActiveId={setActiveId} 
+              renderCard={renderCard} 
+            />
           </section>
 
           {/* Row 2 — Autodescubrimiento */}
@@ -308,9 +302,12 @@ export default function App() {
               <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
             </div>
 
-            <div className="flex overflow-x-auto gap-4 pb-4 px-6 -mx-6 snap-x snap-mandatory no-scrollbar">
-              {row2.map(renderCard)}
-            </div>
+            <DraggableCarousel 
+              items={row2} 
+              activeId={activeId} 
+              setActiveId={setActiveId} 
+              renderCard={renderCard} 
+            />
           </section>
 
           {/* Row 3 — Gratuito */}
@@ -322,9 +319,12 @@ export default function App() {
               <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
             </div>
 
-            <div className="flex overflow-x-auto gap-4 pb-4 px-6 -mx-6 snap-x snap-mandatory no-scrollbar">
-              {row3.map(renderCard)}
-            </div>
+            <DraggableCarousel 
+              items={row3} 
+              activeId={activeId} 
+              setActiveId={setActiveId} 
+              renderCard={renderCard} 
+            />
           </section>
 
         </main>
