@@ -18,33 +18,64 @@ const row1: CardItem[] = [
   {
     id: "tarot",
     title: "Tarot",
-    description: "Agenda tu lectura",
+    description: "Agenda tu lectura personalizada de tarot predictivo y evolutivo.",
     image: "https://i.pinimg.com/736x/3b/76/92/3b7692dfcd49358e911b3bfcf4300fdd.jpg",
     href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20agendar%20una%20lectura%20de%20Tarot%20🔮",
   },
   {
-    id: "comunidad",
-    title: "Comunidad Gratuita",
-    description: "Espacio seguro para tarot",
-    image: "https://i.pinimg.com/1200x/4a/fa/43/4afa433df0056bfd817ef24ffa0e116f.jpg",
-    href: "https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh",
+    id: "vocacion-pedido",
+    title: "Vocación profesional",
+    description: "Descubre tu camino de éxito y propósito de vida alineado a tus astros.",
+    image: "https://i.pinimg.com/736x/fd/54/1a/fd541adc5d506169fc9cae05da39d5e3.jpg",
+    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Vocaci%C3%B3n%20profesional%20💼",
+  },
+  {
+    id: "dones-pedido",
+    title: "Dones Espirituales",
+    description: "Conoce tus talentos mágicos innatos y canaliza tu poder espiritual.",
+    image: "https://i.pinimg.com/736x/15/68/d7/1568d714f086b3d4e5b15a632b66de64.jpg",
+    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Dones%20Espirituales%20🔮",
   }
 ];
 
 const row2: CardItem[] = [
   {
-    id: "dones",
-    title: "Dones Espirituales",
-    description: "Lectura de carta natal personalizada",
-    image: "https://i.pinimg.com/736x/15/68/d7/1568d714f086b3d4e5b15a632b66de64.jpg",
-    href: "https://www.paypal.com/ncp/payment/XT7LDZ3H4PAM8",
-  },
-  {
     id: "saju",
     title: "Saju Autoconocimiento",
-    description: "Análisis de destino y ciclos de vida",
+    description: "Análisis milenario de destino y tus ciclos energéticos de vida.",
     image: "https://i.pinimg.com/736x/39/9c/de/399cdeefe42ec07ef632bec40b128b68.jpg",
-    href: "https://www.paypal.com/ncp/payment/XT7LDZ3H4PAM8",
+    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Saju%20Autoconocimiento%20☯️",
+  },
+  {
+    id: "vocacion-auto",
+    title: "Vocación profesional",
+    description: "Encuentra tu verdadera vocación y brilla profesionalmente con tu energía astral.",
+    image: "https://i.pinimg.com/736x/fd/54/1a/fd541adc5d506169fc9cae05da39d5e3.jpg",
+    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Vocaci%C3%B3n%20profesional%20💼",
+  },
+  {
+    id: "compatibilidad",
+    title: "Compatibilidad de pareja",
+    description: "Explora la sinastría astrológica profunda y tu conexión espiritual con el ser amado.",
+    image: "https://i.pinimg.com/736x/be/32/27/be322744ad14013149ba5844a49c6cb3.jpg",
+    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Compatibilidad%20de%20pareja%20❤️",
+  },
+  {
+    id: "manifestacion",
+    title: "Manifestación",
+    description: "Alinea tu vibración de abundancia y aprende a cocrear tu realidad deseada.",
+    image: "https://i.pinimg.com/736x/44/22/e7/4422e70e302061ced2a52efadd3cd96b.jpg",
+    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20la%20Manifestaci%C3%B3n%20✨",
+  }
+];
+
+const row3: CardItem[] = [
+  {
+    id: "comunidad",
+    title: "Comunidad Gratuita",
+    description: "Únete a nuestro canal de WhatsApp para recursos diarios, lecturas de tarot y sabiduría colectiva.",
+    image: "https://i.pinimg.com/1200x/4a/fa/43/4afa433df0056bfd817ef24ffa0e116f.jpg",
+    href: "https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh",
   }
 ];
 
@@ -101,7 +132,7 @@ export default function App() {
       <div 
         key={card.id}
         onClick={(e) => handleCardClick(card.id, e)}
-        className="relative aspect-[3/4] group cursor-pointer overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 select-none"
+        className="relative aspect-[3/4] w-[200px] shrink-0 snap-start group cursor-pointer overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[0.98] active:scale-95 select-none"
       >
         {/* Background Image */}
         <img 
@@ -245,8 +276,9 @@ export default function App() {
           </div>
 
           {/* Subtitle below name & image row */}
-          <div className="mt-1">
+          <div className="mt-1 space-y-0.5">
             <p className="text-[17px] text-[#1a1a1a]/85 font-sans font-normal tracking-wide">Tarot predictivo y evolutivo</p>
+            <p className="text-[13px] text-[#787774] font-sans font-light tracking-wide">Envio lecturas a todo el mundo 🌍</p>
           </div>
         </header>
 
@@ -262,7 +294,7 @@ export default function App() {
               <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="flex overflow-x-auto gap-4 pb-4 px-6 -mx-6 snap-x snap-mandatory no-scrollbar">
               {row1.map(renderCard)}
             </div>
           </section>
@@ -276,8 +308,22 @@ export default function App() {
               <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="flex overflow-x-auto gap-4 pb-4 px-6 -mx-6 snap-x snap-mandatory no-scrollbar">
               {row2.map(renderCard)}
+            </div>
+          </section>
+
+          {/* Row 3 — Gratuito */}
+          <section className="space-y-4">
+            <div className="text-left space-y-1.5">
+              <h2 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#787774] font-sans">
+                Free →
+              </h2>
+              <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
+            </div>
+
+            <div className="flex overflow-x-auto gap-4 pb-4 px-6 -mx-6 snap-x snap-mandatory no-scrollbar">
+              {row3.map(renderCard)}
             </div>
           </section>
 
