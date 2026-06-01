@@ -706,10 +706,15 @@
                         });
                     }
 
-                    // Calculate correct size subtracting start/end padding (48px total for px-6 borders)
+                    const N = originalCards.length;
                     const alignLoop = () => {
-                        const setWidth = (row.scrollWidth - 48) / 5;
-                        row.scrollLeft = setWidth * 2;
+                        const children = row.children;
+                        const targetIndex = N * 2; // First card of the 3rd set
+                        if (children[targetIndex]) {
+                            const targetChild = children[targetIndex];
+                            const paddingLeft = parseFloat(window.getComputedStyle(row).paddingLeft) || 24;
+                            row.scrollLeft = targetChild.offsetLeft - paddingLeft;
+                        }
                     };
 
                     // Align on initial build, window load (images ready), and resize
@@ -719,11 +724,19 @@
 
                     // Infinite wrapping lookups
                     row.addEventListener("scroll", () => {
-                        const setWidth = (row.scrollWidth - 48) / 5;
-                        if (row.scrollLeft < setWidth) {
-                            row.scrollLeft += setWidth * 2;
-                        } else if (row.scrollLeft > setWidth * 3) {
-                            row.scrollLeft -= setWidth * 2;
+                        const children = row.children;
+                        if (!children[0] || !children[N] || !children[2 * N] || !children[3 * N]) return;
+
+                        const paddingLeft = parseFloat(window.getComputedStyle(row).paddingLeft) || 24;
+                        const setDistance = children[N].offsetLeft - children[0].offsetLeft;
+
+                        const leftBoundary = children[N].offsetLeft - paddingLeft;
+                        const rightBoundary = children[3 * N].offsetLeft - paddingLeft;
+
+                        if (row.scrollLeft < leftBoundary) {
+                            row.scrollLeft += setDistance;
+                        } else if (row.scrollLeft > rightBoundary) {
+                            row.scrollLeft -= setDistance;
                         }
                     });
                 }

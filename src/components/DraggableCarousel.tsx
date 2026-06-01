@@ -39,13 +39,17 @@ export default function DraggableCarousel({
     const el = containerRef.current;
     if (!el || items.length === 0 || !shouldLoop) return;
 
-    // Set scroll position to the safe middle set on mount
+    // Run layout centering after components settle
     const handleResize = () => {
-      const singleSetWidth = (el.scrollWidth - 48) / 5;
-      el.scrollLeft = singleSetWidth * 2;
+      const children = el.children;
+      const targetIndex = items.length * 2; // First card of the 3rd set
+      if (children[targetIndex]) {
+        const targetChild = children[targetIndex] as HTMLElement;
+        const paddingLeft = parseFloat(window.getComputedStyle(el).paddingLeft) || 24;
+        el.scrollLeft = targetChild.offsetLeft - paddingLeft;
+      }
     };
 
-    // Run layout centering after components settle
     const timer = setTimeout(handleResize, 100);
 
     window.addEventListener("resize", handleResize);
@@ -59,15 +63,21 @@ export default function DraggableCarousel({
     const el = containerRef.current;
     if (!el || items.length === 0 || !shouldLoop) return;
 
-    const singleSetWidth = (el.scrollWidth - 48) / 5;
+    const children = el.children;
+    const N = items.length;
+    if (!children[0] || !children[N] || !children[2 * N] || !children[3 * N]) return;
+
+    const paddingLeft = parseFloat(window.getComputedStyle(el).paddingLeft) || 24;
+    const setDistance = (children[N] as HTMLElement).offsetLeft - (children[0] as HTMLElement).offsetLeft;
+
+    const leftBoundary = (children[N] as HTMLElement).offsetLeft - paddingLeft;
+    const rightBoundary = (children[3 * N] as HTMLElement).offsetLeft - paddingLeft;
 
     // Loop bounds check
-    if (el.scrollLeft < singleSetWidth) {
-      // If they scrolled too far left, shift seamlessly to the right middle set
-      el.scrollLeft += singleSetWidth * 2;
-    } else if (el.scrollLeft > singleSetWidth * 3) {
-      // If they scrolled too far right, shift seamlessly to the left middle set
-      el.scrollLeft -= singleSetWidth * 2;
+    if (el.scrollLeft < leftBoundary) {
+      el.scrollLeft += setDistance;
+    } else if (el.scrollLeft > rightBoundary) {
+      el.scrollLeft -= setDistance;
     }
   };
 
