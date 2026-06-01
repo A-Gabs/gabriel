@@ -3,595 +3,469 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tarot.anna - Tarot</title>
+    <title>tarot.anna - Tarot predictivo y evolutivo</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Elegant Font Pairing: Cormorant Garamond (Serif) & Plus Jakarta Sans (Sans-serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFFFFF;
-            color: #37352F;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FDFAF6;
+            color: #1a1a1a;
+            -webkit-tap-highlight-color: transparent;
         }
-        .notion-card {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background-color: #FFFFFF;
-            border: 1px solid #E9E9E7;
-            border-radius: 8px;
-            transition: background-color 0.2s;
-            width: 100%;
-        }
-        .notion-card:hover {
-            background-color: #F1F1EF;
-        }
-        .notion-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background-color: #F7F7F5;
-            border-radius: 6px;
-            flex-shrink: 0;
-        }
-        .hidden {
-            display: none;
-        }
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .animate-slide-right {
-            animation: slideInRight 0.3s ease-out forwards;
-        }
-        .animate-slide-left {
-            animation: slideInLeft 0.3s ease-out forwards;
-        }
-        /* Modal Styles */
-        .modal-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-        }
-        @media (min-width: 640px) {
-            .modal-backdrop {
-                padding: 16px;
-            }
-        }
-        .modal-backdrop.active {
-            display: flex;
-        }
-        .modal-content {
-            background: white;
-            border-radius: 0;
-            width: 100%;
-            height: 100%;
-            max-width: 900px;
-            max-height: 100vh;
+        
+        /* Glassmorphic border lines and smooth custom transition shadows */
+        .card-container {
+            cursor: pointer;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transform: scale(0.95);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px -2px rgba(26, 26, 26, 0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        @media (min-width: 640px) {
-            .modal-content {
-                border-radius: 20px;
-                height: auto;
-                max-height: 90vh;
-            }
+        
+        .card-container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -4px rgba(26, 26, 26, 0.12);
         }
-        .modal-backdrop.active .modal-content {
-            transform: scale(1);
-            opacity: 1;
+
+        .text-shadow-custom {
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
-<body>
-    <div id="app" class="min-h-screen max-w-[480px] mx-auto px-6 py-12 md:py-20 flex flex-col">
-        <!-- Home View -->
-        <div id="home-view" class="flex flex-col gap-10 animate-slide-left">
-            <header class="flex flex-col items-center text-center gap-4">
-                <div class="w-24 h-24 rounded-full border-2 border-[#E9E9E7] overflow-hidden shadow-sm">
-                    <img src="https://i.pinimg.com/736x/ff/3d/f1/ff3df11884ac374f00a6a29cde6fad88.jpg" alt="Gabriel" class="w-full h-full object-cover">
-                </div>
-                <div class="space-y-1">
-                    <h1 class="text-[28px] font-bold tracking-tight">tarot.anna</h1>
-                    <p class="text-[15px] text-[#787774]">Tarot predictivo y evolutivo</p>
-                </div>
-                <!-- Social Icons -->
-                <div class="flex gap-4 mt-2">
-                    <a href="https://tiktok.com/@tis.gabriell" target="_blank" class="hover:opacity-70 transition-opacity">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" class="text-[#37352F]">
-                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
-                        </svg>
-                    </a>
-                    <a href="https://instagram.com/tis.gabriell" target="_blank" class="hover:opacity-70 transition-opacity">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#37352F]"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                    </a>
-                </div>
-            </header>
+<body class="bg-[#FDFAF6] min-h-screen text-[#1a1a1a] antialiased selection:bg-[#1a1a1a]/10 flex flex-col justify-between">
 
-            <nav class="flex flex-col gap-6">
-                <!-- Card 1: Tarot -->
-                <div class="flex p-0 overflow-hidden min-h-[140px] items-stretch text-left border border-[#E9E9E7] rounded-lg shadow-md hover:shadow-lg transition-all">
-                    <div class="w-[40%] flex-shrink-0 relative">
-                        <img src="https://i.pinimg.com/736x/3b/76/92/3b7692dfcd49358e911b3bfcf4300fdd.jpg" alt="Tarot" class="absolute inset-0 w-full h-full object-cover object-top">
+    <div class="w-full max-w-[480px] mx-auto px-6 py-12 md:py-20 flex flex-col min-h-screen justify-between gap-12">
+        
+        <!-- HEADER -->
+        <header class="flex flex-col gap-4 w-full text-left">
+            <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <!-- Circular Avatar with subtle dashed trim -->
+                    <div class="relative w-24 h-24 rounded-full p-[3px] border border-dashed border-[#1a1a1a]/20 shrink-0 transition-transform duration-700 hover:rotate-12">
+                        <img 
+                            src="https://i.pinimg.com/736x/ff/3d/f1/ff3df11884ac374f00a6a29cde6fad88.jpg" 
+                            alt="tarot.anna" 
+                            class="w-full h-full rounded-full object-cover"
+                        >
                     </div>
-                    <div class="flex-1 p-5 flex flex-col justify-center bg-white">
-                        <h3 class="text-xl font-bold text-[#37352F]">Tarot</h3>
-                        <p class="text-[14px] text-[#787774] mt-0.5">Agenda tu lectura</p>
+                    
+                    <!-- Username & Social Icons side-by-side inside this inner row -->
+                    <div class="space-y-2">
+                        <h1 class="font-serif text-[32px] font-bold text-[#1a1a1a] tracking-tight leading-none">tarot.anna</h1>
                         
-                        <div class="flex flex-col gap-2 mt-4">
-                            <button onclick="copyNumberHome()" id="copy-btn-home" class="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#F7F7F5] border border-[#E9E9E7] rounded-md text-[13px] font-medium text-[#37352F] hover:bg-[#F1F1EF] transition-colors">
-                                <svg id="copy-icon-home" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                <span id="copy-text-home">Copiar número</span>
-                            </button>
-                            <a href="https://wa.me/51960260123?text=Deseo%20agendar%20una%20lectura%20🔮" target="_blank" class="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#37352F] text-white rounded-md text-[13px] font-medium hover:bg-black transition-colors">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .011 5.403.011 12.039c0 2.12.553 4.189 1.604 6.039L0 24l6.105-1.602a11.834 11.834 0 005.944 1.599h.005c6.634 0 12.038-5.402 12.038-12.039a11.799 11.799 0 00-3.483-8.52z"/>
+                        <!-- Social Icons (TikTok, Instagram & WhatsApp) -->
+                        <div class="flex gap-2.5 items-center">
+                            <a href="https://tiktok.com/@tis.gabriell" target="_blank" rel="noopener noreferrer" class="text-[#1a1a1a]/70 hover:text-[#1a1a1a] transition-all duration-300" aria-label="TikTok">
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
                                 </svg>
-                                Agendar lectura
+                            </a>
+                            <a href="https://instagram.com/tis.gabriell" target="_blank" rel="noopener noreferrer" class="text-[#1a1a1a]/70 hover:text-[#1a1a1a] transition-all duration-300" aria-label="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                                </svg>
+                            </a>
+                            <a href="https://wa.me/51960260123" target="_blank" rel="noopener noreferrer" class="text-[#1a1a1a]/70 hover:text-[#1a1a1a] transition-all duration-300" aria-label="WhatsApp">
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]">
+                                    <path d="M12.004 2c-5.518 0-9.996 4.477-9.996 9.996 0 1.764.459 3.42 1.258 4.872L2 22l5.318-1.396A9.957 9.957 0 0 0 12.004 22c5.517 0 9.996-4.477 9.996-9.996v-.004C22.004 6.479 17.525 2 12.004 2zm5.726 14.129c-.244.693-1.42 1.272-1.942 1.353-.459.072-.942.135-2.923-.684-2.535-1.045-4.148-3.636-4.275-3.805-.126-.171-1.03-1.373-1.03-2.62s.644-1.854.873-2.111c.229-.257.5-.324.667-.324.167 0 .333.004.477.01.144.004.337-.054.527.404.194.472.667 1.624.726 1.742.06.117.099.252.02.409-.079.158-.12.257-.239.396-.12.139-.252.311-.359.419-.12.117-.245.244-.105.487.139.243.621 1.022 1.332 1.656.914.815 1.683 1.066 1.923 1.185.24.117.378.099.518-.063.139-.162.603-.698.766-.937.162-.239.324-.198.545-.117.22.079 1.405.662 1.644.78.24.117.396.176.455.275.058.099.058.572-.185 1.265z"/>
+                                </svg>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Card 2: Comunidad -->
-                <div class="flex p-0 overflow-hidden min-h-[140px] items-stretch text-left border border-[#E9E9E7] rounded-lg shadow-md hover:shadow-lg transition-all">
-                    <div class="w-[40%] flex-shrink-0 relative">
-                        <img src="https://i.pinimg.com/1200x/4a/fa/43/4afa433df0056bfd817ef24ffa0e116f.jpg" alt="Comunidad" class="absolute inset-0 w-full h-full object-cover object-center">
-                    </div>
-                    <div class="flex-1 p-5 flex flex-col justify-center bg-white">
-                        <h3 class="text-xl font-bold text-[#37352F]">Comunidad Gratuita</h3>
-                        <p class="text-[14px] text-[#787774] mt-0.5">Espacio seguro para tarot 🔮</p>
+                <!-- Share action button on the right matching Pinterest/Linktree -->
+                <button 
+                    onclick="handleShare()" 
+                    class="text-[#1a1a1a]/70 hover:text-[#1a1a1a] p-2.5 rounded-full hover:bg-[#1a1a1a]/5 transition-colors shrink-0" 
+                    aria-label="Compartir"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                        <polyline points="16 6 12 2 8 6"/>
+                        <line x1="12" x2="12" y1="2" y2="15"/>
+                    </svg>
+                </button>
+            </div>
 
-                        <div class="flex flex-col gap-2 mt-4">
-                            <button onclick="copyCommunityLink()" id="copy-btn-comm" class="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#F7F7F5] border border-[#E9E9E7] rounded-md text-[13px] font-medium text-[#37352F] hover:bg-[#F1F1EF] transition-colors">
-                                <svg id="copy-icon-comm" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                <span id="copy-text-comm">Copiar enlace</span>
-                            </button>
-                            <a href="https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh" target="_blank" class="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#37352F] text-white rounded-md text-[13px] font-medium hover:bg-black transition-colors">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .011 5.403.011 12.039c0 2.12.553 4.189 1.604 6.039L0 24l6.105-1.602a11.834 11.834 0 005.944 1.599h.005c6.634 0 12.038-5.402 12.038-12.039a11.799 11.799 0 00-3.483-8.52z"/>
-                                </svg>
-                                Unirme al grupo
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            <!-- Subtitle below name & image row -->
+            <div class="mt-1">
+                <p class="text-[17px] text-[#1a1a1a]/85 font-sans font-normal tracking-wide">Tarot predictivo y evolutivo</p>
+            </div>
+        </header>
 
-            <!-- Autodescubrimiento Section -->
-            <section class="space-y-6">
-                <div class="text-center space-y-2">
-                    <h2 class="text-[14px] font-bold uppercase tracking-[0.2em] text-[#787774]">Autodescubrimiento</h2>
-                    <div class="h-[1px] w-12 bg-[#E9E9E7] mx-auto opacity-50"></div>
+        <!-- MAIN NAVIGATION & CARD GRID -->
+        <main class="flex-1 flex flex-col gap-10">
+
+            <!-- FILA 1 — "Más pedidos" -->
+            <section class="space-y-4">
+                <div class="text-left space-y-1.5">
+                    <h2 class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#787774] font-sans">Más pedidos →</h2>
+                    <div class="h-[1px] w-8 bg-[#1a1a1a]/10"></div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Card 1: Dones Espirituales -->
-                    <div class="bg-white border border-[#E9E9E7] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all group">
-                        <div class="aspect-[4/3] overflow-hidden relative">
-                            <img src="https://i.pinimg.com/736x/15/68/d7/1568d714f086b3d4e5b15a632b66de64.jpg" alt="Dones Espirituales" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Tarjeta 1: Tarot -->
+                    <div class="card-container aspect-[3/4] group" onclick="toggleOverlay(this, event)" id="card-tarot">
+                        <!-- BG Image -->
+                        <img 
+                            src="https://i.pinimg.com/736x/3b/76/92/3b7692dfcd49358e911b3bfcf4300fdd.jpg" 
+                            alt="Tarot - Agenda tu lectura" 
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        >
+                        <!-- Default Title View (graduated bottom overlay, 70% black opacity fading to transparent up to mid-height) -->
+                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
+                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
+                                Tarot
+                            </h3>
                         </div>
-                        <div class="p-5 flex flex-col flex-1 space-y-4">
-                            <div class="space-y-1">
-                                <div class="flex justify-between items-start gap-2">
-                                    <h3 class="font-bold text-[#37352F] leading-[1.3] text-[17px] tracking-tight text-balance">Dones <br> Espirituales</h3>
-                                </div>
-                                <p class="text-[12px] text-[#787774] font-medium italic">Lectura de carta natal personalizada</p>
+                        
+                        <!-- Overlay (Renders exactly on top on click) -->
+                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
+                            <!-- Close icon top-right -->
+                            <div class="flex justify-end">
+                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
                             </div>
                             
-                            <div class="space-y-2 pt-2">
-                                <button onclick="openModal('https://a-gabs.github.io/Dones/')" class="w-full py-2.5 px-4 text-[13px] font-bold border-2 border-[#E9E9E7] text-[#37352F] rounded-lg hover:bg-[#F1F1EF] transition-colors">
-                                    Ver ejemplo
-                                </button>
-                                <a href="https://www.paypal.com/ncp/payment/XT7LDZ3H4PAM8" target="_blank" class="w-full py-2.5 px-4 text-[13px] font-bold bg-[#37352F] text-white rounded-lg hover:opacity-90 transition-opacity text-center block" id="paypal-btn-1">
-                                    Me interesa
+                            <!-- Detail content at bottom -->
+                            <div class="space-y-3">
+                                <div class="space-y-1">
+                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Tarot</h4>
+                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Agenda tu lectura</p>
+                                </div>
+                                <a href="https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20agendar%20una%20lectura%20de%20Tarot%20🔮" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
+                                    Cuéntame más &rarr;
                                 </a>
-                                <p class="text-[10px] text-center text-[#ADACAA]">⏱ Entrega en máximo 24 horas</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Card 2: SAJU -->
-                    <div class="bg-white border border-[#E9E9E7] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all group">
-                        <div class="aspect-[4/3] overflow-hidden relative">
-                            <img src="https://i.pinimg.com/736x/39/9c/de/399cdeefe42ec07ef632bec40b128b68.jpg" alt="SAJU" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <!-- Tarjeta 2: Comunidad Gratuita -->
+                    <div class="card-container aspect-[3/4] group" onclick="toggleOverlay(this, event)" id="card-comunidad">
+                        <!-- BG Image -->
+                        <img 
+                            src="https://i.pinimg.com/1200x/4a/fa/43/4afa433df0056bfd817ef24ffa0e116f.jpg" 
+                            alt="Comunidad Gratuita" 
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        >
+                        <!-- Default Title View (graduated bottom overlay, 70% black opacity fading to transparent up to mid-height) -->
+                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
+                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
+                                Comunidad Gratuita
+                            </h3>
                         </div>
-                        <div class="p-5 flex flex-col flex-1 space-y-4">
-                            <div class="space-y-1">
-                                <div class="flex justify-between items-start gap-2">
-                                    <h3 class="font-bold text-[#37352F] leading-[1.3] text-[17px] tracking-tight text-balance">Saju Autoconocimiento</h3>
-                                </div>
-                                <p class="text-[12px] text-[#787774] font-medium italic">Análisis de destino y ciclos de vida</p>
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
+                            <div class="flex justify-end">
+                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
                             </div>
                             
-                            <div class="space-y-2 pt-2">
-                                <button onclick="openModal('https://a-gabs.github.io/Dones/')" class="w-full py-2.5 px-4 text-[13px] font-bold border-2 border-[#E9E9E7] text-[#37352F] rounded-lg hover:bg-[#F1F1EF] transition-colors">
-                                    Ver ejemplo
-                                </button>
-                                <a href="https://www.paypal.com/ncp/payment/XT7LDZ3H4PAM8" target="_blank" class="w-full py-2.5 px-4 text-[13px] font-bold bg-[#37352F] text-white rounded-lg hover:opacity-90 transition-opacity text-center block" id="paypal-btn-2">
-                                    Me interesa
+                            <div class="space-y-3">
+                                <div class="space-y-1">
+                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Comunidad Gratuita</h4>
+                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Espacio seguro para tarot</p>
+                                </div>
+                                <a href="https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
+                                    Cuéntame más &rarr;
                                 </a>
-                                <p class="text-[10px] text-center text-[#ADACAA]">⏱ Entrega en máximo 24 horas</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-        </div>
 
-        <!-- Pricing View -->
-        <div id="pricing-view" class="hidden flex flex-col gap-8 animate-slide-right">
-            <div class="flex items-center gap-4">
-                <button onclick="showHome()" class="p-2 -ml-2 hover:bg-[#F1F1EF] rounded-md transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#37352F]"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-                </button>
-                <h2 id="pricing-title" class="text-[18px] font-bold">Precios</h2>
-            </div>
-
-            <div id="services-list" class="flex flex-col gap-6">
-                <!-- Categories and Services will be injected here -->
-            </div>
-
-            <div class="mt-4 p-4 bg-[#F7F7F5] border border-[#E9E9E7] rounded-lg flex flex-col gap-4">
-                <div class="space-y-3">
-                    <p id="payment-message" class="text-[13px] text-[#787774] leading-relaxed"></p>
-                    
-                    <div id="yape-container" class="hidden flex items-center justify-between bg-white border border-[#E9E9E7] rounded-md p-2 pl-3">
-                        <span class="text-[14px] font-mono font-medium text-[#37352F]">+51 960 260 123</span>
-                        <button onclick="copyToClipboard()" id="copy-btn" class="p-2 hover:bg-[#F1F1EF] rounded-md transition-colors flex items-center gap-2 text-[12px] font-medium text-[#787774]">
-                            <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                            <span id="copy-text">Copiar</span>
-                        </button>
-                    </div>
+            <!-- FILA 2 — "Autodescubrimiento" -->
+            <section class="space-y-4">
+                <div class="text-left space-y-1.5">
+                    <h2 class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#787774] font-sans">Autodescubrimiento →</h2>
+                    <div class="h-[1px] w-8 bg-[#1a1a1a]/10"></div>
                 </div>
 
-                <a href="https://wa.me/51960260123" target="_blank" class="w-full flex items-center justify-center gap-2 py-2 bg-[#37352F] text-white rounded-md text-[14px] font-medium hover:bg-black transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    Agendar ahora
-                </a>
-            </div>
-        </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Tarjeta 3: Dones Espirituales -->
+                    <div class="card-container aspect-[3/4] group" onclick="toggleOverlay(this, event)" id="card-dones">
+                        <!-- BG Image -->
+                        <img 
+                            src="https://i.pinimg.com/736x/15/68/d7/1568d714f086b3d4e5b15a632b66de64.jpg" 
+                            alt="Dones Espirituales" 
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        >
+                        <!-- Default Title View (graduated bottom overlay, 70% black opacity fading to transparent up to mid-height) -->
+                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
+                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
+                                Dones Espirituales
+                            </h3>
+                        </div>
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
+                            <div class="flex justify-end">
+                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="space-y-1">
+                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Dones Espirituales</h4>
+                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Lectura de carta natal personalizada</p>
+                                </div>
+                                <a href="https://www.paypal.com/ncp/payment/XT7LDZ3H4PAM8" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
+                                    Cuéntame más &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-        <footer class="mt-auto pt-12 text-center flex flex-col items-center gap-4">
-            <div class="h-[1px] w-full bg-[#E9E9E7]"></div>
-            <p class="text-[12px] text-[#ADACAA]">tarot.anna - Tarot ✨</p>
+                    <!-- Tarjeta 4: Saju Autoconocimiento -->
+                    <div class="card-container aspect-[3/4] group" onclick="toggleOverlay(this, event)" id="card-saju">
+                        <!-- BG Image -->
+                        <img 
+                            src="https://i.pinimg.com/736x/39/9c/de/399cdeefe42ec07ef632bec40b128b68.jpg" 
+                            alt="Saju Autoconocimiento" 
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        >
+                        <!-- Default Title View (graduated bottom overlay, 70% black opacity fading to transparent up to mid-height) -->
+                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
+                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
+                                Saju Autoconocimiento
+                            </h3>
+                        </div>
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
+                            <div class="flex justify-end">
+                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="space-y-1">
+                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Saju Autoconocimiento</h4>
+                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Análisis de destino y ciclos de vida</p>
+                                </div>
+                                <a href="https://www.paypal.com/ncp/payment/XT7LDZ3H4PAM8" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
+                                    Cuéntame más &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="mt-8 text-center flex flex-col items-center gap-4">
+            <div class="h-[1px] w-12 bg-[#1a1a1a]/10 mx-auto"></div>
+            <p class="text-[11px] uppercase tracking-[0.25em] text-[#787774] font-medium">tarot.anna — Tarot ✨</p>
         </footer>
     </div>
 
-    <!-- Modal Backdrop -->
-    <div id="modal-backdrop" class="modal-backdrop" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-md text-[#787774] hover:bg-gray-50 transition-colors border border-[#E9E9E7]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    <!-- POPUP MODAL FOR WHATSAPP -->
+    <div 
+        id="whatsapp-popup-modal"
+        onclick="dismissWhatsAppPopup()"
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-300"
+    >
+        <div 
+            onclick="event.stopPropagation()"
+            class="bg-[#FDFAF6] border border-[#1a1a1a]/10 rounded-2xl p-6 w-full max-w-[340px] shadow-2xl relative text-center flex flex-col items-center gap-5 transition-all duration-300 transform scale-100"
+        >
+            <!-- Close button in corner -->
+            <button 
+                onclick="dismissWhatsAppPopup()"
+                class="absolute top-4 right-4 text-[#1a1a1a]/40 hover:text-[#1a1a1a] p-1.5 rounded-full hover:bg-[#1a1a1a]/5 transition-all outline-none"
+                aria-label="Cerrar"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
             </button>
-            <div class="w-full h-full sm:h-[600px] sm:max-h-[80vh] pt-14 sm:pt-0">
-                <iframe id="modal-iframe" src="" class="w-full h-full border-none" title="Ejemplo de lectura"></iframe>
+
+            <!-- Decorative Icon -->
+            <div class="w-12 h-12 bg-[#1a1a1a]/5 rounded-full flex items-center justify-center text-xl shadow-sm border border-[#1a1a1a]/5">
+                🔮
             </div>
+
+            <!-- Header Text -->
+            <div class="space-y-1.5">
+                <h3 class="font-serif text-[22px] font-bold text-[#1a1a1a] tracking-tight leading-tight">
+                    Copia mi WhatsApp
+                </h3>
+                <p class="text-[13px] text-[#787774] font-sans font-light leading-relaxed px-1">
+                    Escríbeme directamente por WhatsApp para agendar tu lectura o hacerme cualquier consulta ✨
+                </p>
+            </div>
+
+            <!-- Display Box for Number -->
+            <div class="w-full bg-[#1a1a1a]/5 border border-[#1a1a1a]/5 rounded-xl py-2.5 px-4 font-serif text-[18px] font-semibold text-[#1a1a1a] tracking-wider select-all">
+                +51 960 260 123
+            </div>
+
+            <!-- Copy Link Button (Pristine, styled identically to the design instructions/image) -->
+            <button 
+                id="popup-copy-btn"
+                onclick="copyWhatsAppNumber()"
+                class="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-white hover:bg-neutral-50 text-neutral-800 border border-neutral-200 rounded-xl text-[13.5px] font-sans font-medium transition-all shadow-sm active:scale-[0.98]"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-500 shrink-0">
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                </svg>
+                <span>Copiar enlace</span>
+            </button>
+
+            <!-- Direct Link Alternative -->
+            <a 
+                href="https://wa.me/51960260123"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="dismissWhatsAppPopup()"
+                class="text-[12px] font-medium text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-all hover:underline"
+            >
+                O abrir chat directamente →
+            </a>
         </div>
     </div>
 
+    <!-- VANILLA JAVASCRIPT MECHANICS -->
     <script>
-        const services = [
-            { name: "1 pregunta privada", category: "✦ General", priceSoles: 12, priceUSD: 6, emoji: "✦" },
-            { name: "Sesión 20 minutos ⭐", category: "✦ General", priceSoles: 30, priceUSD: 18, emoji: "⭐" },
-            { name: "Sesión 45 minutos", category: "✦ General", priceSoles: 50, priceUSD: 30, emoji: "✦" },
-            { 
-                name: "Tirada del ex", 
-                category: "💘 Amor", 
-                priceSoles: 20, 
-                priceUSD: 10, 
-                emoji: "💘",
-                description: "Ideal para comprender conexiones que aún no cierran: Qué siente, Qué piensa, Si tiene intención de volver."
-            },
-            { 
-                name: "Tirada de pretendientes", 
-                category: "💘 Amor", 
-                priceSoles: 20, 
-                priceUSD: 10, 
-                emoji: "💘",
-                description: "Explora las intenciones y sentimientos de hasta 2 personas: Qué sienten por ti, Qué intenciones tiene cada uno, Cuál te conviene más."
-            },
-            { 
-                name: "Tirada del \"casi algo\"", 
-                category: "💘 Amor", 
-                priceSoles: 20, 
-                priceUSD: 10, 
-                emoji: "💘",
-                description: "Para aclarar vínculos inciertos o en pausa: Qué siente, Qué piensa, Si desea formalizar, Si hay terceros..."
-            },
-            { 
-                name: "Tirada de pareja", 
-                category: "💘 Amor", 
-                priceSoles: 20, 
-                priceUSD: 10, 
-                emoji: "💘",
-                description: "Conoce la energía de tu relación actual: Qué siente tu pareja, Qué piensa sobre la relación y cómo te ve."
-            },
-            { 
-                name: "Tirada general", 
-                category: "🔮 Estratégicas", 
-                priceSoles: 20, 
-                priceUSD: 6, 
-                emoji: "🔮",
-                description: "Conoce el estado actual de tu energía e influencias: Energía personal, Bloqueos o cargas presentes, Qué estás atrayendo en este momento."
-            },
-            { 
-                name: "Tirada del mes", 
-                category: "🔮 Estratégicas", 
-                priceSoles: 20, 
-                priceUSD: 6, 
-                emoji: "🔮",
-                description: "Ideal para recibir una guía para el mes en curso: Energía predominante del mes, Aspectos destacados, Desafíos y oportunidades."
-            },
-            { 
-                name: "Tirada de evolución personal", 
-                category: "🔮 Estratégicas", 
-                priceSoles: 20, 
-                priceUSD: 6, 
-                emoji: "🔮",
-                description: "Explora los cambios que estás atravesando: Energía de tu proceso actual, Qué estás dejando atrás, Qué estás llamado/a a integrar."
-            },
-            { 
-                name: "Tirada de futuro cercano", 
-                category: "🔮 Estratégicas", 
-                priceSoles: 20, 
-                priceUSD: 6, 
-                emoji: "🔮",
-                description: "Dónde se dirige tu energía próximamente: Situación actual, Influencias o caminos posibles, Resultado o panorama probable."
+        function toggleOverlay(card, event) {
+            // Avoid activating if clicked close button
+            if (event.target.closest('button') || event.target.closest('a')) {
+                return;
             }
-        ];
 
-        const categories = ["✦ General", "💘 Amor", "🔮 Estratégicas"];
-        let currentCurrency = 'PEN';
-        let expandedCategory = null;
+            // Close other overlays first to keep interaction singular and focused
+            document.querySelectorAll('.card-container').forEach(c => {
+                if (c !== card) {
+                    const o = c.querySelector('.card-overlay');
+                    const t = c.querySelector('.default-title');
+                    o.classList.remove('opacity-100', 'pointer-events-auto');
+                    o.classList.add('opacity-0', 'pointer-events-none');
+                    t.classList.remove('opacity-0');
+                }
+            });
 
-        function showHome() {
-            document.getElementById('home-view').classList.remove('hidden');
-            document.getElementById('pricing-view').classList.add('hidden');
-        }
+            const overlay = card.querySelector('.card-overlay');
+            const defaultTitle = card.querySelector('.default-title');
+            const isActive = overlay.classList.contains('opacity-100');
 
-        function showPricing(currency) {
-            currentCurrency = currency;
-            expandedCategory = null;
-            document.getElementById('home-view').classList.add('hidden');
-            document.getElementById('pricing-view').classList.remove('hidden');
-            
-            renderPricing();
-        }
-
-        function toggleCategory(cat) {
-            expandedCategory = expandedCategory === cat ? null : cat;
-            renderPricing();
-        }
-
-        function renderPricing() {
-            const title = document.getElementById('pricing-title');
-            title.innerText = currentCurrency === 'PEN' ? 'Precios Perú' : 'Precios Internacional';
-
-            const message = document.getElementById('payment-message');
-            message.innerText = currentCurrency === 'PEN' 
-                ? "Aceptamos Yape y Agora al número:"
-                : "Pagos seguros vía PayPal. Una vez realizado el pago, envía el comprobante por WhatsApp.";
-
-            const yapeContainer = document.getElementById('yape-container');
-            if (currentCurrency === 'PEN') {
-                yapeContainer.classList.remove('hidden');
-                yapeContainer.classList.add('flex');
+            if (isActive) {
+                overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                defaultTitle.classList.remove('opacity-0');
             } else {
-                yapeContainer.classList.add('hidden');
-                yapeContainer.classList.remove('flex');
+                overlay.classList.add('opacity-100', 'pointer-events-auto');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                defaultTitle.classList.add('opacity-0');
             }
+        }
 
-            const list = document.getElementById('services-list');
-            list.innerHTML = '';
+        function closeOverlay(button, event) {
+            event.stopPropagation();
+            const card = button.closest('.card-container');
+            const overlay = card.querySelector('.card-overlay');
+            const defaultTitle = card.querySelector('.default-title');
+            
+            overlay.classList.remove('opacity-100', 'pointer-events-auto');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            defaultTitle.classList.remove('opacity-0');
+        }
 
-            categories.forEach(cat => {
-                const filtered = services.filter(s => s.category === cat);
-                const hasVisible = currentCurrency === 'PEN' 
-                    ? filtered.length > 0 
-                    : filtered.some(s => s.priceUSD !== null);
+        function handleShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'tarot.anna',
+                    text: 'Tarot predictivo y evolutivo',
+                    url: window.location.href,
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('¡Enlace de tarot.anna copiado al portapapeles!');
+            }
+        }
 
-                if (!hasVisible) return;
-
-                const isGeneral = cat === "✦ General";
-                const isExpanded = expandedCategory === cat || isGeneral;
-
-                const catDiv = document.createElement('div');
-                catDiv.className = 'flex flex-col gap-2';
-                
-                if (isGeneral) {
-                    let catHeader = `
-                        <div class="px-1 flex items-center gap-2">
-                            <h2 class="text-[11px] font-bold uppercase tracking-wider text-[#787774] opacity-70">
-                                ${cat.split(' ')[1] || cat}
-                            </h2>
-                            <div class="h-[1px] flex-1 bg-[#E9E9E7]"></div>
-                        </div>
-                        <div class="px-1 mb-1">
-                            <p class="text-[12px] text-[#787774] leading-relaxed italic">
-                                Las preguntas son privadas y personalizadas según tu situación.
-                                La lectura se envía mediante nota de audio, donde se explica detalladamente la tirada y los mensajes que aparecen.
-                                <br /><br />
-                                Las sesiones se agendan previamente, coordinando un horario disponible para ambas partes.
-                            </p>
-                        </div>
-                    `;
-
-                    let servicesHtml = '<div class="flex flex-col gap-1.5">';
-                    filtered.forEach(service => {
-                        const price = currentCurrency === 'PEN' 
-                            ? `S/ ${service.priceSoles}` 
-                            : (service.priceUSD ? `$${service.priceUSD}` : null);
-
-                        if (currentCurrency === 'USD' && !price) return;
-
-                        const whatsappMsg = encodeURIComponent(`Hola tarot.anna, me interesa la lectura: ${service.name}`);
-                        const whatsappUrl = `https://wa.me/51960260123?text=${whatsappMsg}`;
-
-                        servicesHtml += `
-                            <a href="${whatsappUrl}" target="_blank" class="notion-card flex-col items-start gap-1 transition-colors">
-                                <div class="flex items-center gap-3 w-full">
-                                    <div class="notion-icon text-lg">${service.emoji}</div>
-                                    <div class="flex-1">
-                                        <h3 class="text-[14px] font-medium leading-tight">${service.name}</h3>
-                                    </div>
-                                    <div class="text-[14px] font-semibold text-[#37352F]">${price}</div>
-                                </div>
-                                ${service.description ? `<p class="text-[12px] text-[#787774] ml-9 leading-snug">${service.description}</p>` : ''}
-                            </a>
-                        `;
-                    });
-                    servicesHtml += '</div>';
-                    catDiv.innerHTML = catHeader + servicesHtml;
-                } else {
-                    const description = cat === "💘 Amor" 
-                        ? "Conoce lo que piensa, lo que siente y hacia dónde se dirige la conexión."
-                        : "Analiza tu situación actual y proyecta tu siguiente movimiento con claridad.";
-                    
-                    let catHeader = `
-                        <button onclick="toggleCategory('${cat}')" class="notion-card text-left flex-col items-start gap-1">
-                            <div class="flex items-center gap-3 w-full">
-                                <div class="notion-icon text-lg">${cat.split(' ')[0]}</div>
-                                <div class="flex-1">
-                                    <h3 class="text-[14px] font-bold">${cat}</h3>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#D3D3D2] transition-transform ${isExpanded ? 'rotate-90' : ''}"><path d="m9 18 6-6-6-6"/></svg>
-                            </div>
-                            <p class="text-[12px] text-[#787774] ml-9 leading-snug">${description}</p>
-                        </button>
-                    `;
-
-                    if (isExpanded) {
-                        let servicesHtml = '<div class="flex flex-col gap-1.5 pl-4 border-l-2 border-[#E9E9E7] ml-4 mt-1">';
-                        filtered.forEach(service => {
-                            const price = currentCurrency === 'PEN' 
-                                ? `S/ ${service.priceSoles}` 
-                                : (service.priceUSD ? `$${service.priceUSD}` : null);
-
-                            if (currentCurrency === 'USD' && !price) return;
-
-                            const whatsappMsg = encodeURIComponent(`Hola tarot.anna, me interesa la lectura: ${service.name}`);
-                            const whatsappUrl = `https://wa.me/51960260123?text=${whatsappMsg}`;
-
-                            servicesHtml += `
-                                <a href="${whatsappUrl}" target="_blank" class="notion-card flex-col items-start gap-1 transition-colors">
-                                    <div class="flex items-center gap-3 w-full">
-                                        <div class="notion-icon text-lg">${service.emoji}</div>
-                                        <div class="flex-1">
-                                            <h3 class="text-[14px] font-medium leading-tight">${service.name}</h3>
-                                        </div>
-                                        <div class="text-[14px] font-semibold text-[#37352F]">${price}</div>
-                                    </div>
-                                    ${service.description ? `<p class="text-[12px] text-[#787774] ml-9 leading-snug">${service.description}</p>` : ''}
-                                </a>
-                            `;
-                        });
-                        servicesHtml += '</div>';
-                        catDiv.innerHTML = catHeader + servicesHtml;
-                    } else {
-                        catDiv.innerHTML = catHeader;
+        // Startup popup logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const popupDismissed = sessionStorage.getItem("whatsapp_popup_dismissed");
+            if (!popupDismissed) {
+                setTimeout(() => {
+                    const modal = document.getElementById("whatsapp-popup-modal");
+                    if (modal) {
+                        modal.classList.remove("opacity-0", "pointer-events-none");
                     }
-                }
+                }, 800);
+            }
+        });
 
-                list.appendChild(catDiv);
-            });
+        function dismissWhatsAppPopup() {
+            const modal = document.getElementById("whatsapp-popup-modal");
+            if (modal) {
+                modal.classList.add("opacity-0", "pointer-events-none");
+            }
+            sessionStorage.setItem("whatsapp_popup_dismissed", "true");
         }
 
-        function copyToClipboard() {
-            const text = "+51960260123";
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = document.getElementById('copy-btn');
-                const icon = document.getElementById('copy-icon');
-                const textEl = document.getElementById('copy-text');
-                
-                if (icon && textEl) {
-                    const originalIcon = icon.innerHTML;
-                    icon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
-                    icon.classList.add('text-green-600');
-                    textEl.innerText = 'Copiado';
-                    
+        function copyWhatsAppNumber() {
+            const number = "+51 960 260 123";
+            const btn = document.getElementById("popup-copy-btn");
+            navigator.clipboard.writeText(number).then(() => {
+                if (btn) {
+                    btn.classList.add("border-emerald-500", "bg-emerald-50/20");
+                    btn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 shrink-0">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <span class="text-emerald-700 font-semibold">¡Copiado con éxito!</span>
+                    `;
                     setTimeout(() => {
-                        icon.innerHTML = '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>';
-                        icon.classList.remove('text-green-600');
-                        textEl.innerText = 'Copiar';
+                        btn.classList.remove("border-emerald-500", "bg-emerald-50/20");
+                        btn.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-500 shrink-0">
+                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                            </svg>
+                            <span>Copiar enlace</span>
+                        `;
                     }, 2000);
                 }
-            });
-        }
-
-        function copyNumberHome() {
-            const text = "+51960260123";
-            navigator.clipboard.writeText(text).then(() => {
-                const icon = document.getElementById('copy-icon-home');
-                const textEl = document.getElementById('copy-text-home');
-                
-                if (icon && textEl) {
-                    const originalIcon = icon.innerHTML;
-                    icon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
-                    icon.classList.add('text-green-600');
-                    textEl.innerText = 'Copiado';
-                    
-                    setTimeout(() => {
-                        icon.innerHTML = '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>';
-                        icon.classList.remove('text-green-600');
-                        textEl.innerText = 'Copiar número';
-                    }, 2000);
-                }
-            });
-        }
-        function copyCommunityLink() {
-            const text = "https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh";
-            navigator.clipboard.writeText(text).then(() => {
-                const icon = document.getElementById('copy-icon-comm');
-                const textEl = document.getElementById('copy-text-comm');
-                
-                if (icon && textEl) {
-                    icon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
-                    icon.classList.add('text-green-600');
-                    textEl.innerText = 'Enlace copiado';
-                    
-                    setTimeout(() => {
-                        icon.innerHTML = '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>';
-                        icon.classList.remove('text-green-600');
-                        textEl.innerText = 'Copiar enlace';
-                    }, 2000);
-                }
-            });
-        }
-
-        function openModal(url) {
-            const backdrop = document.getElementById('modal-backdrop');
-            const iframe = document.getElementById('modal-iframe');
-            iframe.src = url;
-            backdrop.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const backdrop = document.getElementById('modal-backdrop');
-            const iframe = document.getElementById('modal-iframe');
-            backdrop.classList.remove('active');
-            setTimeout(() => {
-                iframe.src = '';
-            }, 300);
-            document.body.style.overflow = 'auto';
+            }).catch(console.error);
         }
     </script>
 </body>
