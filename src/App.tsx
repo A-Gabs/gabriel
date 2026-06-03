@@ -27,7 +27,7 @@ const row1: CardItem[] = [
     id: "vocacion-pedido",
     title: "Vocación profesional",
     description: "Descubre tu camino de éxito y propósito de vida alineado a tus astros.",
-    image: "https://i.pinimg.com/736x/fd/54/1a/fd541adc5d506169fc9cae05da39d5e3.jpg",
+    image: "https://i.pinimg.com/736x/50/b9/bc/50b9bc9574ae6ff7cdaa7ec35e65c297.jpg",
     href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Vocaci%C3%B3n%20profesional%20💼",
   },
   {
@@ -42,30 +42,30 @@ const row1: CardItem[] = [
 const row2: CardItem[] = [
   {
     id: "saju",
-    title: "Saju Autoconocimiento",
+    title: "Autoconocimiento",
     description: "Análisis milenario de destino y tus ciclos energéticos de vida.",
-    image: "https://i.pinimg.com/736x/39/9c/de/399cdeefe42ec07ef632bec40b128b68.jpg",
-    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Saju%20Autoconocimiento%20☯️",
+    image: "https://i.pinimg.com/736x/fe/6b/98/fe6b9850a9b089b4cd477cd2e7b3b127.jpg",
+    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Autoconocimiento%20✨",
   },
   {
     id: "vocacion-auto",
     title: "Vocación profesional",
     description: "Encuentra tu verdadera vocación y brilla profesionalmente con tu energía astral.",
-    image: "https://i.pinimg.com/736x/fd/54/1a/fd541adc5d506169fc9cae05da39d5e3.jpg",
+    image: "https://i.pinimg.com/736x/50/b9/bc/50b9bc9574ae6ff7cdaa7ec35e65c297.jpg",
     href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Vocaci%C3%B3n%20profesional%20💼",
   },
   {
     id: "compatibilidad",
     title: "Compatibilidad de pareja",
     description: "Explora la sinastría astrológica profunda y tu conexión espiritual con el ser amado.",
-    image: "https://i.pinimg.com/736x/be/32/27/be322744ad14013149ba5844a49c6cb3.jpg",
+    image: "https://i.pinimg.com/736x/a8/99/d5/a899d508d9de2031cfe18f1fb98adc24.jpg",
     href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Compatibilidad%20de%20pareja%20❤️",
   },
   {
     id: "manifestacion",
     title: "Manifestación",
     description: "Alinea tu vibración de abundancia y aprende a cocrear tu realidad deseada.",
-    image: "https://i.pinimg.com/736x/44/22/e7/4422e70e302061ced2a52efadd3cd96b.jpg",
+    image: "https://i.pinimg.com/736x/6e/5e/db/6e5edbfc2b41866286a7ef30d8b2812b.jpg",
     href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20la%20Manifestaci%C3%B3n%20✨",
   }
 ];
@@ -92,7 +92,7 @@ const rowTarot: CardItem[] = [
     id: "orientaciones",
     title: "Orientaciones",
     description: "Orientación espiritual y terapéutica para encontrar claridad y respuestas en tu situación actual.",
-    image: "https://i.pinimg.com/736x/11/04/b8/1104b868e4af414383c274bbfda7df5e.jpg",
+    image: "https://i.pinimg.com/736x/36/33/eb/3633eb930771b2546bc3a24a8ba550ea.jpg",
     href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20agendar%20una%20sesi%C3%B3n%20de%20Orientaci%C3%B3n%20✨",
   }
 ];
@@ -301,7 +301,6 @@ export default function App() {
               </h2>
               <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
             </div>
-
             <DraggableCarousel 
               items={row1} 
               activeId={activeId} 
@@ -318,7 +317,6 @@ export default function App() {
               </h2>
               <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
             </div>
-
             <DraggableCarousel 
               items={row2} 
               activeId={activeId} 
@@ -335,7 +333,6 @@ export default function App() {
               </h2>
               <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
             </div>
-
             <DraggableCarousel 
               items={rowTarot} 
               activeId={activeId} 
@@ -344,7 +341,7 @@ export default function App() {
             />
           </section>
 
-          {/* Row 3 — Gratuito */}
+          {/* Row 3 — Free */}
           <section className="space-y-4">
             <div className="text-left space-y-1.5">
               <h2 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#787774] font-sans">
@@ -352,7 +349,6 @@ export default function App() {
               </h2>
               <div className="h-[1px] w-8 bg-[#1a1a1a]/10" />
             </div>
-
             <DraggableCarousel 
               items={row3} 
               activeId={activeId} 

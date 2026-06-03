@@ -28,7 +28,7 @@ export default function DraggableCarousel({
   const isDraggingRef = useRef(false);
   const [isGrabbing, setIsGrabbing] = useState(false);
 
-  const shouldLoop = items.length > 3;
+  const shouldLoop = false;
 
   // We duplicate the items 5 times to make an infinite looping scroll seamless, only if shouldLoop is true
   const multipliedItems = shouldLoop
@@ -37,20 +37,31 @@ export default function DraggableCarousel({
 
   useEffect(() => {
     const el = containerRef.current;
-    if (!el || items.length === 0 || !shouldLoop) return;
+    if (!el) return;
 
-    // Run layout centering after components settle
+    if (!shouldLoop) {
+      // Force scroll reset to 0 to align all carousels perfectly on load and avoid browser scroll memory side-effects
+      el.scrollLeft = 0;
+
+      // Delay-based safety reset checkpoints for asynchronous layout rendering and browser restorations
+      const resets = [20, 100, 300, 600];
+      const timers = resets.map(delay => setTimeout(() => {
+        el.scrollLeft = 0;
+      }, delay));
+
+      return () => {
+        timers.forEach(clearTimeout);
+      };
+    }
+
+    // Run layout centering after components settle using exact mathematical offsets
     const handleResize = () => {
-      const children = el.children;
-      const targetIndex = items.length * 2; // First card of the 3rd set
-      if (children[targetIndex]) {
-        const targetChild = children[targetIndex] as HTMLElement;
-        const paddingLeft = parseFloat(window.getComputedStyle(el).paddingLeft) || 24;
-        el.scrollLeft = targetChild.offsetLeft - paddingLeft;
-      }
+      const N = items.length;
+      const setDistance = N * 216; // 200px card width + 16px gap (gap-4)
+      el.scrollLeft = 2 * setDistance;
     };
 
-    const timer = setTimeout(handleResize, 100);
+    const timer = setTimeout(handleResize, 50);
 
     window.addEventListener("resize", handleResize);
     return () => {
@@ -63,15 +74,11 @@ export default function DraggableCarousel({
     const el = containerRef.current;
     if (!el || items.length === 0 || !shouldLoop) return;
 
-    const children = el.children;
     const N = items.length;
-    if (!children[0] || !children[N] || !children[2 * N] || !children[3 * N]) return;
+    const setDistance = N * 216; // 200px card width + 16px gap (gap-4)
 
-    const paddingLeft = parseFloat(window.getComputedStyle(el).paddingLeft) || 24;
-    const setDistance = (children[N] as HTMLElement).offsetLeft - (children[0] as HTMLElement).offsetLeft;
-
-    const leftBoundary = (children[N] as HTMLElement).offsetLeft - paddingLeft;
-    const rightBoundary = (children[3 * N] as HTMLElement).offsetLeft - paddingLeft;
+    const leftBoundary = setDistance;
+    const rightBoundary = 3 * setDistance;
 
     // Loop bounds check
     if (el.scrollLeft < leftBoundary) {
@@ -141,7 +148,7 @@ export default function DraggableCarousel({
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUpOrLeave}
       onMouseLeave={handleMouseUpOrLeave}
-      className={`flex overflow-x-auto gap-4 pb-4 px-6 -mx-6 snap-x snap-mandatory no-scrollbar select-none active:cursor-grabbing ${
+      className={`flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory no-scrollbar select-none active:cursor-grabbing ${
         isGrabbing ? "cursor-grabbing" : "cursor-grab"
       }`}
       style={{ scrollBehavior: isGrabbing ? "auto" : "smooth" }}
