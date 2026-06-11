@@ -4,7 +4,8 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { Instagram, X, ChevronLeft } from "lucide-react";
+import { Instagram, X, ChevronLeft, Share2, Camera, Check } from "lucide-react";
+import { toPng } from "html-to-image";
 import DraggableCarousel from "./components/DraggableCarousel";
 import { ARCANOS_DATA } from "./arcanosData";
 
@@ -212,6 +213,82 @@ export default function App() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [sharingState, setSharingState] = useState<'idle' | 'capturing' | 'success' | 'error'>('idle');
+
+  const handleShareResult = async (elementId: string, title: string) => {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    setSharingState('capturing');
+    
+    try {
+      // Small pause to allow click effects to settle
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      const dataUrl = await toPng(element, {
+        cacheBust: true,
+        pixelRatio: 2,
+        backgroundColor: "#ffffff",
+        filter: (node) => {
+          return !((node as HTMLElement).hasAttribute && (node as HTMLElement).hasAttribute('data-html2canvas-ignore'));
+        },
+      });
+      
+      const blob = await (await fetch(dataUrl)).blob();
+      if (!blob) {
+        setSharingState('error');
+        setTimeout(() => setSharingState('idle'), 3000);
+        return;
+      }
+      
+      const file = new File([blob], `${elementId}.png`, { type: "image/png" });
+      const shareUrl = "https://anatarot.xyz/";
+      
+      // Proactively copy the link to the clipboard first, so it is always ready to paste
+      try {
+        await navigator.clipboard.writeText(`¡Descubre tu ${title} gratis en tarot.anna! ✨ ${shareUrl}`);
+      } catch (clipErr) {
+        console.warn("Clipboard auto-copy failed:", clipErr);
+      }
+      
+      // Try Native Share API
+      if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: `tarot.anna — ${title}`,
+            text: `¡Mira mi resultado de ${title} en tarot.anna! Descubre el tuyo aquí: ${shareUrl}`,
+            url: shareUrl
+          });
+          setSharingState('success');
+          setTimeout(() => setSharingState('idle'), 3000);
+          return;
+        } catch (err) {
+          if (err instanceof Error && err.name === "AbortError") {
+            setSharingState('idle');
+            return;
+          }
+          console.error("Native share failed:", err);
+        }
+      }
+      
+      // Fallback: file downloader
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = `tarot-anna-${elementId}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      setSharingState('success');
+      setTimeout(() => setSharingState('idle'), 4000);
+      
+    } catch (error) {
+      console.error("Error creating image with html-to-image:", error);
+      setSharingState('error');
+      setTimeout(() => setSharingState('idle'), 3000);
+    }
+  };
 
   // Arcano de nacimiento states
   const [currentView, setCurrentView] = useState<'links' | 'arcano-calc' | 'numerologia-calc' | 'compatibilidad-calc' | 'saju-calc'>('links');
@@ -967,8 +1044,18 @@ export default function App() {
               {calculationResult && !isCalculating && (
                 /* RESULT PANEL */
                 <div id="arcano-result" className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                  <div className="bg-white/80 border border-[#1a1a1a]/5 rounded-3xl p-6 shadow-sm flex flex-col items-center text-center space-y-4">
-                    <div className="space-y-3 px-2">
+                  <div id="arcano-card-capture" className="relative bg-[#FCFAF7] border border-[#1a1a1a]/10 rounded-3xl p-6 shadow-sm flex flex-col items-center text-center space-y-4">
+                    {/* Share Button */}
+                    <button
+                      onClick={() => handleShareResult("arcano-card-capture", "Arcano de Nacimiento")}
+                      data-html2canvas-ignore="true"
+                      className="absolute top-4 right-4 p-1.5 text-neutral-400 hover:text-black hover:bg-neutral-100/80 rounded-full transition-all cursor-pointer bg-white/50 backdrop-blur-xs shadow-xs border border-[#1a1a1a]/5 flex items-center justify-center"
+                      title="Compartir o guardar resultado"
+                    >
+                      <Share2 className="w-3.5 h-3.5" />
+                    </button>
+
+                    <div className="space-y-3 px-2 pt-4">
                       <div className="space-y-1">
                         <span className="text-[12px] uppercase tracking-[0.25em] text-[#787774] font-semibold block">
                           ARCANO {ARCANOS_DATA[calculationResult].number}
@@ -984,6 +1071,11 @@ export default function App() {
                       <p className="text-[14px] text-[#1a1a1a]/90 font-sans font-light leading-relaxed text-left border-t border-[#1a1a1a]/10 pt-4">
                         {ARCANOS_DATA[calculationResult].description}
                       </p>
+                    </div>
+
+                    {/* Subtle watermark */}
+                    <div className="w-full pt-4 border-t border-[#1a1a1a]/5 text-center mt-2">
+                      <span className="text-[9.5px] text-[#1a1a1a]/30 font-sans tracking-widest uppercase font-medium">anatarot.xyz</span>
                     </div>
                   </div>
 
@@ -1122,8 +1214,18 @@ export default function App() {
               {numResult && !numIsCalculating && (
                 /* RESULT PANEL */
                 <div id="num-result" className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                  <div className="bg-white/80 border border-[#1a1a1a]/5 rounded-3xl p-6 shadow-sm flex flex-col items-center text-center space-y-4">
-                    <div className="space-y-3 px-2">
+                  <div id="num-card-capture" className="relative bg-[#FCFAF7] border border-[#1a1a1a]/10 rounded-3xl p-6 shadow-sm flex flex-col items-center text-center space-y-4">
+                    {/* Share Button */}
+                    <button
+                      onClick={() => handleShareResult("num-card-capture", "Camino de Vida")}
+                      data-html2canvas-ignore="true"
+                      className="absolute top-4 right-4 p-1.5 text-neutral-400 hover:text-black hover:bg-neutral-100/80 rounded-full transition-all cursor-pointer bg-white/50 backdrop-blur-xs shadow-xs border border-[#1a1a1a]/5 flex items-center justify-center"
+                      title="Compartir o guardar resultado"
+                    >
+                      <Share2 className="w-3.5 h-3.5" />
+                    </button>
+
+                    <div className="space-y-3 px-2 pt-4">
                       <div className="space-y-1">
                         <span className="text-[12px] uppercase tracking-[0.25em] text-[#787774] font-semibold block">
                           CAMINO DE VIDA
@@ -1139,6 +1241,11 @@ export default function App() {
                       <p className="text-[14px] text-[#1a1a1a]/90 font-sans font-light leading-relaxed text-left border-t border-[#1a1a1a]/10 pt-4">
                         {NUMEROLOGIA_DATA[numResult]?.description}
                       </p>
+                    </div>
+
+                    {/* Subtle watermark */}
+                    <div className="w-full pt-4 border-t border-[#1a1a1a]/5 text-center mt-2">
+                      <span className="text-[9.5px] text-[#1a1a1a]/30 font-sans tracking-widest uppercase font-medium">anatarot.xyz</span>
                     </div>
                   </div>
 
@@ -1344,9 +1451,19 @@ export default function App() {
               {compResult && !compIsCalculating && (
                 /* RESULT PANEL */
                 <div id="comp-result" className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                  <div className="bg-white/80 border border-[#1a1a1a]/5 rounded-3xl p-6 shadow-sm space-y-6 flex flex-col items-center">
+                  <div id="comp-card-capture" className="relative bg-[#FCFAF7] border border-[#1a1a1a]/10 rounded-3xl p-6 shadow-sm space-y-6 flex flex-col items-center">
+                    {/* Share Button */}
+                    <button
+                      onClick={() => handleShareResult("comp-card-capture", "Compatibilidad de Pareja")}
+                      data-html2canvas-ignore="true"
+                      className="absolute top-4 right-4 p-1.5 text-neutral-400 hover:text-black hover:bg-neutral-100/80 rounded-full transition-all cursor-pointer bg-white/50 backdrop-blur-xs shadow-xs border border-[#1a1a1a]/5 flex items-center justify-center"
+                      title="Compartir o guardar resultado"
+                    >
+                      <Share2 className="w-3.5 h-3.5" />
+                    </button>
+
                     {/* Ring score */}
-                    <div className="text-center space-y-2">
+                    <div className="text-center space-y-2 pt-4">
                       <div className="inline-flex items-center justify-center rounded-full bg-rose-50/50 p-4 border border-rose-100/50">
                         <span className="font-serif text-[42px] font-bold text-rose-600 leading-none">
                           {compResult.score}%
@@ -1400,6 +1517,11 @@ export default function App() {
                     <p className="text-[13.5px] text-[#1a1a1a]/90 font-sans font-light leading-relaxed border-t border-[#1a1a1a]/10 pt-4 text-left">
                       {compResult.desc}
                     </p>
+
+                    {/* Subtle watermark */}
+                    <div className="w-full pt-4 border-t border-[#1a1a1a]/5 text-center mt-2">
+                      <span className="text-[9.5px] text-[#1a1a1a]/30 font-sans tracking-widest uppercase font-medium">anatarot.xyz</span>
+                    </div>
                   </div>
 
                   {/* CUSTOM ACTIONS */}
@@ -1553,10 +1675,19 @@ export default function App() {
               {sajuResult && !sajuIsCalculating && (
                 /* RESULT PANEL */
                 <div id="saju-result" className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                  <div className="bg-white/80 border border-[#1a1a1a]/5 rounded-3xl p-6 shadow-sm space-y-6">
+                  <div id="saju-card-capture" className="relative bg-[#FCFAF7] border border-[#1a1a1a]/10 rounded-3xl p-6 shadow-sm space-y-6">
+                    {/* Share Button */}
+                    <button
+                      onClick={() => handleShareResult("saju-card-capture", "Saju")}
+                      data-html2canvas-ignore="true"
+                      className="absolute top-4 right-4 p-1.5 text-neutral-400 hover:text-black hover:bg-neutral-100/80 rounded-full transition-all cursor-pointer bg-white/50 backdrop-blur-xs shadow-xs border border-[#1a1a1a]/5 flex items-center justify-center"
+                      title="Compartir o guardar resultado"
+                    >
+                      <Share2 className="w-3.5 h-3.5" />
+                    </button>
                     
                     {/* Archetype Badge */}
-                    <div className="text-center space-y-1 pb-4 border-b border-[#1a1a1a]/5">
+                    <div className="text-center space-y-1 pb-4 pt-4 border-b border-[#1a1a1a]/5">
                       <span className="text-[10px] tracking-[0.2em] text-[#787774] font-bold uppercase block">Elemento Maestro</span>
                       <h3 className="font-serif text-[24px] font-bold text-[#1a1a1a]">
                         {sajuResult.archetype}
@@ -1633,6 +1764,11 @@ export default function App() {
                           {sajuResult.hourPillar && <p><strong>Hora Secreta (Legado):</strong> {sajuResult.hourPillar.desc}</p>}
                         </div>
                       </div>
+                    </div>
+
+                    {/* Subtle watermark */}
+                    <div className="w-full pt-4 border-t border-[#1a1a1a]/5 text-center mt-2">
+                      <span className="text-[9.5px] text-[#1a1a1a]/30 font-sans tracking-widest uppercase font-medium">anatarot.xyz</span>
                     </div>
                   </div>
 
@@ -1785,6 +1921,36 @@ export default function App() {
           <option key={h} value={`${h}:00`} />
         ))}
       </datalist>
+
+      {/* GLOBAL FEEDBACK TOAST */}
+      {sharingState !== 'idle' && (
+        <div data-html2canvas-ignore="true" className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="bg-neutral-900/95 backdrop-blur-md text-white text-[13.5px] font-sans px-5 py-3 rounded-full flex items-center gap-3 shadow-2xl border border-white/5 whitespace-nowrap">
+            {sharingState === 'capturing' && (
+              <>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span className="font-medium tracking-wide">Generando imagen de tu lectura...</span>
+              </>
+            )}
+            {sharingState === 'success' && (
+              <>
+                <div className="bg-emerald-500 rounded-full p-0.5 text-white flex items-center justify-center">
+                  <Check className="w-3.5 h-3.5" strokeWidth={3} />
+                </div>
+                <span className="font-semibold tracking-wide">¡Imagen lista y enlace copiado! ✨</span>
+              </>
+            )}
+            {sharingState === 'error' && (
+              <>
+                <div className="bg-red-500 rounded-full p-0.5 text-white flex items-center justify-center">
+                  <X className="w-3.5 h-3.5" strokeWidth={3} />
+                </div>
+                <span className="font-semibold tracking-wide">Error al capturar resultado</span>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
     </div>
   );
