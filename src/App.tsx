@@ -42,6 +42,20 @@ const row1: CardItem[] = [
 
 const row2: CardItem[] = [
   {
+    id: "manifestacion",
+    title: "Manifestación",
+    description: "Alinea tu vibración de abundancia y aprende a cocrear tu realidad deseada.",
+    image: "https://i.pinimg.com/736x/6e/5e/db/6e5edbfc2b41866286a7ef30d8b2812b.jpg",
+    href: "https://www.paypal.com/ncp/payment/Q6MZL572GEFSG",
+  },
+  {
+    id: "compatibilidad",
+    title: "Compatibilidad de pareja",
+    description: "Explora la sinastría astrológica profunda y tu conexión espiritual con el ser amado.",
+    image: "https://i.pinimg.com/736x/a8/99/d5/a899d508d9de2031cfe18f1fb98adc24.jpg",
+    href: "https://www.paypal.com/ncp/payment/XJBKMKJKB9CVU",
+  },
+  {
     id: "saju",
     title: "Autoconocimiento",
     description: "Análisis milenario de destino y tus ciclos energéticos de vida.",
@@ -54,20 +68,6 @@ const row2: CardItem[] = [
     description: "Encuentra tu verdadera vocación y brilla profesionalmente con tu energía astral.",
     image: "https://i.pinimg.com/736x/50/b9/bc/50b9bc9574ae6ff7cdaa7ec35e65c297.jpg",
     href: "https://www.paypal.com/ncp/payment/RCQEPWZZHXGLS",
-  },
-  {
-    id: "compatibilidad",
-    title: "Compatibilidad de pareja",
-    description: "Explora la sinastría astrológica profunda y tu conexión espiritual con el ser amado.",
-    image: "https://i.pinimg.com/736x/a8/99/d5/a899d508d9de2031cfe18f1fb98adc24.jpg",
-    href: "https://www.paypal.com/ncp/payment/XJBKMKJKB9CVU",
-  },
-  {
-    id: "manifestacion",
-    title: "Manifestación",
-    description: "Alinea tu vibración de abundancia y aprende a cocrear tu realidad deseada.",
-    image: "https://i.pinimg.com/736x/6e/5e/db/6e5edbfc2b41866286a7ef30d8b2812b.jpg",
-    href: "https://www.paypal.com/ncp/payment/Q6MZL572GEFSG",
   }
 ];
 
@@ -560,31 +560,21 @@ export default function App() {
               {calculationResult && !isCalculating && (
                 /* RESULT PANEL */
                 <div className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                  <div className="bg-white/80 border border-[#1a1a1a]/5 rounded-3xl p-5 shadow-sm flex flex-col items-center text-center space-y-5">
-                    {/* Tarot card illustration frame */}
-                    <div className="relative aspect-[3/4] w-[180px] rounded-2xl overflow-hidden shadow-lg border border-[#1a1a1a]/5">
-                      <img 
-                        src={ARCANOS_DATA[calculationResult].image} 
-                        alt={ARCANOS_DATA[calculationResult].name} 
-                        className="w-full h-full object-cover"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                    
+                  <div className="bg-white/80 border border-[#1a1a1a]/5 rounded-3xl p-6 shadow-sm flex flex-col items-center text-center space-y-4">
                     <div className="space-y-3 px-2">
                       <div className="space-y-1">
-                        <span className="text-[10px] uppercase tracking-[0.25em] text-[#787774] font-semibold">
+                        <span className="text-[12px] uppercase tracking-[0.25em] text-[#787774] font-semibold">
                           ARCANO {ARCANOS_DATA[calculationResult].number}
                         </span>
-                        <h3 className="font-serif text-[24px] font-bold text-[#1a1a1a] tracking-tight">
+                        <h3 className="font-serif text-[28px] font-bold text-[#1a1a1a] tracking-tight">
                           {ARCANOS_DATA[calculationResult].name}
                         </h3>
-                        <p className="text-[12px] text-amber-800 font-sans font-medium italic mt-1">
+                        <p className="text-[13px] text-amber-800 font-sans font-medium italic mt-1.5">
                           "{ARCANOS_DATA[calculationResult].keyEnergy}"
                         </p>
                       </div>
                       
-                      <p className="text-[13px] text-[#1a1a1a]/90 font-sans font-light leading-relaxed text-left border-t border-[#1a1a1a]/10 pt-3">
+                      <p className="text-[14px] text-[#1a1a1a]/90 font-sans font-light leading-relaxed text-left border-t border-[#1a1a1a]/10 pt-4">
                         {ARCANOS_DATA[calculationResult].description}
                       </p>
                     </div>
@@ -593,14 +583,11 @@ export default function App() {
                   {/* CUSTOM ACTIONS */}
                   <div className="space-y-3">
                     <a 
-                      href={`https://wa.me/51960260123?text=${encodeURIComponent(`¡Hola anna! Mi Arcano es ${ARCANOS_DATA[calculationResult].name} ${getArcanoEmoji(calculationResult)} Agendar lectura general ✨`)}`}
+                      href="https://www.paypal.com/ncp/payment/V5FUFJX8KAKUW"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-[14.5px] font-semibold text-center flex items-center justify-center gap-2.5 transition-colors shadow-sm cursor-pointer"
+                      className="w-full py-3.5 px-4 bg-black hover:bg-neutral-900 border border-neutral-800 text-white rounded-xl text-[14.5px] font-semibold text-center flex items-center justify-center gap-2 transition-colors shadow-md cursor-pointer"
                     >
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0">
-                        <path d="M12.004 2c-5.518 0-9.996 4.477-9.996 9.996 0 1.764.459 3.42 1.258 4.872L2 22l5.318-1.396A9.957 9.957 0 0 0 12.004 22c5.517 0 9.996-4.477 9.996-9.996v-.004C22.004 6.479 17.525 2 12.004 2zm5.726 14.129c-.244.693-1.42 1.272-1.942 1.353-.459.072-.942.135-2.923-.684-2.535-1.045-4.148-3.636-4.275-3.805-.126-.171-1.03-1.373-1.03-2.62s.644-1.854.873-2.111c.229-.257.5-.324.667-.324.167 0 .333.004.477.01.144.004.337-.054.527.404.194.472.667 1.624.726 1.742.06.117.099.252.02.409-.079.158-.12.257-.239.396-.12.139-.252.311-.359.419-.12.117-.245.244-.105.487.139.243.621 1.022 1.332 1.656.914.815 1.683 1.066 1.923 1.185.24.117.378.099.518-.063.139-.162.603-.698.766-.937.162-.239.324-.198.545-.117.22.079 1.405.662 1.644.78.24.117.396.176.455.275.058.099.058.572-.185 1.265z"/>
-                      </svg>
                       <span>Agendar lectura general ✨</span>
                     </a>
                     

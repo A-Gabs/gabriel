@@ -259,6 +259,80 @@
                 </div>
 
                 <div class="flex overflow-x-auto gap-4 pb-4 w-full snap-x snap-mandatory no-scrollbar">
+                    <!-- Tarjeta 7: Manifestación -->
+                    <div class="card-container aspect-[3/4] w-[200px] shrink-0 snap-start group" onclick="toggleOverlay(this, event)" id="card-manifestacion">
+                        <!-- BG Image -->
+                        <img 
+                            src="https://i.pinimg.com/736x/6e/5e/db/6e5edbfc2b41866286a7ef30d8b2812b.jpg" 
+                            alt="Manifestación" 
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        >
+                        <!-- Default Title View -->
+                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
+                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
+                                Manifestación
+                            </h3>
+                        </div>
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
+                            <div class="flex justify-end">
+                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="space-y-1">
+                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Manifestación</h4>
+                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Alinea tu vibración de abundancia y aprende a cocrear tu reality deseada.</p>
+                                </div>
+                                <a href="https://www.paypal.com/ncp/payment/Q6MZL572GEFSG" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
+                                    Cuéntame más &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 6: Compatibilidad de pareja -->
+                    <div class="card-container aspect-[3/4] w-[200px] shrink-0 snap-start group" onclick="toggleOverlay(this, event)" id="card-compatibilidad">
+                        <!-- BG Image -->
+                        <img 
+                            src="https://i.pinimg.com/736x/a8/99/d5/a899d508d9de2031cfe18f1fb98adc24.jpg" 
+                            alt="Compatibilidad de pareja" 
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        >
+                        <!-- Default Title View -->
+                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
+                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
+                                Compatibilidad de pareja
+                            </h3>
+                        </div>
+                        
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
+                            <div class="flex justify-end">
+                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="space-y-1">
+                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Compatibilidad de pareja</h4>
+                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Explora la sinastría astrológica profunda y tu conexión espiritual con el ser amado.</p>
+                                </div>
+                                <a href="https://www.paypal.com/ncp/payment/XJBKMKJKB9CVU" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
+                                    Cuéntame más &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Tarjeta 4: Autoconocimiento -->
                     <div class="card-container aspect-[3/4] w-[200px] shrink-0 snap-start group" onclick="toggleOverlay(this, event)" id="card-saju">
                         <!-- BG Image -->
@@ -327,80 +401,6 @@
                                     <p class="text-[12.5px] text-white/90 font-light leading-snug">Encuentra tu verdadera vocación y brilla profesionalmente con tu energía astral.</p>
                                 </div>
                                 <a href="https://www.paypal.com/ncp/payment/RCQEPWZZHXGLS" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
-                                    Cuéntame más &rarr;
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta 6: Compatibilidad de pareja -->
-                    <div class="card-container aspect-[3/4] w-[200px] shrink-0 snap-start group" onclick="toggleOverlay(this, event)" id="card-compatibilidad">
-                        <!-- BG Image -->
-                        <img 
-                            src="https://i.pinimg.com/736x/a8/99/d5/a899d508d9de2031cfe18f1fb98adc24.jpg" 
-                            alt="Compatibilidad de pareja" 
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        >
-                        <!-- Default Title View -->
-                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
-                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
-                                Compatibilidad de pareja
-                            </h3>
-                        </div>
-                        
-                        <!-- Overlay -->
-                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
-                            <div class="flex justify-end">
-                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-                            
-                            <div class="space-y-3">
-                                <div class="space-y-1">
-                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Compatibilidad de pareja</h4>
-                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Explora la sinastría astrológica profunda y tu conexión espiritual con el ser amado.</p>
-                                </div>
-                                <a href="https://www.paypal.com/ncp/payment/XJBKMKJKB9CVU" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
-                                    Cuéntame más &rarr;
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta 7: Manifestación -->
-                    <div class="card-container aspect-[3/4] w-[200px] shrink-0 snap-start group" onclick="toggleOverlay(this, event)" id="card-manifestacion">
-                        <!-- BG Image -->
-                        <img 
-                            src="https://i.pinimg.com/736x/6e/5e/db/6e5edbfc2b41866286a7ef30d8b2812b.jpg" 
-                            alt="Manifestación" 
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        >
-                        <!-- Default Title View -->
-                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent pb-5 px-4 flex items-end transition-opacity duration-300 default-title">
-                            <h3 class="font-serif text-[18px] md:text-[20px] font-semibold text-white tracking-wide text-shadow-custom leading-tight">
-                                Manifestación
-                            </h3>
-                        </div>
-                        
-                        <!-- Overlay -->
-                        <div class="absolute inset-0 bg-black/45 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-10 flex flex-col justify-between p-4 card-overlay">
-                            <div class="flex justify-end">
-                                <button class="text-white/70 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all duration-200" onclick="closeOverlay(this, event)" aria-label="Cerrar">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-                            
-                            <div class="space-y-3">
-                                <div class="space-y-1">
-                                    <h4 class="font-serif text-[18px] font-medium text-white tracking-wide leading-tight">Manifestación</h4>
-                                    <p class="text-[12.5px] text-white/90 font-light leading-snug">Alinea tu vibración de abundancia y aprende a cocrear tu reality deseada.</p>
-                                </div>
-                                <a href="https://www.paypal.com/ncp/payment/Q6MZL572GEFSG" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="w-full py-2 px-3 bg-black text-white hover:bg-neutral-950 border border-neutral-800 rounded-lg text-[13px] font-medium transition-colors text-center inline-block">
                                     Cuéntame más &rarr;
                                 </a>
                             </div>
@@ -678,31 +678,23 @@
 
                 <!-- RESULT PANEL -->
                 <div id="calc-result-panel" class="hidden space-y-6">
-                    <div class="bg-white/80 border border-[#1a1a1a]/5 rounded-3xl p-5 shadow-sm flex flex-col items-center text-center space-y-5">
-                        <!-- Tarot card illustration frame -->
-                        <div class="relative aspect-[3/4] w-[180px] rounded-2xl overflow-hidden shadow-lg border border-[#1a1a1a]/5">
-                            <img 
-                                id="calc-result-image"
-                                src="" 
-                                alt="" 
-                                class="w-full h-full object-cover"
-                            />
-                        </div>
+                    <div class="bg-white/80 border border-[#1a1a1a]/5 rounded-3xl p-6 shadow-sm flex flex-col items-center text-center space-y-4">
+                        <img id="calc-result-image" src="" alt="" class="hidden" />
                         
                         <div class="space-y-3 px-2">
                           <div class="space-y-1">
-                            <span id="calc-result-number-text" class="text-[10px] uppercase tracking-[0.25em] text-[#787774] font-semibold">
+                            <span id="calc-result-number-text" class="text-[12px] uppercase tracking-[0.25em] text-[#787774] font-semibold">
                               ARCANO 
                             </span>
-                            <h3 id="calc-result-name" class="font-serif text-[24px] font-bold text-[#1a1a1a] tracking-tight">
+                            <h3 id="calc-result-name" class="font-serif text-[28px] font-bold text-[#1a1a1a] tracking-tight">
                               NAME
                             </h3>
-                            <p id="calc-result-energy" class="text-[12px] text-amber-800 font-sans font-medium italic mt-1">
+                            <p id="calc-result-energy" class="text-[13px] text-amber-800 font-sans font-medium italic mt-1.5">
                               "ENERGY"
                             </p>
                           </div>
                           
-                          <p id="calc-result-desc" class="text-[13px] text-[#1a1a1a]/90 font-sans font-light leading-relaxed text-left border-t border-[#1a1a1a]/10 pt-3">
+                          <p id="calc-result-desc" class="text-[14px] text-[#1a1a1a]/90 font-sans font-light leading-relaxed text-left border-t border-[#1a1a1a]/10 pt-4">
                             DESCRIPTION
                           </p>
                         </div>
@@ -712,14 +704,11 @@
                     <div class="space-y-3">
                         <a 
                           id="calc-whatsapp-btn"
-                          href=""
+                          href="https://www.paypal.com/ncp/payment/V5FUFJX8KAKUW"
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-[14.5px] font-semibold text-center flex items-center justify-center gap-2.5 transition-colors shadow-sm cursor-pointer"
+                          class="w-full py-3.5 px-4 bg-black hover:bg-neutral-900 border border-neutral-800 text-white rounded-xl text-[14.5px] font-semibold text-center flex items-center justify-center gap-2 transition-colors shadow-md cursor-pointer"
                         >
-                          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 shrink-0">
-                            <path d="M12.004 2c-5.518 0-9.996 4.477-9.996 9.996 0 1.764.459 3.42 1.258 4.872L2 22l5.318-1.396A9.957 9.957 0 0 0 12.004 22c5.517 0 9.996-4.477 9.996-9.996v-.004C22.004 6.479 17.525 2 12.004 2zm5.726 14.129c-.244.693-1.42 1.272-1.942 1.353-.459.072-.942.135-2.923-.684-2.535-1.045-4.148-3.636-4.275-3.805-.126-.171-1.03-1.373-1.03-2.62s.644-1.854.873-2.111c.229-.257.5-.324.667-.324.167 0 .333.004.477.01.144.004.337-.054.527.404.194.472.667 1.624.726 1.742.06.117.099.252.02.409-.079.158-.12.257-.239.396-.12.139-.252.311-.359.419-.12.117-.245.244-.105.487.139.243.621 1.022 1.332 1.656.914.815 1.683 1.066 1.923 1.185.24.117.378.099.518-.063.139-.162.603-.698.766-.937.162-.239.324-.198.545-.117.22.079 1.405.662 1.644.78.24.117.396.176.455.275.058.099.058.572-.185 1.265z"/>
-                          </svg>
                           <span>Agendar lectura general ✨</span>
                         </a>
                         
@@ -1033,155 +1022,155 @@
             1: {
                 name: "El Mago",
                 number: "I",
-                keyEnergy: "Manifestación, Iniciativa, Recursos Infinitos",
-                description: "El Mago representa el poder de manifestación y la fuerza de voluntad. Tienes en tus manos todas las herramientas del universo (elementos del tarot) para crear la realidad que deseas. Tu mente es activa y tienes una gran habilidad para canalizar ideas y hacerlas tangibles.",
+                keyEnergy: "Manifestación, voluntad divina y potencial creador",
+                description: "Naciste bajo el cobijo del Mago. Posees una asombrosa capacidad canalizadora para tomar ideas creativas directas del éter y materializarlas con éxito en el plano físico. Cuentas innatamente con todos los recursos y herramientas para salir victorioso en cualquier meta que te propongas. Tu camino álmico te guiará y exigirá liderar proyectos ambiciosos, iniciar nuevos capítulos con absoluta confianza e inspirar a los demás. Tu gran lección de evolución radica en domar la dispersión, enfocar tu poderosa fuerza mental en un único propósito noble a la vez, y recordar siempre que tu verdadera magia se activa únicamente cuando actúas con alineación ética y determinación pura.",
                 image: "https://i.pinimg.com/736x/88/4b/aa/884baae2b0a3341b17bcefac9868726e.jpg"
             },
             2: {
                 name: "La Sacerdotisa",
                 number: "II",
-                keyEnergy: "Intuición, Sabiduría Silenciosa, Misterio",
-                description: "La Sacerdotisa es el arquetipo de la intuición profunda, la introspección y el conocimiento escondido. Tu fuerza no reside en la acción externa, sino en la escucha de tu voz interior y en el entendimiento de los ciclos del alma. Confía en tus corazonadas y sueños.",
+                keyEnergy: "Intuición mística, sabiduría sagrada y misterio divino",
+                description: "Tu vibración natal está regida por la Sacerdotisa, la guardiana silenciosa de los misterios cósmicos y del subconsciente profundo. Eres un canal de alta sensibilidad psíquica e intuición extraordinaria, cuyas corazonadas nunca fallan cuando consigues silenciar el murmullo de la mente racional. Tu camino de vida te invita a explorar dimensiones místicas, a confiar en tus sueños y a comprender los ciclos naturales del universo. Tu lección álmica estriba en aprender a sostener el silencio, a cultivar la paciencia sagrada antes de actuar, y a reconocer que no todas las respuestas deben buscarse afuera; las verdades más grandes reveladas para ti ya residen pacientemente en la inmensidad de tu propio interior.",
                 image: "https://i.pinimg.com/736x/cb/e6/f1/cbe6f194cb025537549ce498661bd712.jpg"
             },
             3: {
                 name: "La Emperatriz",
                 number: "III",
-                keyEnergy: "Abundancia, Creatividad, Nutrición",
-                description: "Representas el poder absoluto de la creación, la fertilidad de las ideas y la abundancia en todas sus formas. Conectas profundamente con la naturaleza, el placer sensorial y el dar vida a proyectos creativos. Tu vibración cura, nutre y hace crecer todo tu entorno.",
+                keyEnergy: "Abundancia ilimitada, creación fértil y magnetismo de amor",
+                description: "La Emperatriz colma tu vibración de nacimiento con una hermosa energía de magnetismo, sensualidad divina, creatividad expansiva y gracia natural. Tienes el glorioso don divino de hacer florecer y prosperar todo lo que tocan tus manos, desde proyectos, ideas y hogares, hasta relaciones personales. Eres un alma intensamente amorosa que se nutre del contacto directo con la Madre Tierra y la belleza sensorial. Tu misión de alma en esta encarnación te urge a reclamar con orgullo tu valía personal, a permitirte recibir la abundancia por derecho de nacimiento y a compartir tu calidez y amor incondicional con el mundo, enseñando que la vida es un jardín fértil que florece bajo la compasión.",
                 image: "https://i.pinimg.com/736x/43/60/cb/4360cb71af6597fe21f7ed06e4a6fa65.jpg"
             },
             4: {
                 name: "El Emperador",
                 number: "IV",
-                keyEnergy: "Estructura, Estabilidad, Autoridad",
-                description: "El Emperador rige sobre el orden, la disciplina y la manifestación material sólida. Tienes una capacidad natural de liderazgo, organización y protección. Tu vida se construye bajo cimientos estables y normas que te ayudan a prosperar y a dar estructura a otros.",
+                keyEnergy: "Estructura material segura, estabilidad sólida y liderazgo protector",
+                description: "Bajo la influencia arquitectónica del Emperador, tu camino terrestre está guiado por la creación de orden, la disciplina constructiva y la edificación de bases materiales duraderas. Eres un leader innato, un protector inquebrantable de tu círculo y alguien dotado con la templanza necesaria para materializar imperios en tu vida. Tienes una gran facilidad para organizar ideas caóticas de forma racional y pragmática. Tu principal tarea evolutiva en este viaje consiste en flexibilizar tu mente ante los cambios, equilibrar tu inmensa autoridad racional con la empatía del corazón, y edificar un legado tangible que sirva como un refugio seguro, justo y próspero para los que más amas.",
                 image: "https://i.pinimg.com/736x/87/4a/12/874a1207e4d8969f688e1467bece20ca.jpg"
             },
             5: {
                 name: "El Sumo Sacerdote",
                 number: "V",
-                keyEnergy: "Enseñanza, Tradición, Conexión Espiritual",
-                description: "También conocido como el Papa o el Hierofante, es el puente entre lo material y lo sagrado. Tienes una vocación natural hacia la enseñanza, la consejería, el compartir valores profundos e inspirar a otros. Riges bajo el aprendizaje ético y los sistemas integrales de sabiduría.",
+                keyEnergy: "Sabiduría ancestral, tutoría espiritual y transmisión de verdades éticas",
+                description: "Posees la profunda vibración espiritual del Sumo Sacerdote (o Hierofante). El camino de la sabiduría superior, el estudio de leyes universales y la transmisión de verdades guía toda tu encarnación. Eres un maestro de almas por excelencia; las personas de manera natural buscarán tu sabio consejo y tu equilibrada perspectiva en sus momentos de duda moral o confusión existencial. Tu sagrado propósito evolutivo es tender un puente de luz entre los conceptos sagrados y la vida cotidiana, liderar con el ejemplo de tus propios valores inquebrantables, y recordar que la verdadera guía espiritual no impone dogmas cerrados, sino que despierta la sabiduría innata de cada individuo.",
                 image: "https://i.pinimg.com/564x/48/4f/2e/484f2e96d19ebf8f01f2ff2b01a755d9.jpg"
             },
             6: {
                 name: "Los Enamorados",
                 number: "VI",
-                keyEnergy: "Elecciones, Unión, Relaciones Auténticas",
-                description: "La energía de Los Enamorados trata de la alineación interna, las grandes decisiones tomadas desde el corazón y la armonía relacional. Eres un alma que busca comprenderse a través del reflejo con los demás. Tu lección de vida es elegir tu verdadero camino por encima de las expectativas ajenas.",
+                keyEnergy: "Armonía de relaciones, alineación de valores y elecciones del corazón",
+                description: "Nacer bajo el influjo de Los Enamorados indica que tu vida está profundamente entretejida con las relaciones significativas y la alineación moral con tus valores. A lo largo de tu sendero, te enfrentarás con frecuencia a encrucijadas decisivas donde la clave absoluta para el éxito será decidir siempre desde tu verdad sagrada y el amor propio, nunca desde el miedo o la presión social. Tu gran aprendizaje de alma es nutrir primero tu propia completitud, sanar fracturas internas de rechazo para no proyectarlas en los demás, y aprender a cocrear lazos sagrados de correspondencia, respeto mutuo, crecimiento compartido y belleza inigualable.",
                 image: "https://i.pinimg.com/736x/32/7b/09/327b099fc36100cbee3c3608bd7c1fec.jpg"
             },
             7: {
                 name: "El Carro",
                 number: "VII",
-                keyEnergy: "Determinación, Victoria, Control de Opuestos",
-                description: "El Carro es el símbolo de la victoria, el movimiento constante y la conquista guiada por la fuerza de voluntad. Sabes cómo dirigir fuerzas opuestas en la misma dirección. Tu energía es imparable cuando tienes un norte claro y perseveras ante cualquier obstáculo.",
+                keyEnergy: "Fuerza de voluntad implacable, enfoque hacia la victoria y maestría emocional",
+                description: "La energía intrépida del Carro te impulsa a transitar tu destino con una determinación magnífica, coraje indomable y una capacidad asombrosa para el triunfo. Eres un guerrero de luz que sabe sostener con firmeza las riendas de fuerzas contrarias de su vida para dirigirlas de forma armónica hacia metas elevadas. Nada puede apartarte de tu norte cuando tienes claridad. Tu misión primordial estriba en mantener enfocado tu impulso creativo sin distraerte con batallas insignificantes, dominar tus emociones para que sean tu motor en lugar de tu obstáculo, y avanzar con paso firme sabiendo que el éxito verdadero de tu alma ya está garantizado.",
                 image: "https://i.pinimg.com/736x/01/cc/0a/01cc0afafb6020786cfecd49fc2bdbe3.jpg"
             },
             8: {
                 name: "La Justicia",
                 number: "VIII",
-                keyEnergy: "Equilibrio, Verdad, Causa y Efecto",
-                description: "La Justicia representa la honestidad brutal con uno mismo y el equilibrio kármico. Riges bajo la verdad, el discernimiento y la toma de responsabilidad. Comprendes de manera innata los ciclos de causa y efecto. Tu misión es actuar siempre con integridad.",
+                keyEnergy: "Integridad divina, verdad equilibrada y la ley del karma consciente",
+                description: "Tu vibración cósmica es la de la Justicia, revelando un alma imbuida con un inmenso sentido ético, honestidad implacable y devoción por la verdad. Experimentarás con gran dinamismo y rapidez la ley de causa y efecto de tus actos en este plano material. Tu camino te demandará evaluar los sucesos desde una perspectiva neutral y equilibrada, sin dejarte nublar por impulsos emocionales desmedidos. Tu misión natal radica en actuar siempre con la mayor coherencia e integridad posibles, sanar y resolver dinámicas kármicas estancadas con absoluta imparcialidad, y traer paz, discernimiento objetivo y equilibrio moral al mundo.",
                 image: "https://i.pinimg.com/736x/e8/56/6c/e8566c3ce0d37e61e6ca3a07b7fc8096.jpg"
             },
             9: {
                 name: "El Ermitaño",
                 number: "IX",
-                keyEnergy: "Búsqueda Interior, Guía, Autoconocimiento",
-                description: "El Ermitaño posee su propia lámpara interior para iluminar la oscuridad. Riges sobre el autoconocimiento, la madurez espiritual y los momentos sagrados de retiro. Tu misión es encontrar primero tus propias verdades profundas para luego guiar a otros en su despertar.",
+                keyEnergy: "Linterna del alma, introspección luminosa y sabiduría del silencio",
+                description: "Bajo la guía sagrada del Ermitaño, tu existencia está profundamente consagrada al autodescubrimiento y la introspección reflexiva. Eres portador de una hermosa luz interior que sirve de guía a otros cuando transitan sus noches oscuras del alma. Las épocas de soledad o retiro no deben asustarte, ya que en ellas se revelan las mayores verdades de tu evolución. Tu sagrada lección es aprender a madurar con sobriedad espiritual, nutrir tu enorme sabiduría trascendental en la calma del silencio, y compartir de forma humilde y amorosa la luz de tus propias experiencias para disipar la oscuridad del mundo.",
                 image: "https://i.pinimg.com/736x/60/c6/77/60c6776104e1ec6b89660210fc9ba25c.jpg"
             },
             10: {
                 name: "La Rueda de la Fortuna",
                 number: "X",
-                keyEnergy: "Destino, Cambio, Sincronicidad",
-                description: "La Rueda representa las sincronicidades del destino, los giros inesperados y los ciclos de cambio constante. Comprendes el flujo natural de la vida: que todo fluye y refluye. Tu lección es aprender a desapegarte de la ilusión del control absoluto y abrazar cada temporada.",
+                keyEnergy: "Evolución cósmica, sincronicidades del destino y adaptabilidad fluida",
+                description: "Tu vibración cósmica rige bajo la Rueda de la Fortuna. Tu vida estará sazonada de dinámicas aceleradas, giros imprevistos y sincronicidades que te recordarán constantemente el carácter cíclico del universo. Tu mayor poder radica en cultivar una profunda adaptabilidad, sabiendo que toda tormenta precede a un renacer soleado. Tu aprendizaje álmico es encontrar tu centro inamovible de paz mientras todo giran a tu alrededor, desapegarte de la ilusión de controlar el plano externo, y aprender a fluir hábilmente con las mareas y corrientes divinas para cabalgar con gracia tu propio destino.",
                 image: "https://i.pinimg.com/736x/a2/bf/45/a2bf450de1328905b768e77519ff7f99.jpg"
             },
             11: {
                 name: "La Fuerza",
                 number: "XI",
-                keyEnergy: "Entereza Interior, Compasión, Dominio de Instintos",
-                description: "La Fuerza no se mide en músculo, sino en espíritu, perseverancia y la dulzura empleada para sanar las pasiones salvajes. Riges bajo la compasión, el autocontrol amoroso y el coraje frente a la adversidad. Tu presencia serena de por sí amansa las tormentas.",
+                keyEnergy: "Coraje silencioso, compasión inquebrantable y domesticación de sombras",
+                description: "Nacer bajo el arcano de la Fuerza te obsequia un corazón de oro inquebrantable, dotado con una paciencia infinita y una compasión sanadora. Tu verdadero poder jamás se manifestará a través del control rígido ni la violencia física, sino mediante el hermoso arte de abrazar con amor absoluto tus propios miedos, instintos primarios y sombras interiores. Tu misión en la tierra radica en ser un faro de resiliencia ejemplar, suavizar las tensiones de tu entorno mediante tu presencia pacífica, y guiar a otros a curar sus heridas internas a través del amor incondicional y la dulce aceptación de lo que son.",
                 image: "https://i.pinimg.com/736x/0d/9f/51/0d9f51543884cb9df60333796dced4e0.jpg"
             },
             12: {
                 name: "El Colgado",
                 number: "XII",
-                keyEnergy: "Nueva Perspectiva, Rendición, Sabiduría Pasiva",
-                description: "El Colgado nos invita a ver el mundo al revés. Riges sobre la sabiduría de la pausa sagrada, el sacrificio necesario, la meditación y el soltar el control egoico. Al rendirte a las situaciones actuales, adquieres una iluminación que el movimiento continuo nunca te daría.",
+                keyEnergy: "Pausa mística, rendición sagrada y revelación de nuevas perspectivas",
+                description: "Bajo el portal vibracional del Colgado, tu evolution requiere que aprendas el sagrado arte del desapego mental y de contemplar la existencia desde una nueva y revolucionaria perspectiva. Tu camino te enseñará que pausar conscientemente no es sinónimo de estancamiento, sino un proceso de alquimia interior que te regala respuestas y visiones sublimes que otros ignoran por apurados. Tu supremo aprendizaje álmico es soltar las luchas inútiles del ego contra la corriente existencial, consagrarte a la fe silenciosa y encontrar la liberación absoluta mediante la rendición y aceptación inteligente.",
                 image: "https://i.pinimg.com/736x/09/b6/22/09b62283cb0f74bd18fa2f4bc59a4bb3.jpg"
             },
             13: {
                 name: "La Muerte",
                 number: "XIII",
-                keyEnergy: "Transformación Profunda, Renacimiento, Soltar",
-                description: "Lejos de ser física, La Muerte es el arquetipo más puro de la transmutación y el desapego radical. Invita al fin definitivo de ciclos viejos para abrir el portal a un glorioso renacimiento. Tienes la asombrosa capacidad de regenerarte una y otra vez desde las cenizas.",
+                keyEnergy: "Transmutación radical, renacimiento permanente e infinita liberación",
+                description: "Bajo el portal cósmico del arcano XIII, eres un transformador espiritual innato. Tienes la asombrosa capacidad de cerrar ciclos viejos y obsoletos para renacer fortalecido desde tus cenizas con una sabiduría renovada. Tu paso por el mundo implica derrumbar hábitos y apegos que frenan la evolución de tu alma y la de tu entorno. Tu misión de alma es enseñarle a la humanidad que los finales nunca son definitivos, sino hermosos pasajes sagrados que limpian el camino para que brote una vida infinitamente más luminosa, vibrante, sana y expansiva.",
                 image: "https://i.pinimg.com/736x/0c/33/08/0c33089be1f60322bf2542a22be2fa8f.jpg"
             },
             14: {
                 name: "La Templanza",
                 number: "XIV",
-                keyEnergy: "Alquimia, Paciencia, Balance Divino",
-                description: "La Templanza es el ángel alquimista de la moderación y la armonía celestial. Posees una habilidad natural para balancear extremos, sanar desequilibrios y fluir artísticamente con la corriente del universo. Tu sabiduría radica en la paciencia y en la paz interior constante.",
+                keyEnergy: "Armonía divina, alquimia de polaridades y sanación pacífica",
+                description: "La vibración de la Templanza baña tu alma con serenidad, paciencia angelical y una magnífica destreza alquímica para asimilar e integrar opuestos en tu vida. Eres sumamente diplomático y posees el don de calmar dolores emocionales ajenos, armonizar entornos tensos e integrar mentes discordantes en unión amorosa. Tu misión existencial es cultivar y salvaguardar tu paz interior frente a cualquier tempestad externa, fluir a un ritmo pausado y balanceado dictado por el espíritu, y ser el puente que sane las dualidades a través del amor y equilibrio celestial.",
                 image: "https://i.pinimg.com/736x/43/d3/1a/43d31ad957e84f509df63f27f05353d2.jpg"
             },
             15: {
                 name: "El Diablo",
                 number: "XV",
-                keyEnergy: "Sombras, Poder Personal, Pasión Terrenal",
-                description: "El Diablo te confronta cariñosamente con tus propias ataduras, miedos inconscientes y deseos mundanos. Riges bajo un enorme magnetismo, el deseo de libertad y la potencia sexual/creativa. Tu lección de alma consiste en iluminar tus sombras y poseer tu inmenso poder.",
+                keyEnergy: "Confrontación de la sombra, enorme magnetismo creativo y liberación de prisiones",
+                description: "El portal vibracional del Diablo te invita a transitar un camino de profundo poder personal, gran magnetismo y exploración honestas de tu mente subconsciente. Tu labor álmica consiste en desmitificar tus miedos internos y dependencias invisibles para reclamar tu libertad absoluta. Tienes un caudal creativo, sexual y terrenal inmenso que debe ser canalizado éticamente hacia propósitos constructivos. Estás aquí para domar las trampas del ego, romper cadenas heredadas o autoinfligidas con humor y sabiduría, y experimentar la abundancia terrenal desde un espacio de desapego cósmico.",
                 image: "https://i.pinimg.com/736x/a2/21/df/a221dff4fbbd97f37476f59bf53b925b.jpg"
             },
             16: {
                 name: "La Torre",
                 number: "XVI",
-                keyEnergy: "Revelación Repentina, Ruptura de Ilusiones, Avance",
-                description: "La Torre destruye lo que ya no sirve y lo que fue construido sobre cimientos falsos. Riges bajo las epifanías repentinas o despertares disruptivos. Aunque parezca caótica, su rayo te libera de prisiones conceptuales para que construyas de nuevo con autenticidad absoluta.",
+                keyEnergy: "Despertar abrupto, caída de falsas estructuras e iluminación súbita",
+                description: "Nacer bajo el arcano de la Torre indica que tu espíritu posee una fortaleza inigualable para pararse fuerte y renacer tras las tormentas más abruptas de la vida. Las crisis o cambios drásticos que experimentes son sacudidas cuánticas amorosas del universo diseñadas para apartarte de caminos ilusorios que encadenaban tu potencial. Tu gran propósito álmico es demoler las estructuras rígidas del ego, derribar cimientos falsos de orgullo o apariencias, y reconstruir tu realidad sobre bases divinas de absoluta verdad, pureza espiritual y autenticidad indestructible.",
                 image: "https://i.pinimg.com/736x/a2/f0/5c/a2f05cafcb3fc07ccf0e21dd680373df.jpg"
             },
             17: {
                 name: "La Estrella",
                 number: "XVII",
-                keyEnergy: "Esperanza, Sanación, Propósito Inspirado",
-                description: "La Estrella derrama agua fresca sobre la tierra reseca: es el rayo de luz que anuncia el final de la tormenta. Riges bajo el optimismo cósmico, la fe inquebrantable, la vulnerabilidad pura y la sanación interna. Te recuerda que estás perfectamente alineado con tu estrella guía.",
+                keyEnergy: "Renovación espiritual, sanación cósmica y esperanza divina inagotable",
+                description: "Tu alma nació cobijada por el divino manto de la Estrella, colmándote con una inmensa fe cósmica, optimismo y un aura rebosante de sanación. Tienes el bellísimo don espiritual de transmitir sosiego de forma inconsciente con solo sonreír o estar presente en vidas afligidas. El universo protege constantemente tus pasos con amor infinito. Tu sagrado propósito terrestre es fluir sin corazas ni máscaras, derramar tu vulnerabilidad transparente sobre el mundo de manera libre, y recordarles a todos que, incluso en las noches más frías, siempre brilla una guía divina.",
                 image: "https://i.pinimg.com/736x/7d/96/97/7d9697078df8849b389ee761a6b0c60f.jpg"
             },
             18: {
                 name: "La Luna",
                 number: "XVIII",
-                keyEnergy: "Emociones Profundas, Ilusiones, Subconsciente",
-                description: "La Luna te invita a explorar el reino misterioso de las sombras nocturnas, la imaginación ilimitada y las emociones fluctuantes. Tienes una intuición psíquica extraordinaria y conectas con lo místico. Tu aprendizaje es superar la confusión mental y confiar en tu instinto primordial.",
+                keyEnergy: "Intuición psíquica, conexión profunda con el subconsciente y dotes artísticos",
+                description: "La mágica e intrigante energía de la Luna envuelve tu ser natal con un halo de misterio, sueños proféticos, imaginación fértil y destrezas intuitivas incomparables. Posees un canal chamánico directo con los mundos sutiles e invisibles. Tu pasaje de vida requiere que aprendas a navegar la niebla de miedos imaginarios o ilusiones sentimentales para que brille tu impecable claridad psíquica. Tienes dotes artísticos y terapéuticos increíbles; tu misión estriba en sumergirte en las aguas del sentir más íntimo para traer luz y magia consoladora al plano físico.",
                 image: "https://i.pinimg.com/736x/7a/ff/d1/7affd1b111ee999882200388d0115049.jpg"
             },
             19: {
                 name: "El Sol",
                 number: "XIX",
-                keyEnergy: "Vitalidad, Claridad Absoluta, Éxito Radiante",
-                description: "El Sol representa el éxito absoluto, la felicidad radiante y la verdad revelada ante toda luz. Riges bajo el juego espontáneo, la vitalidad pura y una calidez que resucita y contagia entusiasmo a cualquiera que te rodee. Tu energía interna brilla de forma magnética.",
+                keyEnergy: "Éxito radiante, alegría pura e iluminación del sendero propio",
+                description: "Bajo la gloriosa influencia cósmica del Sol, tu destino está llamado a brillar con un carisma arrollador, éxito material y un optimismo tan puro que irradia vida y calidez a tu paso. Eres portador de una hermosa inocencia y una gran claridad mental que disuelve de inmediato las mentiras, envidias e hipocresías del plano terrenal. Tu sublime misión consiste en vibrar con alegría espontánea, empoderar generosamente a otros para que reclamen su brillo único, y recordar que la abundancia divina es infinita cuando decidimos vivir con un corazón transparente.",
                 image: "https://i.pinimg.com/736x/32/3f/76/323f76da05929bdf6e445037d0c3dd1b.jpg"
             },
             20: {
                 name: "El Juicio",
                 number: "XX",
-                keyEnergy: "Llamado del Alma, Redención, Absolución del Pasado",
-                description: "El Juicio es la trompeta cósmica que te llama a levantarte con una nueva conciencia integral. Riges bajo segundas oportunidades, el perdonarse a uno mismo y escuchar el verdadero propósito de tu espíritu. Estás listo para liberarte del pasado y evolucionar al siguiente nivel.",
+                keyEnergy: "Llamado del alma, despertar de consciencia superior y absolución total",
+                description: "El Juicio rige tu vibración natal de nacimiento. Tu encarnación se caracteriza por despertares espirituales monumentales e imperiosos que te invitan a mudar de piel espiritual constantemente. Estás llamado a sanar heridas ancestrales de tu linaje con sabiduría, perdonar tu pasado por completo y responder al gran llamado de tu vocación álmica superior. Tu propósito cósmico es trascender todos los miedos, sonar tu propia trompeta de revelación interior y ayudar con tu testimonio y luz a la resurrección espiritual de otros.",
                 image: "https://i.pinimg.com/736x/43/60/cb/4360cb71af6597fe21f7ed06e4a6fa65.jpg"
             },
             21: {
                 name: "El Mundo",
                 number: "XXI",
-                keyEnergy: "Plenitud, Integración Total, Cierre Glorioso",
-                description: "El Mundo representa el fin victorioso del viaje del loco. Riges sobre el éxito universal, la integración de lecciones de vida, la armonía absoluta y el sentirte completamente cómodo en tu propia piel. Simboliza la graduación de tu alma y el inicio de un nuevo gran ciclo cósmico.",
+                keyEnergy: "Realización plena, integración holística de lecciones y culminación gloriosa",
+                description: "Tu vibración natal es el Mundo, la cima absoluta y consagrada del trayecto del Tarot. Esto denota un espíritu de alta evolución dotado con un entendimiento holístico y elevado del viaje de la existencia. Gozas de una capacidad especial para integrar lecciones kármicas con suma rapidez y cerrar ciclos existenciales de forma exitosa y victoriosa. Tu sagrado propósito estriba en alcanzar tu plenitud personal en todos los ámbitos, expandir tus fronteras conectando con diferentes culturas del mundo, e irradiar tu completitud pacífica eterna.",
                 image: "https://i.pinimg.com/736x/ce/bf/6d/cebf6d8c43fc2c524b07fbdfcffcefc6.jpg"
             },
             22: {
                 name: "El Loco",
                 number: "XXII",
-                keyEnergy: "Inicios Puros, Salto de Fe, Libertad Total",
-                description: "El Loco camina despreocupado al borde del acantilado, confiando ciegamente en el viento universal. Representa tu espíritu indomable, los comienzos intrépidos y la libertad absoluta del juicio externo. Eres un canal de juego divino, espontaneidad y un optimismo inagotable.",
+                keyEnergy: "Libertad absoluta, salto cuántico de fe y aventura pura del espíritu",
+                description: "Tu vibración natal está impulsada por el indómito espíritu libre del Loco (representando el 0 o el 22). No te asustan los comienzos desde cero ni dar un fabuloso salto de fe hacia lo desconocido sin equipajes pesados que te aten. Tienes un corazón permanentemente joven y espontáneo guiado por un viento celestial que te cuida en cada travesía. Tu misión consiste en recordarnos a todos que la existencia en este planeta es un juego sagrado y maravilloso que se debe transitar con gozo, ligereza y absoluta autenticidad cósmica.",
                 image: "https://i.pinimg.com/736x/95/43/46/954346e9d89ee5ebd9c71a396b27e999.jpg"
             }
         };
@@ -1303,9 +1292,7 @@
                     16: "⚡", 17: "⭐", 18: "🌙", 19: "☀️", 20: "🔔",
                     21: "🌍", 22: "🃏"
                 };
-                const emoji = ARCANO_EMOJIS[arcanoNum] || "✨";
-                const textMessage = `¡Hola anna! Mi Arcano es ${info.name} ${emoji} Agendar lectura general ✨`;
-                document.getElementById('calc-whatsapp-btn').href = "https://wa.me/51960260123?text=" + encodeURIComponent(textMessage);
+                document.getElementById('calc-whatsapp-btn').href = "https://www.paypal.com/ncp/payment/V5FUFJX8KAKUW";
 
                 loadingPanel.classList.add('hidden');
                 document.getElementById('calc-result-panel').classList.remove('hidden');

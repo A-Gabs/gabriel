@@ -10,155 +10,155 @@ export const ARCANOS_DATA: Record<number, ArcanoInfo> = {
   1: {
     number: "I",
     name: "El Mago",
-    keyEnergy: "Manifestación, poder de voluntad y acción inspirada",
+    keyEnergy: "Manifestación, voluntad divina y potencial creador",
     image: "https://i.pinimg.com/736x/6c/4f/77/6c4f77c5c06fe1dabc19b0d62da562cc.jpg",
-    description: "Naciste bajo el signo del Mago. Posees la capacidad natural para tomar ideas del éter y hacerlas tangibles en la tierra. Tienes todos los elementos necesarios (aire, fuego, agua y tierra) a tu disposición para manifestar tus metas. Tu camino te guiará a liderar proyectos, iniciar nuevos capítulos con confianza y recordar siempre que tu fuerza proviene de tu mente y tu enfoque."
+    description: "Naciste bajo el cobijo del Mago. Posees una asombrosa capacidad canalizadora para tomar ideas creativas directas del éter y materializarlas con éxito en el plano físico. Cuentas innatamente con todos los recursos y herramientas para salir victorioso en cualquier meta que te propongas. Tu camino álmico te guiará y exigirá liderar proyectos ambiciosos, iniciar nuevos capítulos con absoluta confianza e inspirar a los demás. Tu gran lección de evolución radica en domar la dispersión, enfocar tu poderosa fuerza mental en un único propósito noble a la vez, y recordar siempre que tu verdadera magia se activa únicamente cuando actúas con alineación ética y determinación pura."
   },
   2: {
     number: "II",
     name: "La Sacerdotisa",
-    keyEnergy: "Intuición profunda, misterio y sabiduría interior",
+    keyEnergy: "Intuición mística, sabiduría sagrada y misterio divino",
     image: "https://i.pinimg.com/736x/89/37/ef/8937ef39cd2ad37dfb8eb4962c646b14.jpg",
-    description: "Tu energía de nacimiento es la de la Sacerdotisa, la guardiana de lo oculto y los misterios de la vida. Eres una persona altamente intuitiva con una conexión especial hacia lo invisible. Tu guía interior nunca te falla; tu lección de vida consiste en aprender a escuchar el silencio, confiar en tus corazonadas por encima del ruido externo y saber cuándo esperar pacientemente que el velo del misterio se corra."
+    description: "Tu vibración natal está regida por la Sacerdotisa, la guardiana silenciosa de los misterios cósmicos y del subconsciente profundo. Eres un canal de alta sensibilidad psíquica e intuición extraordinaria, cuyas corazonadas nunca fallan cuando consigues silenciar el murmullo de la mente racional. Tu camino de vida te invita a explorar dimensiones místicas, a confiar en tus sueños y a comprender los ciclos naturales del universo. Tu lección álmica estriba en aprender a sostener el silencio, a cultivar la paciencia sagrada antes de actuar, y a reconocer que no todas las respuestas deben buscarse afuera; las verdades más grandes reveladas para ti ya residen pacientemente en la inmensidad de tu propio interior."
   },
   3: {
     number: "III",
     name: "La Emperatriz",
-    keyEnergy: "Abundancia, creación consciente y nutrición",
+    keyEnergy: "Abundancia ilimitada, creación fértil y magnetismo de amor",
     image: "https://i.pinimg.com/736x/60/a4/09/60a40954b9f6eece6cd7c0eaf725bf6e.jpg",
-    description: "La Emperatriz rige tu vibración natal, llenando tu vida de magnetismo, creatividad y abundancia. Tienes un don especial para nutrir ideas, proyectos, plantas o personas y hacerlos florecer. Eres sumamente sensorial y conectas con la belleza de la naturaleza de manera innata. Cree en tu potencial creativo; tu misión de alma consiste en dar vida a nuevas bellezas terrenales compartiendo tu calidez y amor incondicional."
+    description: "La Emperatriz colma tu vibración de nacimiento con una hermosa energía de magnetismo, sensualidad divina, creatividad expansiva y gracia natural. Tienes el glorioso don divino de hacer florecer y prosperar todo lo que tocan tus manos, desde proyectos, ideas y hogares, hasta relaciones personales. Eres un alma intensamente amorosa que se nutre del contacto directo con la Madre Tierra y la belleza sensorial. Tu misión de alma en esta encarnación te urge a reclamar con orgullo tu valía personal, a permitirte recibir la abundancia por derecho de nacimiento y a compartir tu calidez y amor incondicional con el mundo, enseñando que la vida es un jardín fértil que florece bajo la compasión."
   },
   4: {
     number: "IV",
     name: "El Emperador",
-    keyEnergy: "Estructura, autoridad constructiva y estabilidad",
+    keyEnergy: "Estructura material segura, estabilidad sólida y liderazgo protector",
     image: "https://i.pinimg.com/736x/43/fa/cf/43facf0fbbff9fb3cb21182270929285.jpg",
-    description: "Bajo la influencia del Emperador, tu camino está guiado por la disciplina, el orden y la creación de bases sólidas. Tienes madera de líder y protector para tu familia o comunidad. Tu aprendizaje consiste en balancear tu gran fuerza organizativa con la flexibilidad. Estás aquí para estructurar tu vida, construir legados estables en el plano material y brindar un refugio seguro a los que amas."
+    description: "Bajo la influencia arquitectónica del Emperador, tu camino terrestre está guiado por la creación de orden, la disciplina constructiva y la edificación de bases materiales duraderas. Eres un líder innato, un protector inquebrantable de tu círculo y alguien dotado con la templanza necesaria para materializar imperios en tu vida. Tienes una gran facilidad para organizar ideas caóticas de forma racional y pragmática. Tu principal tarea evolutiva en este viaje consiste en flexibilizar tu mente ante los cambios, equilibrar tu inmensa autoridad racional con la empatía del corazón, y edificar un legado tangible que sirva como un refugio seguro, justo y próspero para los que más amas."
   },
   5: {
     number: "V",
     name: "El Sumo Sacerdote",
-    keyEnergy: "Sabiduría tradicional, guía espiritual y aprendizaje",
+    keyEnergy: "Sabiduría ancestral, tutoría espiritual y transmisión de verdades éticas",
     image: "https://i.pinimg.com/736x/07/7a/7b/077a7b827e85c13b2c63ef29feec6859.jpg",
-    description: "Posees la vibración del Sumo Sacerdote (o Hierofante). El camino del conocimiento, la sabiduría milenaria y la enseñanza guían tu vida. Eres maestro nato; las personas suelen buscar tu consejo y tu perspectiva equilibrada en momentos difíciles. Tu misión te impulsa a conectar lo espiritual con lo racional, a guiar con compasión y a mantener vivos los principios éticos más profundos."
+    description: "Posees la profunda vibración espiritual del Sumo Sacerdote (o Hierofante). El camino de la sabiduría superior, el estudio de leyes universales y la transmisión de verdades guía toda tu encarnación. Eres un maestro de almas por excelencia; las personas de manera natural buscarán tu sabio consejo y tu equilibrada perspectiva en sus momentos de duda moral o confusión existencial. Tu sagrado propósito evolutivo es tender un puente de luz entre los conceptos sagrados y la vida cotidiana, liderar con el ejemplo de tus propios valores inquebrantables, y recordar que la verdadera guía espiritual no impone dogmas cerrados, sino que despierta la sabiduría innata de cada individuo."
   },
   6: {
     number: "VI",
     name: "Los Enamorados",
-    keyEnergy: "Armonía, decisiones del corazón e intimidad verdadera",
+    keyEnergy: "Armonía de relaciones, alineación de valores y elecciones del corazón",
     image: "https://i.pinimg.com/736x/a4/4f/d1/a44fd1db0913f4125b448f2178ee7ea4.jpg",
-    description: "Tu vibración natal es la de Los Enamorados, indicando que las relaciones significativas y la alineación con tus valores internos rigen tu existencia. Te enfrentarás a encrucijadas de vida donde la clave será elegir siempre desde el corazón y tu verdad ética, no desde el miedo. Tu misión consiste en aprender a amarte primero a ti para poder cocrear lazos armoniosos y sinceros de mutuo crecimiento."
+    description: "Nacer bajo el influjo de Los Enamorados indica que tu vida está profundamente entretejida con las relaciones significativas y la alineación moral con tus valores. A lo largo de tu sendero, te enfrentarás con frecuencia a encrucijadas decisivas donde la clave absoluta para el éxito será decidir siempre desde tu verdad sagrada y el amor propio, nunca desde el miedo o la presión social. Tu gran aprendizaje de alma es nutrir primero tu propia completitud, sanar fracturas internas de rechazo para no proyectarlas en los demás, y aprender a cocrear lazos sagrados de correspondencia, respeto mutuo, crecimiento compartido y belleza inigualable."
   },
   7: {
     number: "VII",
     name: "El Carro",
-    keyEnergy: "Determinación implacable, fuerza de voluntad y triunfo",
+    keyEnergy: "Fuerza de voluntad implacable, enfoque hacia la victoria y maestría emocional",
     image: "https://i.pinimg.com/736x/51/9a/c0/519ac0b89bf22718e265c1926615b1ea.jpg",
-    description: "La energía del Carro te impulsa a avanzar siempre con determinación y enfoque hacia tus metas. Eres una persona resiliente que sabe equilibrar fuerzas opuestas para obtener el triunfo. Aunque encuentres obstáculos en tu ruta, tu fuerza de voluntad te sacará adelante. Tu misión de alma es mantener las riendas de tu vida con claridad y guiar con propósito, sin dejarte desviar por distracciones temporales."
+    description: "La energía intrépida del Carro te impulsa a transitar tu destino con una determinación magnífica, coraje indomable y una capacidad asombrosa para el triunfo. Eres un guerrero de luz que sabe sostener con firmeza las riendas de fuerzas contrarias de su vida para dirigirlas de forma armónica hacia metas elevadas. Nada puede apartarte de tu norte cuando tienes claridad. Tu misión primordial estriba en mantener enfocado tu impulso creativo sin distraerte con batallas insignificantes, dominar tus emociones para que sean tu motor en lugar de tu obstáculo, y avanzar con paso firme sabiendo que el éxito verdadero de tu alma ya está garantizado."
   },
   8: {
     number: "VIII",
     name: "La Justicia",
-    keyEnergy: "Verdad objetiva, equilibrio del karma e integridad",
+    keyEnergy: "Integridad divina, verdad equilibrada y la ley del karma consciente",
     image: "https://i.pinimg.com/736x/fe/15/0e/fe150eb814bc74d08f36c53e87859c25.jpg",
-    description: "Tu energía natal de la Justicia revela que posees un gran sentido ético, integridad y amor por la verdad. Experimentarás la ley cósmica de causa y efecto de manera directa. Tu aprendizaje estriba en mantener la calma y la perspectiva neutral, sopesando las situaciones fríamente. Tienes un alma diseñada para traer balance, equidad y decisiones honestas a este plano terrestre."
+    description: "Tu vibración cósmica es la de la Justicia, revelando un alma imbuida con un inmenso sentido ético, honestidad implacable y devoción por la verdad. Experimentarás con gran dinamismo y rapidez la ley de causa y efecto de tus actos en este plano material. Tu camino te demandará evaluar los sucesos desde una perspectiva neutral y equilibrada, sin dejarte nublar por impulsos emocionales desmedidos. Tu misión natal radica en actuar siempre con la mayor coherencia e integridad posibles, sanar y resolver dinámicas kármicas estancadas con absoluta imparcialidad, y traer paz, discernimiento objetivo y equilibrio moral al mundo."
   },
   9: {
     number: "IX",
     name: "El Ermitaño",
-    keyEnergy: "Luz interior, guía solitaria y autodescrubrimiento",
+    keyEnergy: "Linterna del alma, introspección luminosa y sabiduría del silencio",
     image: "https://i.pinimg.com/736x/13/fe/78/13fe78d655f4625b6510e14acc73a97a.jpg",
-    description: "Bajo la guía del Ermitaño, tu camino está imbuido por la introspección y la búsqueda de la verdad profunda. Eres una linterna para los demás en tiempos de oscuridad. No le temas a los momentos de soledad, pues de ellos brotan tus comprensiones más valiosas. Tu misión te invita a madurar espiritualmente, alimentar tu sabiduría interior y compartir la luz de tu propia experiencia con el mundo desde un lugar humilde."
+    description: "Bajo la guía sagrada del Ermitaño, tu existencia está profundamente consagrada al autodescubrimiento y la introspección reflexiva. Eres portador de una hermosa luz interior que sirve de guía a otros cuando transitan sus noches oscuras del alma. Las épocas de soledad o retiro no deben asustarte, ya que en ellas se revelan las mayores verdades de tu evolución. Tu sagrada lección es aprender a madurar con sobriedad espiritual, nutrir tu enorme sabiduría trascendental en la calma del silencio, y compartir de forma humilde y amorosa la luz de tus propias experiencias para disipar la oscuridad del mundo."
   },
   10: {
     number: "X",
     name: "La Rueda de la Fortuna",
-    keyEnergy: "Ciclos cósmicos, sincronía y adaptabilidad",
+    keyEnergy: "Evolución cósmica, sincronicidades del destino y adaptabilidad fluida",
     image: "https://i.pinimg.com/736x/44/22/a9/4422a945b4cbf9b14c1eb25816bb1c23.jpg",
-    description: "Tu vibración cósmica es la Rueda de la Fortuna. Tu vida experimentará dinámicas en constante cambio, enseñándote que todo en el universo es cíclico. Tu mayor fortaleza reside en la adaptabilidad y en aprender a centrarte en el eje inamovible de la rueda mientras las circunstancias giran a tu alrededor. Estás aquí para descifrar las sincronías celestiales y fluir con maestría ante el destino."
+    description: "Tu vibración cósmica rige bajo la Rueda de la Fortuna. Tu vida estará sazonada de dinámicas aceleradas, giros imprevistos y sincronicidades que te recordarán constantemente el carácter cíclico del universo. Tu mayor poder radica en cultivar una profunda adaptabilidad, sabiendo que toda tormenta precede a un renacer soleado. Tu aprendizaje álmico es encontrar tu centro inamovible de paz mientras todo giran a tu alrededor, desapegarte de la ilusión de controlar el plano externo, y aprender a fluir hábilmente con las mareas y corrientes divinas para cabalgar con gracia tu propio destino."
   },
   11: {
     number: "XI",
     name: "La Fuerza",
-    keyEnergy: "Valentía silenciosa, compasión y control de impulsos",
+    keyEnergy: "Coraje silencioso, compasión inquebrantable y domesticación de sombras",
     image: "https://i.pinimg.com/736x/8e/3c/6e/8e3c6eed5be292db2f2eb6e57973d4ee.jpg",
-    description: "Tu arcano de nacimiento es la Fuerza. Tienes un corazón inquebrantable revestido de suma ternura y compasión. Comprendes que el verdadero dominio no se logra con violencia ni control externo, sino abrazando silenciosamente tus propias sombras y temores con infinito amor propio. Tu misión natal radica en ser un faro de resiliencia y un bálsamo reconfortante en situaciones desafiantes."
+    description: "Nacer bajo el arcano de la Fuerza te obsequia un corazón de oro inquebrantable, dotado con una paciencia infinita y una compasión sanadora. Tu verdadero poder jamás se manifestará a través del control rígido ni la violencia física, sino mediante el hermoso arte de abrazar con amor absoluto tus propios miedos, instintos primarios y sombras interiores. Tu misión en la tierra radica en ser un faro de resiliencia ejemplar, suavizar las tensiones de tu entorno mediante tu presencia pacífica, y guiar a otros a curar sus heridas internas a través del amor incondicional y la dulce aceptación de lo que son."
   },
   12: {
     number: "XII",
     name: "El Colgado",
-    keyEnergy: "Nuevas perspectivas, pausa sagrada y entrega espiritual",
+    keyEnergy: "Pausa mística, rendición sagrada y revelación de nuevas perspectivas",
     image: "https://i.pinimg.com/736x/c5/45/de/c545de4dae19cfc1f7bbaed899c717ca.jpg",
-    description: "Bajo el portal vibracional del Colgado, tu camino espiritual requiere que aprendas a rendirte al flujo cósmico y a ver el mundo al revés. No siempre el progreso significa correr aceleradamente; la pausa reflexiva te brindará revelaciones increíbles que otros ignoran. Tu lección de alma consiste en soltar el control y encontrar la libertad plena mediante el desapego y la aceptación consciente."
+    description: "Bajo el portal vibracional del Colgado, tu evolución requiere que aprendas el sagrado arte del desapego mental y de contemplar la existencia desde una nueva y revolucionaria perspectiva. Tu camino te enseñará que pausar conscientemente no es sinónimo de estancamiento, sino un proceso de alquimia interior que te regala respuestas y visiones sublimes que otros ignoran por apurados. Tu supremo aprendizaje álmico es soltar las luchas inútiles del ego contra la corriente existencial, consagrarte a la fe silenciosa y encontrar la liberación absoluta mediante la rendición y aceptación inteligente."
   },
   13: {
     number: "XIII",
     name: "La Muerte (Transformación)",
-    keyEnergy: "Renacimiento, desprendimiento de estructuras y liberación",
+    keyEnergy: "Transmutación radical, renacimiento permanente e infinita liberación",
     image: "https://i.pinimg.com/736x/ab/db/18/abdb1839e3650222372f8832a8e8db6b.jpg",
-    description: "Nacer bajo el arcano XIII indica que eres un agente de evolución natural e infinita transformación. Tienes la habilidad innata de cerrar ciclos viejos con gracia e impulsarte fortalecido hacia el renacimiento. No temas a las transiciones; representas al fénix que purifica lo caduco para dar vida a nuevas experiencias luminosas y vibrantes de tu alma."
+    description: "Bajo el portal cósmico del arcano XIII, eres un transformador espiritual innato. Tienes la asombrosa capacidad de cerrar ciclos viejos y obsoletos para renacer fortalecido desde tus cenizas con una sabiduría renovada. Tu paso por el mundo implica derrumbar hábitos y apegos que frenan la evolución de tu alma y la de tu entorno. Tu misión de alma es enseñarle a la humanidad que los finales nunca son definitivos, sino hermosos pasajes sagrados que limpian el camino para que brote una vida infinitamente más luminosa, vibrante, sana y expansiva."
   },
   14: {
     number: "XIV",
     name: "La Templanza",
-    keyEnergy: "Alquimia personal, balance divino e integración pacífica",
+    keyEnergy: "Armonía divina, alquimia de polaridades y sanación pacífica",
     image: "https://i.pinimg.com/736x/43/60/c8/4360c8e2289c56baefb6b66dd6f837bd8.jpg",
-    description: "Rige tu vibración la Templanza, llenando tu alma de calma, diplomacia y talento alquímico para balancear opuestos. Puedes unificar ideas discordantes y sanar estados de ánimo revueltos de forma amorosa. Tu misión vital radica en enseñar serenidad, cultivar un ritmo fluido en tu día a día, y nutrir tu paz interior como el tesoro más resplandeciente frente a cualquier tormenta."
+    description: "La vibración de la Templanza baña tu alma con serenidad, paciencia angelical y una magnífica destreza alquímica para asimilar e integrar opuestos en tu vida. Eres sumamente diplomático y posees el don de calmar dolores emocionales ajenos, armonizar entornos tensos e integrar mentes discordantes en unión amorosa. Tu misión existencial es cultivar y salvaguardar tu paz interior frente a cualquier tempestad externa, fluir a un ritmo pausado y balanceado dictado por el espíritu, y ser el puente que sane las dualidades a través del amor y equilibrio celestial."
   },
   15: {
     number: "XV",
     name: "El Diablo",
-    keyEnergy: "Pasión terrenal, confrontación de sombras y libertad",
-    image: "https://i.pinimg.com/736x/b6/c1/96/b6c19634dcc6daae8729505ba1e4b85c.jpg",
-    description: "La vibración del Diablo estimula un camino donde conectarás con tu magnetismo terrenal, tu fuerza salvaje y tus límites psicológicos. No debes temerle a esta vibración; su gran regalo es enseñarte a desmitificar tus sombras, romper cadenas de apegos limitantes y sanar tabúes. Estás aquí para domar la ilusión de la mente y vivir tu pasión física y creativa libremente con honestidad cósmica."
+    keyEnergy: "Confrontación de la sombra, enorme magnetismo creativo y liberación de prisiones",
+    image: "https://i.pinimg.com/736x/b6/c1/96/b6c19634dcc6daae872950ba1e4b85c.jpg",
+    description: "El portal vibracional del Diablo te invita a transitar un camino de profundo poder personal, gran magnetismo y exploración honestas de tu mente subconsciente. Tu labor álmica consiste en desmitificar tus miedos internos y dependencias invisibles para reclamar tu libertad absoluta. Tienes un caudal creativo, sexual y terrenal inmenso que debe ser canalizado éticamente hacia propósitos constructivos. Estás aquí para domar las trampas del ego, romper cadenas heredadas o autoinfligidas con humor y sabiduría, y experimentar la abundancia terrenal desde un espacio de desapego cósmico."
   },
   16: {
     number: "XVI",
     name: "La Torre",
-    keyEnergy: "Liberación súbita del ego, caída de ilusiones y renacer sólido",
+    keyEnergy: "Despertar abrupto, caída de falsas estructuras e iluminación súbita",
     image: "https://i.pinimg.com/736x/f6/fd/84/f6fd84587efcc28620800b6f9fe31eff.jpg",
-    description: "El arcano de la Torre indica que tu vida está marcada por momentos de despertar estrepitoso y sacudidas cuánticas diseñadas para apartarte del camino equivocado rápidamente. Tienes la inmensa fortaleza espiritual para pararte erguido tras el rayo. Tu misión consiste en destruir cimientos viejos e ilusorios del ego y edificar una vida infinitamente auténtica basada en la verdad divina incorruptible."
+    description: "Nacer bajo el arcano de la Torre indica que tu espíritu posee una fortaleza inigualable para pararse fuerte y renacer tras las tormentas más abruptas de la vida. Las crisis o cambios drásticos que experimentes son sacudidas cuánticas amorosas del universo diseñadas para apartarte de caminos ilusorios que encadenaban tu potencial. Tu gran propósito álmico es demoler las estructuras rígidas del ego, derribar cimientos falsos de orgullo o apariencias, y reconstruir tu realidad sobre bases divinas de absoluta verdad, pureza espiritual y autenticidad indestructible."
   },
   17: {
     number: "XVII",
     name: "La Estrella",
-    keyEnergy: "Sanación profunda, esperanza divina e inspiración",
+    keyEnergy: "Renovación espiritual, sanación cósmica y esperanza divina inagotable",
     image: "https://i.pinimg.com/736x/6f/30/1e/6f301e742be9b6acb8137f8bfb215886.jpg",
-    description: "Naciste cobijado bajo la sublime energía de la Estrella. Eres portador de optimismo cósmico, inspiración y renovación espiritual. Allá donde vayas, dejas un rastro de sosiego y paz sanadora para quienes sufren. Cree firmemente que el universo cuida tu sendero; tu misión divina es fluir libremente con tu autenticidad desnuda, transmitiendo un mensaje de fe absoluta y belleza a la humanidad."
+    description: "Tu alma nació cobijada por el divino manto de la Estrella, colmándote con una inmensa fe cósmica, optimismo y un aura rebosante de sanación. Tienes el bellísimo don espiritual de transmitir sosiego de forma inconsciente con solo sonreír o estar presente en vidas afligidas. El universo protege constantemente tus pasos con amor infinito. Tu sagrado propósito terrestre es fluir sin corazas ni máscaras, derramar tu vulnerabilidad transparente sobre el mundo de manera libre, y recordarles a todos que, incluso en las noches más frías, siempre brilla una guía divina."
   },
   18: {
     number: "XVIII",
     name: "La Luna",
-    keyEnergy: "Emociones de marea, intuición onírica y conexión psíquica",
+    keyEnergy: "Intuición psíquica, conexión profunda con el subconsciente y dotes artísticos",
     image: "https://i.pinimg.com/736x/a3/95/94/a395941c4bd7f8d689620ca94aef4355.jpg",
-    description: "La sutil y mágica energía de la Luna envuelve tu ser natal. Tienes un lazo indisoluble con tus sueños, la intuición clarividente, el subconsciente profundo y las artes místicas. Tu pasaje de alma consiste en cruzar la niebla de ansiedades o dudas y encontrar tu luz psíquica. Tienes un corazón chamánico capaz de navegar las profundas aguas de la compasión y el arte expresivo."
+    description: "La mágica e intrigante energía de la Luna envuelve tu ser natal con un halo de misterio, sueños proféticos, imaginación fértil y destrezas intuitivas incomparables. Posees un canal chamánico directo con los mundos sutiles e invisibles. Tu pasaje de vida requiere que aprendas a navegar la niebla de miedos imaginarios o ilusiones sentimentales para que brille tu impecable claridad psíquica. Tienes dotes artísticos y terapéuticos increíbles; tu misión estriba en sumergirte en las aguas del sentir más íntimo para traer luz y magia consoladora al plano físico."
   },
   19: {
     number: "XIX",
     name: "El Sol",
-    keyEnergy: "Brillo luminoso, alegría infantil pura y éxito radiante",
+    keyEnergy: "Éxito radiante, alegría pura e iluminación del sendero propio",
     image: "https://i.pinimg.com/736x/b2/8d/62/b28d62635badc6eb66a0fe3871b0cd98.jpg",
-    description: "Bajo la espectacular vibración del Sol, tu vida está llamada a manifestar abundancia, claridad de juicio y un espléndido optimismo que contagia. Tienes la pureza espiritual de los niños y un carisma de luz que disuelve las mentiras y sombras de forma innata. Tu propósito natal es brillar auténticamente, inspirando con alegría a otros a reconectar con su propia luz cósmica."
+    description: "Bajo la gloriosa influencia cósmica del Sol, tu destino está llamado a brillar con un carisma arrollador, éxito material y un optimismo tan puro que irradia vida y calidez a tu paso. Eres portador de una hermosa inocencia y una gran claridad mental que disuelve de inmediato las mentiras, envidias e hipocresías del plano terrenal. Tu sublime misión consiste en vibrar con alegría espontánea, empoderar generosamente a otros para que reclamen su brillo único, y recordar que la abundancia divina es infinita cuando decidimos vivir con un corazón transparente."
   },
   20: {
     number: "XX",
     name: "El Juicio",
-    keyEnergy: "Llamado del destino, despertar de consciencia y redención",
+    keyEnergy: "Llamado del alma, despertar de consciencia superior y absolución total",
     image: "https://i.pinimg.com/736x/c4/d7/6e/c4d76ea65a6fc5789bcbf1941ee2bba9.jpg",
-    description: "El Juicio comanda tu vibración de nacimiento. Eres un alma que experimenta llamados espirituales imponentes y transformaciones súbitas hacia caminos más elevados de consciencia. Estás llamado a trascender el pasado, liberarte de viejas culpas o patrones familiares y asumir con orgullo tu verdadera identidad álmica. Estás aquí para sonar tu propia trompeta despertando a otros."
+    description: "El Juicio rige tu vibración natal de nacimiento. Tu encarnación se caracteriza por despertares espirituales monumentales e imperiosos que te invitan a mudar de piel espiritual constantemente. Estás llamado a sanar heridas ancestrales de tu linaje con sabiduría, perdonar tu pasado por completo y responder al gran llamado de tu vocación álmica superior. Tu propósito cósmico es trascender todos los miedos, sonar tu propia trompeta de revelación interior y ayudar con tu testimonio y luz a la resurrección espiritual de de otros."
   },
   21: {
     number: "XXI",
     name: "El Mundo",
-    keyEnergy: "Realización plena, final exitoso de ciclos e integración celestial",
+    keyEnergy: "Realización plena, integración holística de lecciones y culminación gloriosa",
     image: "https://i.pinimg.com/736x/5f/85/68/5f8568c0788647efad4b03664dcf2e6c.jpg",
-    description: "Tu vibración natal es el Mundo, la máxima realización del viaje cósmico del Tarot. Posees una sintonía bendita que te facilita el entendimiento holístico de la vida e integrar lecciones kármicas con madurez exquisita. Estás aquí para culminar grandes propósitos con éxito formidable, viajar, conectar con múltiples planos cósmicos o culturales, e irradiar tu completitud pacífica."
+    description: "Tu vibración natal es el Mundo, la cima absoluta y consagrada del trayecto del Tarot. Esto denota un espíritu de alta evolución dotado con un entendimiento holístico y elevado del viaje de la existencia. Gozas de una capacidad especial para integrar lecciones kármicas con suma rapidez y cerrar ciclos existenciales de forma exitosa y victoriosa. Tu sagrado propósito estriba en alcanzar tu plenitud personal en todos los ámbitos, expandir tus fronteras conectando con diferentes culturas del mundo, e irradiar tu completitud pacífica eterna."
   },
   22: {
-    number: "XXII", // Also matches 22 reduction representing El Loco/0
+    number: "XXII",
     name: "El Loco",
-    keyEnergy: "Salto de fe, libertad infinita e inicios mágicos",
+    keyEnergy: "Libertad absoluta, salto cuántico de fe y aventura pura del espíritu",
     image: "https://i.pinimg.com/736x/2b/2d/a9/2b2da96a090e8f0003013d3326715fef.jpg",
-    description: "Rige tu alma el espíritu libre y sagrado del Loco (vibración 22/0). Eres el eterno viajero cósmico, no te asustan los comienzos puros, los giros inesperados, ni dar un fabuloso salto de fe hacia lo desconocido sin equipajes que te aten. Tu destino destaca por tu frescura, autenticidad inquebrantable y por recordarle al mundo que el juego de la existencia es para disfrutarlo ligeros."
+    description: "Tu vibración natal está impulsada por el indómito espíritu libre del Loco (representando el 0 o el 22). No te asustan los comienzos desde cero ni dar un fabuloso salto de fe hacia lo desconocido sin equipajes pesados que te aten. Tienes un corazón permanentemente joven y espontáneo guiado por un viento celestial que te cuida en cada travesía. Tu misión consiste en recordarnos a todos que la existencia en este planeta es un juego sagrado y maravilloso que se debe transitar con gozo, ligereza y absoluta autenticidad cósmica."
   }
 };
