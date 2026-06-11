@@ -52,7 +52,7 @@ const row2: CardItem[] = [
     id: "compatibilidad",
     title: "Compatibilidad de pareja",
     description: "Explora la sinastría astrológica profunda y tu conexión espiritual con el ser amado.",
-    image: "https://i.pinimg.com/736x/a8/99/d5/a899d508d9de2031cfe18f1fb98adc24.jpg",
+    image: "https://i.pinimg.com/736x/4b/81/ef/4b81ef8a1953fbe73dcada3d3d120eb1.jpg",
     href: "https://www.paypal.com/ncp/payment/XJBKMKJKB9CVU",
   },
   {
@@ -90,21 +90,21 @@ const row3: CardItem[] = [
     id: "numerologia-gratis",
     title: "Camino de Vida",
     description: "Calcula tu número de Camino de Vida y descubre el misterio y los talentos de tu vibración de nacimiento.",
-    image: "https://i.pinimg.com/736x/87/47/4b/87474be349be1178657662c19e599e1a.jpg",
+    image: "https://i.pinimg.com/1200x/55/e6/33/55e6331a39664a855308cb508c236d95.jpg",
     href: "#",
   },
   {
     id: "compatibilidad-gratis",
     title: "Compatibilidad",
     description: "Calcula la sinastría de pareja, sintonía de corazón y el porcentaje de atracción espiritual con tu persona.",
-    image: "https://i.pinimg.com/736x/7d/51/52/7d51527ecc021669ac06f7b19286dcb7.jpg",
+    image: "https://i.pinimg.com/736x/4b/81/ef/4b81ef8a1953fbe73dcada3d3d120eb1.jpg",
     href: "#",
   },
   {
     id: "saju-gratis",
     title: "Saju: 4 Símbolos",
     description: "Descubre tus Cuatro Pilares del Destino (Año, Mes, Día y Hora) bajo la milenaria sabiduría astrológica coreana.",
-    image: "https://i.pinimg.com/736x/21/cf/30/21cf30d226a31c5048cd3c1fccc359d7.jpg",
+    image: "https://i.pinimg.com/1200x/85/b8/e1/85b8e104ae4bf80b356779561407da69.jpg",
     href: "#",
   }
 ];
