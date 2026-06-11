@@ -189,6 +189,25 @@ const NUMEROLOGIA_DATA: Record<number, { name: string; keyEnergy: string; descri
   }
 };
 
+const parseMonth = (mStr: string): number => {
+  if (!mStr) return 1;
+  const norm = mStr.trim().toLowerCase();
+  if (norm.startsWith("ene")) return 1;
+  if (norm.startsWith("feb")) return 2;
+  if (norm.startsWith("mar")) return 3;
+  if (norm.startsWith("abr")) return 4;
+  if (norm.startsWith("may")) return 5;
+  if (norm.startsWith("jun")) return 6;
+  if (norm.startsWith("jul")) return 7;
+  if (norm.startsWith("ago")) return 8;
+  if (norm.startsWith("sep")) return 9;
+  if (norm.startsWith("oct")) return 10;
+  if (norm.startsWith("nov")) return 11;
+  if (norm.startsWith("dic")) return 12;
+  const parsed = parseInt(norm);
+  return isNaN(parsed) ? 1 : parsed;
+};
+
 export default function App() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -269,9 +288,9 @@ export default function App() {
     }, 250);
 
     setTimeout(() => {
-      const d = parseInt(birthDay);
-      const m = parseInt(birthMonth);
-      const y = parseInt(birthYear);
+      const d = parseInt(birthDay) || 1;
+      const m = parseMonth(birthMonth);
+      const y = parseInt(birthYear) || 1995;
       
       const sum = d + m + y;
       let tempSum = sum;
@@ -297,9 +316,9 @@ export default function App() {
     }, 250);
 
     setTimeout(() => {
-      const d = parseInt(numDay);
-      const m = parseInt(numMonth);
-      const y = parseInt(numYear);
+      const d = parseInt(numDay) || 1;
+      const m = parseMonth(numMonth);
+      const y = parseInt(numYear) || 1995;
       
       // Reduce function
       const reduceNum = (num: number, final: boolean) => {
@@ -333,12 +352,12 @@ export default function App() {
     }, 250);
 
     setTimeout(() => {
-      const d1 = parseInt(compDay1);
-      const m1 = parseInt(compMonth1);
-      const y1 = parseInt(compYear1);
-      const d2 = parseInt(compDay2);
-      const m2 = parseInt(compMonth2);
-      const y2 = parseInt(compYear2);
+      const d1 = parseInt(compDay1) || 1;
+      const m1 = parseMonth(compMonth1);
+      const y1 = parseInt(compYear1) || 1995;
+      const d2 = parseInt(compDay2) || 1;
+      const m2 = parseMonth(compMonth2);
+      const y2 = parseInt(compYear2) || 1995;
 
       // Deterministic but dynamic algorithm
       const combinedVal = (d1 * m1 * y1) + (d2 * m2 * y2) + (compName1.length * 17) + (compName2.length * 23);
@@ -380,9 +399,9 @@ export default function App() {
     }, 250);
 
     setTimeout(() => {
-      const d = parseInt(sajuDay);
-      const m = parseInt(sajuMonth);
-      const y = parseInt(sajuYear);
+      const d = parseInt(sajuDay) || 1;
+      const m = parseMonth(sajuMonth);
+      const y = parseInt(sajuYear) || 1995;
 
       // 1. Year animal & element
       const animalYearNames = ["Rata", "Buey", "Tigre", "Conejo", "Dragón", "Serpiente", "Caballo", "Cabra", "Mono", "Gallo", "Perro", "Pig"];
@@ -425,8 +444,29 @@ export default function App() {
 
       // 4. Hour animal & element (if known)
       let hourPillar = null;
-      if (sajuHour !== "desconocido") {
-        const hourVal = parseInt(sajuHour.split(":")[0]);
+      const isDesconocido = !sajuHour || sajuHour.toLowerCase().includes("desconocido") || sajuHour.toLowerCase().includes("no lo sé") || sajuHour.toLowerCase().includes("no lo se");
+      
+      if (!isDesconocido) {
+        let hourVal = 12; // default fallback
+        
+        // Match standard format formats (e.g. 14:30, 02:17, 2.17 pm, etc)
+        const timeMatch = sajuHour.match(/^(\d{1,2})[.:h ]?(\d{2})?\s*(am|pm|a\.m\.|p\.m\.)?$/i);
+        if (timeMatch) {
+          let h = parseInt(timeMatch[1]);
+          const ampm = timeMatch[3]?.toLowerCase();
+          if (ampm && ampm.includes('p') && h < 12) h += 12;
+          if (ampm && ampm.includes('a') && h === 12) h = 0;
+          hourVal = h;
+        } else {
+          const splitHour = parseInt(sajuHour.split(":")[0]);
+          if (!isNaN(splitHour)) {
+            hourVal = splitHour;
+          }
+        }
+        
+        // Clamp hourVal to valid hour range
+        hourVal = Math.max(0, Math.min(23, hourVal));
+
         // 2-hour brackets
         let hAnimalIdx = 0;
         if (hourVal >= 23 || hourVal < 1) hAnimalIdx = 0; // Rata
@@ -861,58 +901,42 @@ export default function App() {
                     <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-1.5 col-span-1">
                         <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Día</label>
-                        <select 
+                        <input 
+                          type="text"
                           id="arcano-day-select"
                           value={birthDay}
                           onChange={(e) => setBirthDay(e.target.value)}
+                          list="days-list"
+                          placeholder="Día"
                           className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                        >
-                          {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
-                            <option key={d} value={String(d)}>{d}</option>
-                          ))}
-                        </select>
+                        />
                       </div>
-
+ 
                       <div className="space-y-1.5 col-span-1">
                         <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Mes</label>
-                        <select 
+                        <input 
+                          type="text"
                           id="arcano-month-select"
                           value={birthMonth}
                           onChange={(e) => setBirthMonth(e.target.value)}
+                          list="months-list"
+                          placeholder="Mes"
                           className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                        >
-                          {[
-                            { val: "1", label: "Enero" },
-                            { val: "2", label: "Febrero" },
-                            { val: "3", label: "Marzo" },
-                            { val: "4", label: "Abril" },
-                            { val: "5", label: "Mayo" },
-                            { val: "6", label: "Junio" },
-                            { val: "7", label: "Julio" },
-                            { val: "8", label: "Agosto" },
-                            { val: "9", label: "Septiembre" },
-                            { val: "10", label: "Octubre" },
-                            { val: "11", label: "Noviembre" },
-                            { val: "12", label: "Diciembre" },
-                          ].map(m => (
-                            <option key={m.val} value={m.val}>{m.label}</option>
-                          ))}
-                        </select>
+                        />
                       </div>
                     </div>
-
+ 
                     <div className="space-y-1.5">
                       <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Año</label>
-                      <select 
+                      <input 
+                        type="text"
                         id="arcano-year-select"
                         value={birthYear}
                         onChange={(e) => setBirthYear(e.target.value)}
+                        list="years-list"
+                        placeholder="Año"
                         className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                      >
-                        {Array.from({ length: 90 }, (_, i) => 2026 - i).map(y => (
-                          <option key={y} value={String(y)}>{y}</option>
-                        ))}
-                      </select>
+                      />
                     </div>
                   </div>
 
@@ -1032,58 +1056,42 @@ export default function App() {
                     <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-1.5 col-span-1">
                         <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Día</label>
-                        <select 
+                        <input 
+                          type="text"
                           id="num-day-select"
                           value={numDay}
                           onChange={(e) => setNumDay(e.target.value)}
+                          list="days-list"
+                          placeholder="Día"
                           className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                        >
-                          {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
-                            <option key={d} value={String(d)}>{d}</option>
-                          ))}
-                        </select>
+                        />
                       </div>
-
+ 
                       <div className="space-y-1.5 col-span-1">
                         <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Mes</label>
-                        <select 
+                        <input 
+                          type="text"
                           id="num-month-select"
                           value={numMonth}
                           onChange={(e) => setNumMonth(e.target.value)}
+                          list="months-list"
+                          placeholder="Mes"
                           className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                        >
-                          {[
-                            { val: "1", label: "Enero" },
-                            { val: "2", label: "Febrero" },
-                            { val: "3", label: "Marzo" },
-                            { val: "4", label: "Abril" },
-                            { val: "5", label: "Mayo" },
-                            { val: "6", label: "Junio" },
-                            { val: "7", label: "Julio" },
-                            { val: "8", label: "Agosto" },
-                            { val: "9", label: "Septiembre" },
-                            { val: "10", label: "Octubre" },
-                            { val: "11", label: "Noviembre" },
-                            { val: "12", label: "Diciembre" },
-                          ].map(m => (
-                            <option key={m.val} value={m.val}>{m.label}</option>
-                          ))}
-                        </select>
+                        />
                       </div>
                     </div>
-
+ 
                     <div className="space-y-1.5">
                       <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Año</label>
-                      <select 
+                      <input 
+                        type="text"
                         id="num-year-select"
                         value={numYear}
                         onChange={(e) => setNumYear(e.target.value)}
+                        list="years-list"
+                        placeholder="Año"
                         className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                      >
-                        {Array.from({ length: 90 }, (_, i) => 2026 - i).map(y => (
-                          <option key={y} value={String(y)}>{y}</option>
-                        ))}
-                      </select>
+                      />
                     </div>
                   </div>
 
@@ -1220,39 +1228,36 @@ export default function App() {
                     <div className="grid grid-cols-3 gap-2">
                       <div>
                         <label className="text-[9px] uppercase text-[#787774] block mb-1">Día</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={compDay1} 
                           onChange={(e) => setCompDay1(e.target.value)}
-                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none"
-                        >
-                          {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
-                            <option key={d} value={String(d)}>{d}</option>
-                          ))}
-                        </select>
+                          list="days-list"
+                          placeholder="Día"
+                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none focus:border-[#1a1a1a]/30 transition-colors"
+                        />
                       </div>
                       <div>
                         <label className="text-[9px] uppercase text-[#787774] block mb-1">Mes</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={compMonth1} 
                           onChange={(e) => setCompMonth1(e.target.value)}
-                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none"
-                        >
-                          {Array.from({ length: 12 }, (_, i) => i + 1).map(m => (
-                            <option key={m} value={String(m)}>{m}</option>
-                          ))}
-                        </select>
+                          list="months-list"
+                          placeholder="Mes"
+                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none focus:border-[#1a1a1a]/30 transition-colors"
+                        />
                       </div>
                       <div>
                         <label className="text-[9px] uppercase text-[#787774] block mb-1">Año</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={compYear1} 
                           onChange={(e) => setCompYear1(e.target.value)}
-                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none"
-                        >
-                          {Array.from({ length: 90 }, (_, i) => 2026 - i).map(y => (
-                            <option key={y} value={String(y)}>{y}</option>
-                          ))}
-                        </select>
+                          list="years-list"
+                          placeholder="Año"
+                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none focus:border-[#1a1a1a]/30 transition-colors"
+                        />
                       </div>
                     </div>
                   </div>
@@ -1278,39 +1283,36 @@ export default function App() {
                     <div className="grid grid-cols-3 gap-2">
                       <div>
                         <label className="text-[9px] uppercase text-[#787774] block mb-1">Día</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={compDay2} 
                           onChange={(e) => setCompDay2(e.target.value)}
-                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none"
-                        >
-                          {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
-                            <option key={d} value={String(d)}>{d}</option>
-                          ))}
-                        </select>
+                          list="days-list"
+                          placeholder="Día"
+                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none focus:border-[#1a1a1a]/30 transition-colors"
+                        />
                       </div>
                       <div>
                         <label className="text-[9px] uppercase text-[#787774] block mb-1">Mes</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={compMonth2} 
                           onChange={(e) => setCompMonth2(e.target.value)}
-                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none"
-                        >
-                          {Array.from({ length: 12 }, (_, i) => i + 1).map(m => (
-                            <option key={m} value={String(m)}>{m}</option>
-                          ))}
-                        </select>
+                          list="months-list"
+                          placeholder="Mes"
+                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none focus:border-[#1a1a1a]/30 transition-colors"
+                        />
                       </div>
                       <div>
                         <label className="text-[9px] uppercase text-[#787774] block mb-1">Año</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={compYear2} 
                           onChange={(e) => setCompYear2(e.target.value)}
-                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none"
-                        >
-                          {Array.from({ length: 90 }, (_, i) => 2026 - i).map(y => (
-                            <option key={y} value={String(y)}>{y}</option>
-                          ))}
-                        </select>
+                          list="years-list"
+                          placeholder="Año"
+                          className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-lg p-1.5 text-xs outline-none focus:border-[#1a1a1a]/30 transition-colors"
+                        />
                       </div>
                     </div>
                   </div>
@@ -1474,73 +1476,52 @@ export default function App() {
                     <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-1.5 col-span-1">
                         <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Día</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={sajuDay}
                           onChange={(e) => setSajuDay(e.target.value)}
+                          list="days-list"
+                          placeholder="Día"
                           className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                        >
-                          {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
-                            <option key={d} value={String(d)}>{d}</option>
-                          ))}
-                        </select>
+                        />
                       </div>
 
                       <div className="space-y-1.5 col-span-1">
                         <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Mes</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={sajuMonth}
                           onChange={(e) => setSajuMonth(e.target.value)}
+                          list="months-list"
+                          placeholder="Mes"
                           className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                        >
-                          {[
-                            { val: "1", label: "Enero" },
-                            { val: "2", label: "Febrero" },
-                            { val: "3", label: "Marzo" },
-                            { val: "4", label: "Abril" },
-                            { val: "5", label: "Mayo" },
-                            { val: "6", label: "Junio" },
-                            { val: "7", label: "Julio" },
-                            { val: "8", label: "Agosto" },
-                            { val: "9", label: "Septiembre" },
-                            { val: "10", label: "Octubre" },
-                            { val: "11", label: "Noviembre" },
-                            { val: "12", label: "Diciembre" },
-                          ].map(m => (
-                            <option key={m.val} value={m.val}>{m.label}</option>
-                          ))}
-                        </select>
+                        />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-1.5 col-span-1">
                         <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Año</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={sajuYear}
                           onChange={(e) => setSajuYear(e.target.value)}
+                          list="years-list"
+                          placeholder="Año"
                           className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                        >
-                          {Array.from({ length: 90 }, (_, i) => 2026 - i).map(y => (
-                            <option key={y} value={String(y)}>{y}</option>
-                          ))}
-                        </select>
+                        />
                       </div>
 
                       <div className="space-y-1.5 col-span-1">
                         <label className="text-[11px] uppercase tracking-wider text-[#787774] font-semibold font-sans">Hora de nacimiento</label>
-                        <select 
+                        <input 
+                          type="text"
                           value={sajuHour}
                           onChange={(e) => setSajuHour(e.target.value)}
+                          list="hours-list"
+                          placeholder="Ej: 2:17"
                           className="w-full bg-[#fcfcfc] border border-[#1a1a1a]/10 rounded-xl px-3 py-2 text-[14px] outline-none focus:border-[#1a1a1a]/30 transition-colors"
-                        >
-                          <option value="desconocido">No lo sé / Desconocido</option>
-                          {Array.from({ length: 24 }, (_, i) => {
-                            const hr = String(i).padStart(2, "0");
-                            return (
-                              <option key={hr} value={`${hr}:00`}>{hr}:00</option>
-                            );
-                          })}
-                        </select>
+                        />
                       </div>
                     </div>
                   </div>
@@ -1772,6 +1753,38 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* GLOBAL DATALISTS FOR DYNAMIC WEB TYPE-UIs */}
+      <datalist id="days-list">
+        {Array.from({ length: 31 }, (_, i) => String(i + 1)).map(d => (
+          <option key={d} value={d} />
+        ))}
+      </datalist>
+
+      <datalist id="months-list">
+        {[
+          "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+          "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ].map(m => (
+          <option key={m} value={m} />
+        ))}
+        {Array.from({ length: 12 }, (_, i) => String(i + 1)).map(m => (
+          <option key={m} value={m} />
+        ))}
+      </datalist>
+
+      <datalist id="years-list">
+        {Array.from({ length: 100 }, (_, i) => String(2026 - i)).map(y => (
+          <option key={y} value={y} />
+        ))}
+      </datalist>
+
+      <datalist id="hours-list">
+        <option value="No lo sé / Desconocido" />
+        {Array.from({ length: 24 }, (_, i) => String(i).padStart(2, "0")).map(h => (
+          <option key={h} value={`${h}:00`} />
+        ))}
+      </datalist>
 
     </div>
   );
