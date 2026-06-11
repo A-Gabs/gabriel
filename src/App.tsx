@@ -22,21 +22,21 @@ const row1: CardItem[] = [
     title: "Tarot",
     description: "Agenda tu lectura personalizada de tarot predictivo y evolutivo.",
     image: "https://i.pinimg.com/736x/3b/76/92/3b7692dfcd49358e911b3bfcf4300fdd.jpg",
-    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20agendar%20una%20lectura%20de%20Tarot%20🔮",
+    href: "https://www.paypal.com/ncp/payment/V5FUFJX8KAKUW",
   },
   {
     id: "vocacion-pedido",
     title: "Vocación profesional",
     description: "Descubre tu camino de éxito y propósito de vida alineado a tus astros.",
     image: "https://i.pinimg.com/736x/50/b9/bc/50b9bc9574ae6ff7cdaa7ec35e65c297.jpg",
-    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Vocaci%C3%B3n%20profesional%20💼",
+    href: "https://www.paypal.com/ncp/payment/RCQEPWZZHXGLS",
   },
   {
     id: "dones-pedido",
     title: "Dones Espirituales",
     description: "Conoce tus talentos mágicos innatos y canaliza tu poder espiritual.",
     image: "https://i.pinimg.com/736x/15/68/d7/1568d714f086b3d4e5b15a632b66de64.jpg",
-    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Dones%20Espirituales%20🔮",
+    href: "https://www.paypal.com/ncp/payment/XT7LDZ3H4PAM8",
   }
 ];
 
@@ -46,28 +46,28 @@ const row2: CardItem[] = [
     title: "Autoconocimiento",
     description: "Análisis milenario de destino y tus ciclos energéticos de vida.",
     image: "https://i.pinimg.com/736x/fe/6b/98/fe6b9850a9b089b4cd477cd2e7b3b127.jpg",
-    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Autoconocimiento%20✨",
+    href: "https://www.paypal.com/ncp/payment/QHRG2XQ7KLW38",
   },
   {
     id: "vocacion-auto",
     title: "Vocación profesional",
     description: "Encuentra tu verdadera vocación y brilla profesionalmente con tu energía astral.",
     image: "https://i.pinimg.com/736x/50/b9/bc/50b9bc9574ae6ff7cdaa7ec35e65c297.jpg",
-    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Vocaci%C3%B3n%20profesional%20💼",
+    href: "https://www.paypal.com/ncp/payment/RCQEPWZZHXGLS",
   },
   {
     id: "compatibilidad",
     title: "Compatibilidad de pareja",
     description: "Explora la sinastría astrológica profunda y tu conexión espiritual con el ser amado.",
     image: "https://i.pinimg.com/736x/a8/99/d5/a899d508d9de2031cfe18f1fb98adc24.jpg",
-    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20la%20lectura%20de%20Compatibilidad%20de%20pareja%20❤️",
+    href: "https://www.paypal.com/ncp/payment/XJBKMKJKB9CVU",
   },
   {
     id: "manifestacion",
     title: "Manifestación",
     description: "Alinea tu vibración de abundancia y aprende a cocrear tu realidad deseada.",
     image: "https://i.pinimg.com/736x/6e/5e/db/6e5edbfc2b41866286a7ef30d8b2812b.jpg",
-    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20la%20Manifestaci%C3%B3n%20✨",
+    href: "https://www.paypal.com/ncp/payment/Q6MZL572GEFSG",
   }
 ];
 
@@ -83,7 +83,7 @@ const row3: CardItem[] = [
     id: "arcano-gratis",
     title: "Arcano de nacimiento",
     description: "Descubre tu arcano de nacimiento de forma interactiva y conoce la energía que rige tu destino, virtudes y misión de alma.",
-    image: "https://i.pinimg.com/736x/ab/db/18/abdb1839e3650222372f8832a8e8db6b.jpg",
+    image: "https://i.pinimg.com/1200x/9f/9c/57/9f9c57466a354a7a583c4e8c024d9cec.jpg",
     href: "#",
   }
 ];
@@ -94,7 +94,7 @@ const rowTarot: CardItem[] = [
     title: "Tarot",
     description: "Agenda tu lectura personalizada de tarot predictivo y evolutivo para iluminar tu camino.",
     image: "https://i.pinimg.com/736x/3b/76/92/3b7692dfcd49358e911b3bfcf4300fdd.jpg",
-    href: "https://wa.me/51960260123?text=Hola%20tarot.anna,%20me%20interesa%20agendar%20una%20lectura%20de%20Tarot%20🔮",
+    href: "https://www.paypal.com/ncp/payment/V5FUFJX8KAKUW",
   },
   {
     id: "orientaciones",
@@ -120,18 +120,25 @@ export default function App() {
   const [loadingText, setLoadingText] = useState<string>("Conectando con tu vibración...");
 
   // Calculations
+  const getArcanoEmoji = (num: number): string => {
+    const emojis: Record<number, string> = {
+      1: "🪄", 2: "🔮", 3: "👑", 4: "🏰", 5: "📜",
+      6: "❤️", 7: "🏎️", 8: "⚖️", 9: "🕯️", 10: "🎡",
+      11: "🦁", 12: "🧭", 13: "💀", 14: "🕊️", 15: "😈",
+      16: "⚡", 17: "⭐", 18: "🌙", 19: "☀️", 20: "🔔",
+      21: "🌍", 22: "🃏"
+    };
+    return emojis[num] || "✨";
+  };
+
   const calculateArcano = () => {
     setIsCalculating(true);
     setCalculationResult(null);
     setLoadingText("Conectando con tu vibración...");
     
     setTimeout(() => {
-      setLoadingText("Alineando canales cósmicos...");
-    }, 600);
-    
-    setTimeout(() => {
-      setLoadingText("Calculando vibración numérica natal...");
-    }, 1200);
+      setLoadingText("Calculando...");
+    }, 250);
 
     setTimeout(() => {
       const d = parseInt(birthDay);
@@ -149,7 +156,7 @@ export default function App() {
       
       setCalculationResult(finalNum);
       setIsCalculating(false);
-    }, 1800);
+    }, 600);
   };
 
   const handleOpenCalc = (e: React.MouseEvent) => {
@@ -586,7 +593,7 @@ export default function App() {
                   {/* CUSTOM ACTIONS */}
                   <div className="space-y-3">
                     <a 
-                      href={`https://wa.me/51960260123?text=Hola%20tarot.anna,%20mi%20arcano%20de%20nacimiento%20es%20${encodeURIComponent(ARCANOS_DATA[calculationResult].name.toUpperCase())}%20(${ARCANOS_DATA[calculationResult].number}).%20Me%20gustaría%20una%20lectura%20profunda%20✨`}
+                      href={`https://wa.me/51960260123?text=${encodeURIComponent(`¡Hola anna! Mi Arcano es ${ARCANOS_DATA[calculationResult].name} ${getArcanoEmoji(calculationResult)} Agendar lectura general ✨`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-[14.5px] font-semibold text-center flex items-center justify-center gap-2.5 transition-colors shadow-sm cursor-pointer"
@@ -594,7 +601,7 @@ export default function App() {
                       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0">
                         <path d="M12.004 2c-5.518 0-9.996 4.477-9.996 9.996 0 1.764.459 3.42 1.258 4.872L2 22l5.318-1.396A9.957 9.957 0 0 0 12.004 22c5.517 0 9.996-4.477 9.996-9.996v-.004C22.004 6.479 17.525 2 12.004 2zm5.726 14.129c-.244.693-1.42 1.272-1.942 1.353-.459.072-.942.135-2.923-.684-2.535-1.045-4.148-3.636-4.275-3.805-.126-.171-1.03-1.373-1.03-2.62s.644-1.854.873-2.111c.229-.257.5-.324.667-.324.167 0 .333.004.477.01.144.004.337-.054.527.404.194.472.667 1.624.726 1.742.06.117.099.252.02.409-.079.158-.12.257-.239.396-.12.139-.252.311-.359.419-.12.117-.245.244-.105.487.139.243.621 1.022 1.332 1.656.914.815 1.683 1.066 1.923 1.185.24.117.378.099.518-.063.139-.162.603-.698.766-.937.162-.239.324-.198.545-.117.22.079 1.405.662 1.644.78.24.117.396.176.455.275.058.099.058.572-.185 1.265z"/>
                       </svg>
-                      <span>Quiero mi lectura profunda de Arcano ✨</span>
+                      <span>Agendar lectura general ✨</span>
                     </a>
                     
                     <button 
