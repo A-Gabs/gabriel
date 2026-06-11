@@ -131,62 +131,62 @@ const NUMEROLOGIA_DATA: Record<number, { name: string; keyEnergy: string; descri
   1: {
     name: "El Líder Creador (Número 1)",
     keyEnergy: "Independencia, ambición, originalidad y fuerza de voluntad iniciadora",
-    description: "Nacer bajo el número de vida 1 significa que tienes alma de pionero y director. Eres independiente, innovador y posees una fuerza de voluntad increíble para manifestar tus ideas. Tu gran lección de vida es confiar plenamente en tus talentos únicos, superar la duda y guiar con el ejemplo desde la total integridad cósmica."
+    description: "Tienes madera de líder y te encanta tomar la iniciativa. Eres independiente, valoras tu libertad y tienes mucha facilidad para arrancar proyectos desde cero. Tu gran lección práctica en la vida es aprender a confiar en tu propio criterio sin buscar tanto la aprobación ajena, delegar tareas para no sobrecargarte, y evitar impacientarte cuando los demás no van a tu mismo ritmo."
   },
   2: {
     name: "El Pacificador Empático (Número 2)",
     keyEnergy: "Diplomacia, cooperación, sensibilidad de alma y armonía relacional",
-    description: "Tu vibración es de paz, unión y equilibrio. Tienes una enorme sensibilidad intuitiva que te permite sentir las emociones ajenas y ayudar a sanarlas. Tu propósito terrestre es tender puentes de amor y comprensión, logrando metas colectivas mediante la diplomacia y cooperación amorosa."
+    description: "Eres el cable a tierra de tu grupo gracias a tu empatía y tu capacidad de mantener la calma. Sabes escuchar de forma excelente y tienes un radar natural para mediar en los conflictos de manera muy justa. Tu reto práctico es aprender a poner límites claros y decir 'no' sin sentirte culpable, para que no termines descuidando tus propias prioridades."
   },
   3: {
     name: "El Expresivo Creativo (Número 3)",
     keyEnergy: "Optimismo desbordante, comunicación radiante y arte inspirador",
-    description: "Eres portador de una hermosa energía expresiva de júbilo y fantasía. Tu mente bulle con creatividad de forma innata. Expresas tu verdad a través del arte, la escritura o la palabra inspiradora. Tu misión de alma es sanar la tristeza del mundo derramando alegría espontánea e iluminando con tu fe."
+    description: "Tu alegría, sentido del humor y facilidad para comunicar son súper contagiosos. Tienes una mente creativa que busca expresarse constantemente (sea hablando, escribiendo o inventando cosas nuevas). Tu principal desafío práctico en el día a día es ganarle a la procrastinación, enfocar tu atención en una sola tarea a la vez y no dispersar tus talentos."
   },
   4: {
     name: "El Constructor Metódico (Número 4)",
     keyEnergy: "Estabilidad material, disciplina sagrada, orden y bases firmes",
-    description: "El número 4 te colma de una increíble resiliencia, disciplina y honestidad intelectual. Tu labor álmica consiste en dar estructura firme a tus visiones en la tierra, estableciendo un hogar seguro y bases profesionales duraderas con persistencia y paciencia inamovible."
+    description: "La constancia, la organización y la confiabilidad son tus mayores virtudes. Cuando te comprometes a hacer algo, la gente sabe que puede darlo por hecho. Te gusta tener bases firmes en tus proyectos, finanzas y relaciones. Tu reto pragmático es flexibilizar la mente ante los cambios y entender que los imprevistos también traen oportunidades."
   },
   5: {
     name: "El Explorador Libre (Número 5)",
     keyEnergy: "Aventura intelectual, cambio constante, libertad y adaptabilidad",
-    description: "Viniste a experimentar la libertad absoluta del viento. El cambio continuo es tu combustible natural. Gozas de gran carisma y versatilidad para asimilar nuevos conocimientos e idiomas. Tu destino es viajar, enseñar la expansión de consciencia y liberar las cadenas de rigidez mental."
+    description: "Te aburre la rutina y necesitas constante movimiento, aprender cosas nuevas o viajar para sentirte plenamente vivo/a. Tienes una capacidad de adaptación envidiable. Tu desafío práctico está en tolerar las fases aburridas o repetitivas de tus proyectos, ser más constante y no salir huyendo cuando sientas la menor sensación de atadura."
   },
   6: {
     name: "El Protector Armonioso (Número 6)",
     keyEnergy: "Amor incondicional, sanación del hogar y servicio compasivo",
-    description: "Tu corazón late con la frecuencia de la maternidad espiritual, la compasión y protección. Eres el refugio para tus seres amados y posees profundos dotes para el arte curativo. Tu hermoso propósito es sanar relaciones quebrantadas y cuidar de la comunidad desde un amor puro."
+    description: "El cuidado, la protección y el bienestar de los tuyos son tu prioridad absoluta. Creas ambientes acogedores allá donde vas y la gente acude a ti para sentirse segura. Tu gran aprendizaje práctico es soltar el rol de salvador/a: no cargues con problemas ajenos que no te corresponden y dedícate la misma atención que das a los demás."
   },
   7: {
     name: "El Buscador Sabio (Número 7)",
     keyEnergy: "Misticismo sagrado, introspección profunda, análisis y fe superior",
-    description: "Nacer con el número 7 te envuelve en un halo de sabiduría intelectual y amor por el misterio y lo metafísico. Buscas constantemente el porqué de la existencia. Tu destino es el estudio místico profundo, la contemplación y la iluminación, convirtiéndote en consejero intuitivo de la psique humana."
+    description: "Tienes una mente sumamente analítica, observadora y curiosa. Te encanta el trasfondo de las cosas y tu intuición para detectar intenciones o mentiras es infalible. Tu reto diario es no aislarte demasiado ni sobreanalizar cada conversación o situación; date permiso de sentir e interactuar de forma sencilla sin sobrepensarlo todo."
   },
   8: {
     name: "El Gestor del Poder (Número 8)",
     keyEnergy: "Visión material de abundancia, autoridad justa y maestría kármica",
-    description: "Eres portador del gran poder de manifestar la riqueza material bajo principios éticos superiores. Tienes gran resistencia, olfato organizativo y fuerza ejecutiva. Tu lección terrenal es sincronizar el dinero con la luz espiritual, demostrando que la abundancia divina es infinita."
+    description: "Tienes una ambición muy sana, gran sentido práctico y un instinto especial para los negocios, las finanzas o el liderazgo de equipos. Trabajas duro y logras el éxito de forma decisiva. Tu reto diario consiste en equilibrar el trabajo con tu bienestar personal y entender que el éxito real no es solo acumular tareas cumplidas."
   },
   9: {
     name: "El Humanitario Evolutivo (Número 9)",
     keyEnergy: "Altruismo universal, perdón sagrado, transmutación y cierre de ciclo",
-    description: "Tu alma guarda la sabiduría condensada de los números previos. Tu vibración es de compasión global, perdón absoluto y desapego generoso. Brindas luz a extraños, viajas superando fronteras materiales y cierras con amor y éxito los ciclos de transito espiritual en esta vida."
+    description: "Tienes un corazón súper generoso y empático. Inspiras confianza inmediata y encuentras satisfacción ayudando a otros. Sabes cerrar etapas con mucha sabiduría. Tu lección práctica es aprender a soltar capítulos o relaciones del pasado sin culpa ni nostalgia, y recordar que para ayudar a tu entorno primero debes estar bien tú."
   },
   11: {
     name: "El Mensajero Cósmico (Número Maestro 11)",
     keyEnergy: "Intuición suprasensorial, iluminación espiritual e inspiración estelar",
-    description: "Como número maestro, actúas de puente radiante entre el cielo y la tierra. Posees una intuición psíquica electrizante que a veces te desborda. Tu propósito supremo es servir de faro divino, transmitiendo mensajes intuitivos reveladores para guiar a miles hacia el amanecer de su consciencia."
+    description: "Posees una sensibilidad y una empatía excepcionales que te permiten conectar profundamente con la gente. Inspiras a tu entorno con tus palabras y tu visión práctica de la vida. Tu mayor reto es regular tu energía para no abrumarte con el estrés exterior; dedica tiempo de calidad a desconectar y recargar tu propia pila mental."
   },
   22: {
     name: "El Arquitecto Universal (Número Maestro 22)",
     keyEnergy: "Capacidad monumental de manifestar utopías espirituales en el plano real",
-    description: "Gozas del poder único del Maestro Constructor. Tienes una visión de alcances colosales que combinas con la disciplina constructiva material del número 4. Eres capaz de materializar sueños humanitarios, sistemas sostenibles o imperios benéficos para elevar la vibración de la humanidad entera."
+    description: "Tienes una capacidad brutal de planeación estratégica y de transformar grandes ideas en realidades concretas. Sabes organizar recursos para lograr metas grupales que beneficien a muchos. Tu lección es no asustarte ante tus propias expectativas elevadas y dar el primer paso práctico sin buscar la perfección inmediata."
   },
   33: {
     name: "El Guía de Almas (Número Maestro 33)",
     keyEnergy: "Amor divino absoluto, compasión crística y vocación terapéutica",
-    description: "Ésta es la rarísima vibración del Gran Sacerdote o Guía que se entrega con amor devoto absoluto por la paz de sus semejantes. Tu vibración tiene poder sanador instantáneo. Tu camino es inspirar el auto-perdón y sanar el corazón herido de la humanidad mediante la compasión infinita."
+    description: "Destacas por tu inmensa generosidad y vocación de guía. Tu sola presencia transmite alivio y tienes una gran empatía que reconforta corazones. Tu tarea pragmática es cuidar tu salud mental y física: tu intención de ayudar es infinita, pero tus recursos de energía diarios son limitados. Priorízate también a ti."
   }
 };
 
@@ -244,9 +244,20 @@ export default function App() {
       const file = new File([blob], `${elementId}.png`, { type: "image/png" });
       const shareUrl = "https://anatarot.xyz/";
       
+      let customText = `¡Calculé mi resultado de ${title} en tarot.anna! Es súper acertado, tienes que probarlo gratis aquí: ${shareUrl}`;
+      if (title === "Arcano de Nacimiento") {
+        customText = `¡No sabía esto sobre mi personalidad! Me calculé mi Arcano de Nacimiento y me describió tal cual. Siento que te va a encantar, calcula el tuyo gratis acá: ${shareUrl}`;
+      } else if (title === "Camino de Vida") {
+        customText = `¡Acabo de descubrir mi número de Camino de Vida y es idéntico a mí! Define súper bien lo que me pasa en el día a día. Mira tu número natal gratis aquí: ${shareUrl}`;
+      } else if (title === "Compatibilidad de Pareja") {
+        customText = `¡Hice la prueba de compatibilidad de pareja y la verdad describe nuestra dinámica al revés y al derecho! Haz la tuya súper fácil y gratis aquí: ${shareUrl}`;
+      } else if (title === "Saju") {
+        customText = `¡Encontré mi Elemento Maestro usando astrología coreana Saju! Te re identificas con lo que te sale. Pruébalo gratis aquí: ${shareUrl}`;
+      }
+
       // Proactively copy the link to the clipboard first, so it is always ready to paste
       try {
-        await navigator.clipboard.writeText(`¡Descubre tu ${title} gratis en tarot.anna! ✨ ${shareUrl}`);
+        await navigator.clipboard.writeText(customText);
       } catch (clipErr) {
         console.warn("Clipboard auto-copy failed:", clipErr);
       }
@@ -257,7 +268,7 @@ export default function App() {
           await navigator.share({
             files: [file],
             title: `tarot.anna — ${title}`,
-            text: `¡Mira mi resultado de ${title} en tarot.anna! Descubre el tuyo aquí: ${shareUrl}`,
+            text: customText,
             url: shareUrl
           });
           setSharingState('success');
@@ -448,17 +459,17 @@ export default function App() {
       let desc = "";
 
       if (score >= 90) {
-        archetype = "Almas Gemelas Cósmicas";
-        desc = `¡Vuestra conexión proviene de esferas estelares sublimes! ${compName1 || "Persona 1"} y ${compName2 || "Persona 2"} comparten un lazo kármico dorado que facilita una comunicación fluida y un amor maduro. Están destinados a inspirarse mutuamente para derribar limitaciones pasadas y materializar grandes sueños de vida en perfecta unión espiritual.`;
+        archetype = "Conexión Natural e Imbatible";
+        desc = `¡La sintonía entre vosotros es brutal! ${compName1 || "Persona 1"} y ${compName2 || "Persona 2"} se entienden casi sin hablar. Se nota que hay una base sólida donde la comunicación fluye con total honestidad y cero dramas. Funcionan genial como equipo: se apoyan en los momentos difíciles y potencian los proyectos del otro. El mayor reto práctico será mantener la magia viva en el día a día para no volverse solo mejores amigos, pero el potencial de construir algo hermoso y duradero es altísimo.`;
       } else if (score >= 80) {
-        archetype = "Alianza de Fuego y Aire";
-        desc = `Una relación rebosante de magnetismo creativo y pasión incombustible. Ambos encienden la curiosidad intelectual del otro. La atracción magnética inicial da paso a una hermosa amistad cósmica que los incentiva a explorar el mundo con coraje y vivir en total libertad pero profundamente unidos y compenetrados.`;
+        archetype = "Fuego Creativo y Acción";
+        desc = `Vuestra relación derrocha química, risas y dinamismo. Con ${compName1 || "Persona 1"} y ${compName2 || "Persona 2"} nunca hay espacio para el aburrimiento. Tienen una complicidad muy rápida y divertida que los mantiene siempre motivados. Se inspiran para hacer planes, viajar y retar la rutina. Para que sea estable a largo plazo, cuiden de organizar espacios donde puedan desacelerar juntos, hablar de lo que sienten con calma y conectar sin prisas ni distracciones externas.`;
       } else if (score >= 72) {
-        archetype = "Danza del Agua y la Tierra";
-        desc = `Vuestra relación ofrece un refugio de paz, seguridad y afecto incondicional incomparable. Es tierra firme que nutre al agua fresca, y agua que da vida a las semillas. Juntos pueden construir un hogar cálido y una sociedad material impecable, sanando antiguas heridas mediante la empatía y la presencia constante.`;
+        archetype = "La Calma y el Refugio Seguro";
+        desc = `Esta unión es sinónimo de estabilidad, confort y paz mental. Entre ${compName1 || "Persona 1"} y ${compName2 || "Persona 2"} se respira un ambiente seguro donde cada uno puede ser él mismo sin miedo a ser juzgado. Saben escucharse y se cuidan con ternura cuando el exterior es caótico. Es una relación excelente para consolidar planes a futuro, finanzas compartidas y convivir con total fluidez. Solo tengan cuidado con la comodidad; rétense mutuamente de vez en cuando.`;
       } else {
-        archetype = "Espejos de Aprendizaje Kármico";
-        desc = `Una unión de altísimo crecimiento espiritual y redefinición personal. Actúan como espejos reveladores de la sombra del otro con respeto y honestidad. Aunque se presenten debates o diferencias, la sintonía final les enseña paciencia sagrada, perdón profundo y un entendimiento inigualable del amor libre e incondicional.`;
+        archetype = "Crecimiento y Espejo Mutuo";
+        desc = `Una relación intensa que los desafía constantemente a crecer y madurar. ${compName1 || "Persona 1"} y ${compName2 || "Persona 2"} funcionan como espejos perfectos de lo que necesitan trabajar internamente. Aunque a veces se presenten debates o choques debido a sus diferentes perspectivas, estos retos son ideales para sanar inseguridades del pasado. El consejo práctico: hablen las cosas en el momento, eviten suponer y cultiven la empatía.`;
       }
 
       setCompResult({ score, love, comm, destiny, archetype, desc });
@@ -561,7 +572,7 @@ export default function App() {
           emoji: hourEmoji,
           animal: hourAnimal,
           code: hourCode,
-          desc: "Representa tus deseos ocultos, tus proyectos creativos íntimos, tus hijos y el legado pacífico para tus últimos años."
+          desc: "Representa tus deseos ocultos, tus planes a futuro y tu lado más privado que no todos conocen."
         };
       }
 
@@ -569,20 +580,20 @@ export default function App() {
       let archetype = "";
       let advice = "";
       if (dayElem === "Madera") {
-        archetype = "Esencia Mok (Bosque Verde)";
-        advice = "Tu esencia es de expansión, generosidad y continuo renacimiento. Tienes un alma idealista llamada a inspirar liderazgo, pero recuerda echar raíces firmes en el presente y aprender a ser flexible ante los vientos de cambio.";
+        archetype = "Esencia Madera (Crecimiento y Acción)";
+        advice = "Tu energía se enfoca en avanzar, emprender y renovarte constantemente. Te encanta ver crecer tus proyectos y tienes una iniciativa natural para liderar de manera fresca. Tu reto diario es ser más flexible cuando las cosas cambian de imprevisto y aprender a terminar lo que empiezas en lugar de dispersarte en mil planes nuevos.";
       } else if (dayElem === "Fuego") {
-        archetype = "Esencia Hwa (Lobo Solar)";
-        advice = "Tu esencia brilla con un carisma ardiente, pasión desbordante y fuerte magnetismo de atracción. Naciste para brillar y ser centro de calidez en vidas oscuras, pero cuida tu impulsividad para evitar consumir tu propia energía.";
+        archetype = "Esencia Fuego (Pasión y Carisma)";
+        advice = "Eres pura energía, carisma y emoción. Te apasionas rápido con lo que te gusta y contagias tu entusiasmo a todos a tu alrededor de forma muy de tú a tú. Tu lección práctica es cuidar tu impulsividad: mantén la cabeza fría antes de tomar decisiones importantes para ahorrar tiempo y energía.";
       } else if (dayElem === "Tierra") {
-        archetype = "Esencia To (Montaña Sagrada)";
-        advice = "Tu esencia es firme, segura, confiable y rebosa un enorme sentido de lealtad cósmica. Eres la piedra angular de tu entorno, acumulando gran sabiduría vital, pero aprende a dejar ir lo inmóvil para fluir libre de apegos.";
+        archetype = "Esencia Tierra (Estabilidad y Confianza)";
+        advice = "Eres la persona de confianza a la que todos acuden cuando necesitan dirección. Eres muy realista, leal y te gusta construir bases seguras en tu vida personal y laboral. Tu mayor desafío es no cerrarte al cambio o estancarte en la rutina: aprende a soltar el control y fluir con lo que venga.";
       } else if (dayElem === "Metal") {
-        archetype = "Esencia Geum (Espada Blanca)";
-        advice = "Tu esencia es de alta precisión, autodisciplina impecable, sentido de justicia supremo y elegancia pura. Posees una fuerza mental imparable para lograr metas, pero modera tu nivel de auto-exigencia y ábrete a la tierna compasión.";
+        archetype = "Esencia Metal (Determinación y Enfoque)";
+        advice = "Tienes una mente súper nítida, súper organizada y decidida. Te encanta el trabajo bien hecho, valoras la honestidad y tienes una facilidad innata para resolver problemas con lógica y orden. Tu reto es suavizar la autocrítica y no exigirle tanto a tu entorno: recuerda que no todo tiene que ser perfecto.";
       } else {
-        archetype = "Esencia Su (Océano Profundo)";
-        advice = "Tu esencia es altamente fluida, misteriosa, sutil, intuitiva y sumamente sabia. Tienes una enorme inteligencia emocional, pero evita estancarte en nostalgias imaginarias del pasado para que tu manantial espiritual permanezca cristalino.";
+        archetype = "Esencia Agua (Intuición y Fluidez)";
+        advice = "Te adaptas súper fácil a las situaciones y tienes una intuición excelente para leer a las personas o saber qué camino tomar. Eres empático/a e independiente. Tu tarea práctica es evitar el exceso de análisis y no darle tantas vueltas a las cosas para que no te ganes estrés innecesario: actúa con confianza.";
       }
 
       setSajuResult({
