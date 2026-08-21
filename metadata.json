@@ -1,5 +1,6 @@
 {
   "name": "Gabriel - Tarot",
-  "description": "Tarot predictivo y evolutivo - Gabriel",
-  "requestFramePermissions": []
+  "description": "Tarot predictivo y evolutivo - Gabriel. Incluye blog oficial Mystic Lab y herramientas esotéricas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

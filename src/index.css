@@ -1,15 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-serif: "Cormorant Garamond", serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-caveat: "Caveat", cursive;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-jost: "Jost", sans-serif;
 }
 
 body {
   background-color: #FDFAF6;
   color: #1a1a1a;
   font-family: var(--font-sans);
+}
+
+/* Custom fonts helper utilities */
+.font-caveat {
+  font-family: 'Caveat', cursive;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-jost {
+  font-family: 'Jost', sans-serif;
+}
+
+/* Glow effects for buttons */
+.btn-glow-wine {
+  border: 1px solid transparent;
+  transition: box-shadow 0.35s ease, filter 0.35s ease, border-color 0.35s ease;
+}
+.btn-glow-wine:hover {
+  border-color: #f0d5d8;
+  box-shadow: 0 0 10px 2px rgba(244, 215, 219, 0.9), 0 0 30px 10px rgba(200, 120, 140, 0.75), 0 0 60px 20px rgba(124, 42, 52, 0.5);
+  filter: brightness(1.1);
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

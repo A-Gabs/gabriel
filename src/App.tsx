@@ -4,10 +4,11 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { Instagram, X, ChevronLeft, Share2, Camera, Check } from "lucide-react";
+import { Instagram, X, ChevronLeft, Share2, Camera, Check, BookOpen } from "lucide-react";
 import { toPng } from "html-to-image";
 import DraggableCarousel from "./components/DraggableCarousel";
 import { ARCANOS_DATA } from "./arcanosData";
+import BlogPage from "./components/BlogPage";
 
 interface CardItem {
   id: string;
@@ -302,7 +303,52 @@ export default function App() {
   };
 
   // Arcano de nacimiento states
-  const [currentView, setCurrentView] = useState<'links' | 'arcano-calc' | 'numerologia-calc' | 'compatibilidad-calc' | 'saju-calc'>('links');
+  const [currentView, setCurrentView] = useState<'links' | 'arcano-calc' | 'numerologia-calc' | 'compatibilidad-calc' | 'saju-calc' | 'blog'>(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path === '/blog' || path.startsWith('/blog/') || hash === '#blog' || hash.startsWith('#/blog')) {
+        return 'blog';
+      }
+    }
+    return 'links';
+  });
+
+  const navigateTo = (view: 'links' | 'arcano-calc' | 'numerologia-calc' | 'compatibilidad-calc' | 'saju-calc' | 'blog') => {
+    setCurrentView(view);
+    setActiveId(null);
+    if (typeof window !== "undefined") {
+      if (view === 'blog') {
+        window.history.pushState(null, '', '/blog');
+      } else {
+        if (window.location.pathname === '/blog' || window.location.pathname.startsWith('/blog/')) {
+          window.history.pushState(null, '', '/');
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path === '/blog' || path.startsWith('/blog/') || hash === '#blog' || hash.startsWith('#/blog')) {
+        setCurrentView('blog');
+      } else if (currentView === 'blog') {
+        setCurrentView('links');
+      }
+    };
+
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('hashchange', handleUrlChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+      window.removeEventListener('hashchange', handleUrlChange);
+    };
+  }, [currentView]);
+
   const [birthDay, setBirthDay] = useState<string>("1");
   const [birthMonth, setBirthMonth] = useState<string>("1");
   const [birthYear, setBirthYear] = useState<string>("1995");
@@ -629,13 +675,11 @@ export default function App() {
   const handleOpenCalc = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    setCurrentView('arcano-calc');
-    setActiveId(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo('arcano-calc');
   };
 
   const handleCloseCalc = () => {
-    setCurrentView('links');
+    navigateTo('links');
     
     // Arcano Resets
     setCalculationResult(null);
@@ -670,8 +714,6 @@ export default function App() {
     setSajuMonth("1");
     setSajuYear("1995");
     setSajuHour("desconocido");
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -761,12 +803,11 @@ export default function App() {
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
-                  if (card.id === "arcano-gratis") setCurrentView('arcano-calc');
-                  if (card.id === "numerologia-gratis") setCurrentView('numerologia-calc');
-                  if (card.id === "compatibilidad-gratis") setCurrentView('compatibilidad-calc');
-                  if (card.id === "saju-gratis") setCurrentView('saju-calc');
+                  if (card.id === "arcano-gratis") navigateTo('arcano-calc');
+                  if (card.id === "numerologia-gratis") navigateTo('numerologia-calc');
+                  if (card.id === "compatibilidad-gratis") navigateTo('compatibilidad-calc');
+                  if (card.id === "saju-gratis") navigateTo('saju-calc');
                   setActiveId(null);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className="w-full py-2 px-3 bg-black text-white hover:bg-[#1a1a1a]/90 border border-neutral-800 rounded-lg text-[13.5px] font-sans font-medium transition-colors text-center inline-block cursor-pointer"
               >
@@ -788,6 +829,15 @@ export default function App() {
       </div>
     );
   };
+
+  // Dedicated full-screen view for the Blog
+  if (currentView === "blog") {
+    return (
+      <div className="bg-[#FAF9F5] min-h-screen text-[#1A1A1A] antialiased selection:bg-[#7c2a34]/15">
+        <BlogPage onBackToMain={() => navigateTo('links')} />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#FDFAF6] min-h-screen text-[#1a1a1a] antialiased flex flex-col justify-between selection:bg-[#1a1a1a]/10">
