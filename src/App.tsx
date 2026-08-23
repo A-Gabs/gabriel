@@ -9,6 +9,7 @@ import { toPng } from "html-to-image";
 import DraggableCarousel from "./components/DraggableCarousel";
 import { ARCANOS_DATA } from "./arcanosData";
 import BlogPage from "./components/BlogPage";
+import NewsArticlePage, { ArticleSlug } from "./components/NewsArticlePage";
 
 interface CardItem {
   id: string;
@@ -302,11 +303,15 @@ export default function App() {
     }
   };
 
-  // Arcano de nacimiento states
-  const [currentView, setCurrentView] = useState<'links' | 'arcano-calc' | 'numerologia-calc' | 'compatibilidad-calc' | 'saju-calc' | 'blog'>(() => {
+  // Routing and page states
+  const [newsSlug, setNewsSlug] = useState<ArticleSlug>("destacada-en-esan");
+  const [currentView, setCurrentView] = useState<'links' | 'arcano-calc' | 'numerologia-calc' | 'compatibilidad-calc' | 'saju-calc' | 'blog' | 'news-article'>(() => {
     if (typeof window !== "undefined") {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
+      if (path.includes("/lacalle") || hash.includes("lacalle")) {
+        return 'news-article';
+      }
       if (path === '/blog' || path.startsWith('/blog/') || hash === '#blog' || hash.startsWith('#/blog')) {
         return 'blog';
       }
@@ -314,14 +319,24 @@ export default function App() {
     return 'links';
   });
 
-  const navigateTo = (view: 'links' | 'arcano-calc' | 'numerologia-calc' | 'compatibilidad-calc' | 'saju-calc' | 'blog') => {
+  const navigateTo = (view: 'links' | 'arcano-calc' | 'numerologia-calc' | 'compatibilidad-calc' | 'saju-calc' | 'blog' | 'news-article', slug?: ArticleSlug) => {
     setCurrentView(view);
     setActiveId(null);
+    if (slug) {
+      setNewsSlug(slug);
+    }
     if (typeof window !== "undefined") {
       if (view === 'blog') {
         window.history.pushState(null, '', '/blog');
+      } else if (view === 'news-article') {
+        const targetSlug = slug || newsSlug || 'destacada-en-esan';
+        window.history.pushState(null, '', `/lacalle/${targetSlug}`);
       } else {
-        if (window.location.pathname === '/blog' || window.location.pathname.startsWith('/blog/')) {
+        if (
+          window.location.pathname === '/blog' ||
+          window.location.pathname.startsWith('/blog/') ||
+          window.location.pathname.startsWith('/lacalle')
+        ) {
           window.history.pushState(null, '', '/');
         }
       }
@@ -333,9 +348,16 @@ export default function App() {
     const handleUrlChange = () => {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
-      if (path === '/blog' || path.startsWith('/blog/') || hash === '#blog' || hash.startsWith('#/blog')) {
+      if (path.includes("/lacalle") || hash.includes("lacalle")) {
+        setCurrentView('news-article');
+        if (path.includes("organizacion") || hash.includes("organizacion")) {
+          setNewsSlug("organizacion-en-el-tarot");
+        } else {
+          setNewsSlug("destacada-en-esan");
+        }
+      } else if (path === '/blog' || path.startsWith('/blog/') || hash === '#blog' || hash.startsWith('#/blog')) {
         setCurrentView('blog');
-      } else if (currentView === 'blog') {
+      } else if (currentView === 'blog' || currentView === 'news-article') {
         setCurrentView('links');
       }
     };
@@ -347,7 +369,7 @@ export default function App() {
       window.removeEventListener('popstate', handleUrlChange);
       window.removeEventListener('hashchange', handleUrlChange);
     };
-  }, [currentView]);
+  }, [currentView, newsSlug]);
 
   const [birthDay, setBirthDay] = useState<string>("1");
   const [birthMonth, setBirthMonth] = useState<string>("1");
@@ -829,6 +851,16 @@ export default function App() {
       </div>
     );
   };
+
+  // Dedicated full-screen view for Newspaper Articles (Diario La Calle)
+  if (currentView === "news-article") {
+    return (
+      <NewsArticlePage
+        initialSlug={newsSlug}
+        onBackToMain={() => navigateTo('links')}
+      />
+    );
+  }
 
   // Dedicated full-screen view for the Blog
   if (currentView === "blog") {
