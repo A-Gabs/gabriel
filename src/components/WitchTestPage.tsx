@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowLeft, RefreshCw, Share2, Sparkles, Check } from "lucide-react";
+import { ArrowLeft, RefreshCw, Share2, Sparkles, Check, MessageCircle, ExternalLink } from "lucide-react";
 
 export interface ArchetypeResult {
   letter: string;
@@ -512,8 +512,49 @@ export const WitchTestPage: React.FC<WitchTestPageProps> = ({
               ✨ No hay un resultado mejor que otro. El quiz describe afinidades simbólicas y espirituales.
             </p>
 
+            {/* COMMUNITY & NEXT STEPS / 2 BOTONES DE COMUNIDAD Y PATREON */}
+            <div className="mt-8 bg-[#fbf5ec] border border-[#e2d2bf] rounded-2xl p-6 sm:p-7 text-center shadow-sm">
+              <div className="text-[11px] tracking-[2px] text-[#7c2a34] font-semibold uppercase mb-1.5 flex items-center justify-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>CONTINÚA TU CAMINO MÁGICO</span>
+                <Sparkles className="w-3.5 h-3.5" />
+              </div>
+              <h3 className="font-cormorant text-2xl sm:text-3xl text-[#3a2a24] font-medium mb-2">
+                Únete al Círculo de Mystic Lab
+              </h3>
+              <p className="text-sm text-[#5a463c] max-w-md mx-auto mb-6 leading-relaxed">
+                Conéctate con nuestra comunidad, comparte tus lecturas y aprende a profundizar en tu práctica mágica:
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {/* 1. Botón WhatsApp */}
+                <a
+                  id="witch-test-whatsapp-link"
+                  href="https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh?s=cl&p=a&mlu=4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2.5 px-5 py-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-xl font-medium text-[12.5px] tracking-wider shadow-sm transition-all transform hover:-translate-y-0.5 active:scale-[0.98]"
+                >
+                  <MessageCircle className="w-4 h-4 fill-white/20" />
+                  <span>UNIRTE AL WHATSAPP ✦</span>
+                </a>
+
+                {/* 2. Botón Patreon */}
+                <a
+                  id="witch-test-patreon-link"
+                  href="https://www.patreon.com/MysticLabs369/posts/como-empezar-en-167309757?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2.5 px-5 py-4 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] rounded-xl font-medium text-[12.5px] tracking-wider shadow-sm transition-all transform hover:-translate-y-0.5 active:scale-[0.98]"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>CÓMO EMPEZAR EN PATREON ✦</span>
+                </a>
+              </div>
+            </div>
+
             {/* ACTION BUTTONS */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-8">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-6">
               <button
                 onClick={handleRestart}
                 className="w-full sm:w-auto px-7 py-3.5 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] text-xs font-semibold tracking-widest rounded-full transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
