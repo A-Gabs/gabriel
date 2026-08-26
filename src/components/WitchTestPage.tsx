@@ -821,16 +821,6 @@ export const WitchTestPage: React.FC<WitchTestPageProps> = ({
                   </p>
                 </div>
 
-                {/* TAROT CARD ART */}
-                <div className="max-w-[240px] sm:max-w-[270px] mx-auto my-6 rounded-xl overflow-hidden shadow-lg border-2 border-[#c8a4a8] bg-[#2a1c18]">
-                  <img
-                    src={arcanoInfo.image}
-                    alt={arcanoInfo.name}
-                    className="w-full h-auto object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-
                 {/* DETAILED INTERPRETATION */}
                 <div className="space-y-4 text-sm sm:text-[15px] leading-relaxed text-[#5a463c] pt-2">
                   <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-[#e6d5c2]">
