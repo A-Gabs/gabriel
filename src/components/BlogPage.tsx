@@ -847,7 +847,7 @@ export default function BlogPage({ onBackToMain }: Props) {
               className="w-full text-center py-3.5 px-4 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] text-[12px] tracking-[1.5px] rounded-full font-medium cursor-pointer btn-glow-wine shadow-sm flex items-center justify-center gap-2"
             >
               <span>🔮</span>
-              <span>TEST: ¿QUÉ TIPO DE BRUJA ERES? ✦</span>
+              <span>TESTS MÍSTICOS & ARCANO ✦</span>
             </button>
 
             {/* Escuela para Brujas Button */}

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { ArrowLeft, RefreshCw, Share2, Sparkles, Check, MessageCircle, ExternalLink } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ArrowLeft, RefreshCw, Share2, Sparkles, Check, MessageCircle, ExternalLink, Calendar, Compass, Star } from "lucide-react";
+import { ARCANOS_DATA, ArcanoInfo } from "../arcanosData";
 
 export interface ArchetypeResult {
   letter: string;
@@ -98,150 +99,155 @@ export const WITCH_QUESTIONS: WitchQuestion[] = [
     setup: "Llegas a una casa antigua que lleva décadas abandonada. Solo puedes explorar primero un lugar.",
     prompt: "¿A dónde vas?",
     options: [
-      { letter: "D", text: "A la biblioteca llena de libros y manuscritos." },
-      { letter: "A", text: "Al jardín trasero, completamente invadido por plantas." },
-      { letter: "G", text: "Al sótano. No sabes qué hay allí y precisamente por eso quieres entrar." },
-      { letter: "C", text: "Al ático, porque jurarías haber visto algo moverse allí." },
-      { letter: "F", text: "A la cocina, llena de frascos, especias y utensilios antiguos." },
-      { letter: "B", text: "A una habitación llena de cartas, fotografías y objetos de antiguos habitantes." },
-      { letter: "E", text: "A una habitación con una enorme ventana desde donde se ve el cielo." }
+      { letter: "A", text: "🌿 Al jardín cubierto de maleza, donde las plantas siguen creciendo sin control." },
+      { letter: "B", text: "🕯️ Al ático lleno de baúles viejos, fotos familiares y cartas sin abrir." },
+      { letter: "C", text: "👁️ Al dormitorio principal, donde hay un espejo antiguo que parece tener memoria." },
+      { letter: "D", text: "🃏 A la biblioteca, a revisar los libros raros y papeles sobre la mesa." },
+      { letter: "E", text: "🌙 A la azotea, para observar cómo cambia el cielo desde lo alto." },
+      { letter: "F", text: "🔥 A la cocina, donde todavía huele a humo y madera vieja." },
+      { letter: "G", text: "🗝️ Al sótano cerrado con un candado que alguien intentó forzar." }
     ]
   },
   {
-    emoji: "🗝️",
+    emoji: "💎",
     scenario: "El objeto",
-    setup: "Sobre una mesa aparecen siete objetos. Puedes llevarte solamente uno.",
-    prompt: "¿Cuál eliges?",
+    setup: "Encuentras una caja enterrada. Al abrirla, solo puedes quedarte con una cosa.",
+    prompt: "¿Qué eliges?",
     options: [
-      { letter: "E", text: "Un colgante con símbolos del Sol, la Luna y los planetas." },
-      { letter: "C", text: "Un espejo negro antiguo." },
-      { letter: "A", text: "Un pequeño frasco con semillas desconocidas." },
-      { letter: "G", text: "Una llave oxidada sin ninguna cerradura a la vista." },
-      { letter: "B", text: "Un medallón que perteneció a varias generaciones de una familia." },
-      { letter: "F", text: "Una vela cuyo aroma te recuerda inmediatamente a tu hogar." },
-      { letter: "D", text: "Una baraja ilustrada que nunca habías visto." }
+      { letter: "A", text: "🌿 Una raíz seca que aún huele a bosque húmedo." },
+      { letter: "B", text: "🕯️ Un anillo antiguo que perteneció a alguien que no conoces." },
+      { letter: "C", text: "👁️ Una piedra pulida que parece cambiar de color en la penumbra." },
+      { letter: "D", text: "🃏 Una baraja desgastada con símbolos dibujados a mano." },
+      { letter: "E", text: "🌙 Un calendario de bronce con fases lunares grabadas." },
+      { letter: "F", text: "🔥 Un mortero de piedra con restos de especias." },
+      { letter: "G", text: "🗝️ Una llave pesada de hierro que no tiene cerradura a la vista." }
     ]
   },
   {
-    emoji: "🌙",
+    emoji: "🌌",
     scenario: "Una noche sin obligaciones",
-    setup: "Tienes toda la noche para ti.",
-    prompt: "¿Qué plan te resulta más atractivo?",
+    setup: "Tienes una noche entera para ti, en silencio. Nadie te espera y no tienes que ser productiva.",
+    prompt: "¿Cómo pasas ese tiempo?",
     options: [
-      { letter: "F", text: "Preparar algo especial, encender velas y transformar tu espacio en un refugio." },
-      { letter: "B", text: "Revisar fotografías, recuerdos o historias de tu familia." },
-      { letter: "E", text: "Observar la Luna y descubrir qué está sucediendo astrológicamente." },
-      { letter: "A", text: "Caminar por un lugar lleno de naturaleza y perder la noción del tiempo." },
-      { letter: "G", text: "Escribir sobre algo de ti que normalmente prefieres evitar." },
-      { letter: "D", text: "Sacar cartas, consultar un oráculo o buscar respuestas a una pregunta." },
-      { letter: "C", text: "Apagar las luces y experimentar con sueños, meditación o estados de conciencia." }
+      { letter: "A", text: "🌿 Cuidando plantas, caminando afuera o abriendo las ventanas para que entre el aire fresco." },
+      { letter: "B", text: "🕯️ Revisando recuerdos, escuchando música antigua o pensando en personas que ya no están." },
+      { letter: "C", text: "👁️ Escribiendo lo que soñaste, leyendo sobre símbolos o perdiéndote en tus pensamientos." },
+      { letter: "D", text: "🃏 Barajando cartas, haciendo preguntas y buscando patrones en lo que te pasa." },
+      { letter: "E", text: "🌙 Mirando el cielo, revisando en qué fase está la Luna o cómo se siente la noche." },
+      { letter: "F", text: "🔥 Encendiendo velas, preparando una infusión o limpiando tu espacio para que se sienta bien." },
+      { letter: "G", text: "🗝️ Escribiendo en un diario aquello que no le dirías a nadie más." }
     ]
   },
   {
-    emoji: "👁️",
+    emoji: "✨",
     scenario: "Tu intuición",
-    setup: "Una amiga te cuenta que tiene una sensación extraña sobre una decisión importante.",
-    prompt: "¿Qué haces naturalmente?",
+    setup: "Cuando algo importante está a punto de pasar, ¿cómo te avisa tu cuerpo o tu mente?",
+    prompt: "¿Cómo lo percibes?",
     options: [
-      { letter: "G", text: "Le haces la pregunta incómoda que nadie más se atreve a hacerle." },
-      { letter: "D", text: "Quieres consultar cartas, símbolos o algún método de adivinación." },
-      { letter: "A", text: "Le preguntas qué siente físicamente cuando imagina cada opción." },
-      { letter: "F", text: "Le propones hablar tranquilamente en un espacio donde pueda sentirse segura." },
-      { letter: "C", text: "Presta atención a sueños, coincidencias o sensaciones difíciles de explicar." },
-      { letter: "E", text: "Quieres conocer las fechas y observar los ciclos que rodean la situación." },
-      { letter: "B", text: "Intentas descubrir si existe algún patrón familiar detrás de la situación." }
+      { letter: "A", text: "🌿 Sientes cambios físicos: tensión, escalofríos o una sensación de que el entorno cambió." },
+      { letter: "B", text: "🕯️ Te acuerdas de pronto de una persona de tu pasado o de tu familia." },
+      { letter: "C", text: "👁️ Lo ves en un sueño antes de que ocurra o se te repite una imagen." },
+      { letter: "D", text: "🃏 Empiezas a notar coincidencias, números repetidos o señales que parecen conectadas." },
+      { letter: "E", text: "🌙 Notas que tu estado de ánimo cambia de golpe según el día o el ciclo lunar." },
+      { letter: "F", text: "🔥 Sientes una punzada en el estómago que te dice si confiar o retirarte." },
+      { letter: "G", text: "🗝️ Se te cae la venda de los ojos respecto a alguien: ves claramente lo que ocultaba." }
     ]
   },
   {
-    emoji: "🔥",
+    emoji: "🕯️",
     scenario: "El ritual",
-    setup: "Si fueras a crear un ritual completamente intuitivo, ¿qué elemento aparecería casi seguro?",
-    prompt: "Elige el elemento.",
+    setup: "Si tuvieras que hacer un ritual simple para cambiar la energía de tu vida, ¿qué elemento principal usarías?",
+    prompt: "¿Cuál sería tu base?",
     options: [
-      { letter: "C", text: "Humo, espejos, sueños o símbolos extraños." },
-      { letter: "E", text: "Correspondencias planetarias, fases lunares o estrellas." },
-      { letter: "G", text: "Papel, fuego y algo que quieras confrontar, transformar o dejar atrás." },
-      { letter: "A", text: "Hierbas, flores, agua o tierra." },
-      { letter: "D", text: "Cartas, runas, péndulos o símbolos para interpretar." },
-      { letter: "F", text: "Velas, alimentos, aromas y objetos cotidianos." },
-      { letter: "B", text: "Fotografías, objetos heredados o recuerdos." }
+      { letter: "A", text: "🌿 Hojas de laurel, romero, tierra o agua de lluvia." },
+      { letter: "B", text: "🕯️ Una vela blanca encendida en memoria de tus ancestros o de tu historia." },
+      { letter: "C", text: "👁️ Un espejo, una libreta de sueños o una meditación profunda en silencio." },
+      { letter: "D", text: "🃏 Una tirada de tarot de tres cartas para entender qué camino tomar." },
+      { letter: "E", text: "🌙 Esperar a la Luna Nueva o Luna Llena para iniciar algo." },
+      { letter: "F", text: "🔥 Una infusión de canela, humo de incienso o una limpieza profunda de tu casa." },
+      { letter: "G", text: "🗝️ Quemar un papel con lo que quieres soltar y mirar la ceniza hasta que se apague." }
     ]
   },
   {
-    emoji: "🌑",
+    emoji: "🍂",
     scenario: "Algo termina",
-    setup: "Estás cerrando una etapa importante de tu vida.",
-    prompt: "¿Qué sientes que necesitas hacer?",
+    setup: "Cuando una etapa importante de tu vida se acaba definitivamente (una relación, un trabajo, un lugar), ¿qué haces para procesarlo?",
+    prompt: "¿Cómo cierras el ciclo?",
     options: [
-      { letter: "B", text: "Comprender de dónde viene lo que estoy viviendo." },
-      { letter: "F", text: "Limpiar y reorganizar mi espacio para sentir que comienzo de nuevo." },
-      { letter: "D", text: "Encontrar señales que me ayuden a comprender hacia dónde voy." },
-      { letter: "G", text: "Mirar directamente aquello que me dolió y descubrir qué cambió dentro de mí." },
-      { letter: "A", text: "Ir a algún lugar natural para recuperar equilibrio." },
-      { letter: "E", text: "Esperar el momento adecuado para comenzar mi siguiente etapa." },
-      { letter: "C", text: "Estar en silencio y escuchar lo que mi intuición intenta mostrarme." }
+      { letter: "A", text: "🌿 Buscas aire libre, necesitas que la naturaleza te limpie y te devuelva la calma." },
+      { letter: "B", text: "🕯️ Guardas algo como recuerdo y buscas entender qué aprendizaje dejó en tu linaje." },
+      { letter: "C", text: "👁️ Te sumerges en tu mundo interno: escribes, sueñas y dejas que el inconsciente lo ordene." },
+      { letter: "D", text: "🃏 Consultas las cartas para entender por qué pasó y qué viene después." },
+      { letter: "E", text: "🌙 Confías en que era el tiempo cósmico justo: todo tiene un ciclo de inicio y fin." },
+      { letter: "F", text: "🔥 Reordenas todo tu espacio, cambias cosas de lugar y renuevas la energía del hogar." },
+      { letter: "G", text: "🗝️ Vas al fondo del dolor: necesitas sentirlo entero antes de volver a levantarte." }
     ]
   },
   {
     emoji: "📖",
     scenario: "El conocimiento prohibido",
-    setup: "Encuentras un libro que contiene exactamente el conocimiento que más deseas adquirir.",
-    prompt: "¿De qué trata?",
+    setup: "Si pudieras abrir un libro que responde con certeza a una sola de estas preguntas, ¿cuál elegirías?",
+    prompt: "¿Qué secreto te gustaría revelar?",
     options: [
-      { letter: "G", text: "Los deseos, miedos y partes ocultas de la mente humana." },
-      { letter: "A", text: "Los secretos y propiedades de plantas, minerales y elementos naturales." },
-      { letter: "E", text: "Los patrones secretos que conectan a las personas con el cosmos." },
-      { letter: "C", text: "Sueños, espíritus, símbolos y mundos invisibles." },
-      { letter: "F", text: "Antiguos rituales domésticos de protección, prosperidad y bienestar." },
-      { letter: "D", text: "Cómo interpretar perfectamente cualquier señal u oráculo." },
-      { letter: "B", text: "La historia olvidada de tus antepasados." }
-    ]
-  },
-  {
-    emoji: "🕯️",
-    scenario: "Tu espacio mágico",
-    setup: "Puedes crear un pequeño rincón solamente para ti.",
-    prompt: "¿Qué tendría?",
-    options: [
-      { letter: "D", text: "Tarot, oráculos, péndulos y cuadernos llenos de interpretaciones." },
-      { letter: "G", text: "Un diario privado donde puedas escribir absolutamente todo sin censura." },
-      { letter: "B", text: "Fotografías familiares, recuerdos y objetos con historia." },
-      { letter: "E", text: "Una representación de la Luna, el Sol y los planetas." },
-      { letter: "A", text: "Muchas plantas, piedras, flores y elementos naturales." },
-      { letter: "C", text: "Un espejo, incienso y objetos misteriosos que solo tú comprendes." },
-      { letter: "F", text: "Velas, aceites, especias y objetos que hagan sentir protegido el espacio." }
-    ]
-  },
-  {
-    emoji: "✨",
-    scenario: "El poder",
-    setup: "Imagina que mañana despiertas con una habilidad extraordinaria.",
-    prompt: "¿Cuál elegirías?",
-    options: [
-      { letter: "E", text: "Comprender los grandes ciclos de la vida y saber cuándo actuar." },
-      { letter: "G", text: "Ver inmediatamente las verdaderas intenciones, miedos y deseos ocultos de una persona." },
-      { letter: "C", text: "Viajar conscientemente dentro de tus sueños." },
-      { letter: "A", text: "Comprender perfectamente el lenguaje de la naturaleza." },
-      { letter: "F", text: "Convertir cualquier espacio en un lugar de paz, protección y abundancia." },
-      { letter: "B", text: "Poder conocer las historias de quienes estuvieron antes que tú." },
-      { letter: "D", text: "Percibir los posibles caminos futuros de una situación." }
+      { letter: "A", text: "🌿 Cómo comunicarte con las plantas y entender los secretos medicinales de la tierra." },
+      { letter: "B", text: "🕯️ Qué historias y secretos guardaban tus antepasados que nadie te contó." },
+      { letter: "C", text: "👁️ Qué significan realmente los mundos que visitas cuando sueñas." },
+      { letter: "D", text: "🃏 Qué va a pasar exactamente en tu vida en los próximos cinco años." },
+      { letter: "E", text: "🌙 Cómo influyen las fuerzas del universo en el destino de cada persona." },
+      { letter: "F", text: "🔥 Cómo proteger para siempre a las personas y los lugares que amas." },
+      { letter: "G", text: "🗝️ La verdad absoluta sobre por qué las personas hacen las cosas oscuras que hacen." }
     ]
   },
   {
     emoji: "🔮",
+    scenario: "Tu espacio mágico",
+    setup: "Si pudieras diseñar un rincón sagrado en tu casa, ¿qué no podría faltar nunca?",
+    prompt: "¿Qué elemento preside tu espacio?",
+    options: [
+      { letter: "A", text: "🌿 Muchas plantas, ramas secas, piedras y flores frescas." },
+      { letter: "B", text: "🕯️ Fotos antiguas, recuerdos heredados y objetos con historia familiar." },
+      { letter: "C", text: "👁️ Un diario de papel grueso, velas tenues y figuras simbólicas." },
+      { letter: "D", text: "🃏 Varios mazos de tarot, tapetes de tela y un cuaderno de lecturas." },
+      { letter: "E", text: "🌙 Cristales alineados, un mapa estelar y agua de luna." },
+      { letter: "F", text: "🔥 Velas aromáticas, tarros de especias, canela y aceites esenciales." },
+      { letter: "G", text: "🗝️ Objetos oscuros, obsidiana, candados antiguos y un espacio privado bajo llave." }
+    ]
+  },
+  {
+    emoji: "⚡",
+    scenario: "El poder",
+    setup: "Si pudieras desarrollar un don especial al máximo nivel, ¿cuál te gustaría tener?",
+    prompt: "¿Qué don despierta tu alma?",
+    options: [
+      { letter: "A", text: "🌿 Sanar con las manos, con hierbas y con la energía de la naturaleza." },
+      { letter: "B", text: "🕯️ Escuchar los consejos de quienes vivieron antes que tú." },
+      { letter: "C", text: "👁️ Viajar conscientemente a través de los sueños y recibir revelaciones." },
+      { letter: "D", text: "🃏 Leer el destino de cualquier persona con solo mirar sus ojos o sus cartas." },
+      { letter: "E", text: "🌙 Moverte en perfecta sincronía con los ciclos del universo y no fallar nunca el momento." },
+      { letter: "F", text: "🔥 Crear un escudo de protección que ninguna mala energía pueda romper." },
+      { letter: "G", text: "🗝️ Ver la verdad oculta de cualquier persona sin que pueda engañarte jamás." }
+    ]
+  },
+  {
+    emoji: "🚪",
     scenario: "La última elección",
-    setup: "Frente a ti aparecen siete puertas. No sabes qué existe detrás de ninguna. Solo tienen un símbolo.",
+    setup: "Llegas al final del camino. Frente a ti hay siete puertas de distintos materiales. Solo puedes cruzar una.",
     prompt: "¿Cuál abres?",
     options: [
-      { letter: "F", text: "🔥 Una pequeña llama dentro de una casa." },
-      { letter: "D", text: "🃏 Una mano sosteniendo una carta." },
-      { letter: "A", text: "🌿 Una rama creciendo alrededor de un círculo." },
-      { letter: "G", text: "🗝️ Una llave atravesando un corazón negro." },
-      { letter: "C", text: "👁️ Un ojo dentro de una Luna oscura." },
-      { letter: "E", text: "☾ Una Luna rodeada de estrellas." },
-      { letter: "B", text: "🕯️ Una llama rodeada por pequeñas figuras humanas." }
+      { letter: "A", text: "🌿 Una puerta de madera viva cubierta de hiedra y flores silvestres." },
+      { letter: "B", text: "🕯️ Una puerta de roble antiguo con un escudo familiar tallado a mano." },
+      { letter: "C", text: "👁️ Una puerta de cristal translúcido que parece reflejar un cielo estrellado." },
+      { letter: "D", text: "🃏 Una puerta grabada con los 22 Arcanos Mayores del Tarot." },
+      { letter: "E", text: "🌙 Una puerta de piedra oscura con una media luna de plata incrustada." },
+      { letter: "F", text: "🔥 Una puerta de madera cálida por donde sale olor a pan recién horneado y romero." },
+      { letter: "G", text: "🗝️ Una puerta de hierro negro con una cerradura que brilla suavemente en la oscuridad." }
     ]
   }
+];
+
+const MONTH_NAMES = [
+  "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
 ];
 
 interface WitchTestPageProps {
@@ -253,14 +259,31 @@ export const WitchTestPage: React.FC<WitchTestPageProps> = ({
   onBackToBlog,
   onBackToMain,
 }) => {
+  // Test Selector Mode: "WITCH_QUIZ" | "ARCANO_BIRTH"
+  const [activeTest, setActiveTest] = useState<"WITCH_QUIZ" | "ARCANO_BIRTH">("WITCH_QUIZ");
+
+  // State for Witch Quiz
   const [step, setStep] = useState<number>(0);
   const [answers, setAnswers] = useState<string[]>([]);
-  const [copied, setCopied] = useState<boolean>(false);
+  const [copiedWitch, setCopiedWitch] = useState<boolean>(false);
+
+  // State for Arcano de Nacimiento
+  const [birthDay, setBirthDay] = useState<string>("1");
+  const [birthMonth, setBirthMonth] = useState<string>("1");
+  const [birthYear, setBirthYear] = useState<string>("1998");
+  const [isCalculatingArcano, setIsCalculatingArcano] = useState<boolean>(false);
+  const [arcanoResultNumber, setArcanoResultNumber] = useState<number | null>(null);
+  const [arcanoLoadingPhase, setArcanoLoadingPhase] = useState<string>("");
+  const [copiedArcano, setCopiedArcano] = useState<boolean>(false);
 
   const totalQuestions = WITCH_QUESTIONS.length;
-  const isFinished = step >= totalQuestions;
+  const isWitchFinished = step >= totalQuestions;
 
-  const handleSelect = (letter: string) => {
+  // WHATSAPP & PATREON LINKS
+  const WHATSAPP_COMMUNITY_URL = "https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh?s=cl&p=a&mlu=4";
+  const PATREON_POST_URL = "https://www.patreon.com/MysticLabs369/posts/como-empezar-en-167309757?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link";
+
+  const handleSelectWitchOption = (letter: string) => {
     const nextAnswers = [...answers];
     nextAnswers[step] = letter;
     setAnswers(nextAnswers);
@@ -268,20 +291,20 @@ export const WitchTestPage: React.FC<WitchTestPageProps> = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handlePrevious = () => {
+  const handlePreviousWitch = () => {
     if (step > 0) {
       setStep(prev => prev - 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  const handleRestart = () => {
+  const handleRestartWitch = () => {
     setStep(0);
     setAnswers([]);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Calculate results
+  // Calculate Witch Archetype
   const tally: Record<string, number> = {};
   answers.forEach((letter) => {
     tally[letter] = (tally[letter] || 0) + 1;
@@ -302,27 +325,74 @@ export const WitchTestPage: React.FC<WitchTestPageProps> = ({
       )
     : null;
 
-  const handleShare = () => {
+  const handleShareWitch = () => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(
         `🔮 Hice el Test de Bruja en Mystic Lab y mi resultado es: ${primaryResult.emoji} ${primaryResult.name}. ¡Descubre qué tipo de bruja eres tú!`
       );
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      setCopiedWitch(true);
+      setTimeout(() => setCopiedWitch(false), 2500);
+    }
+  };
+
+  // Calculate Arcano de Nacimiento
+  const handleCalculateArcano = () => {
+    setIsCalculatingArcano(true);
+    setArcanoResultNumber(null);
+    setArcanoLoadingPhase("Sintonizando tu vibración natal...");
+
+    setTimeout(() => {
+      setArcanoLoadingPhase("Conectando con los 22 Arcanos Mayores...");
+    }, 450);
+
+    setTimeout(() => {
+      const d = parseInt(birthDay) || 1;
+      const m = parseInt(birthMonth) || 1;
+      const y = parseInt(birthYear) || 1998;
+
+      const sum = d + m + y;
+      let tempSum = sum;
+      while (tempSum > 22) {
+        tempSum = tempSum.toString().split("").reduce((acc, digit) => acc + parseInt(digit), 0);
+      }
+
+      let finalNum = tempSum;
+      if (finalNum < 1) finalNum = 1;
+
+      setArcanoResultNumber(finalNum);
+      setIsCalculatingArcano(false);
+      window.scrollTo({ top: 400, behavior: "smooth" });
+    }, 950);
+  };
+
+  const handleResetArcano = () => {
+    setArcanoResultNumber(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const arcanoInfo: ArcanoInfo | null = arcanoResultNumber ? ARCANOS_DATA[arcanoResultNumber] : null;
+
+  const handleShareArcano = () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard && arcanoInfo) {
+      navigator.clipboard.writeText(
+        `🃏 Mi Arcano de Nacimiento es el arcano ${arcanoInfo.number} - ${arcanoInfo.name} (${arcanoInfo.keyEnergy}). ¡Calcula el tuyo en Mystic Lab!`
+      );
+      setCopiedArcano(true);
+      setTimeout(() => setCopiedArcano(false), 2500);
     }
   };
 
   const progressPct = Math.round((step / totalQuestions) * 100);
-  const currentQ = !isFinished ? WITCH_QUESTIONS[step] : null;
+  const currentQ = !isWitchFinished ? WITCH_QUESTIONS[step] : null;
 
   return (
-    <div className="font-jost bg-[#f4ece1] text-[#3a2a24] min-h-screen antialiased selection:bg-[#e3b8bb] pb-16">
+    <div className="font-jost bg-[#f4ece1] text-[#3a2a24] min-h-screen antialiased selection:bg-[#e3b8bb] pb-20">
       
-      {/* TOP BAR / RETURN NAVIGATION */}
-      <div className="w-full bg-[#3a2a24] text-[#f4ece1] px-4 py-2 text-xs flex items-center justify-between border-b border-[#2a1c18]">
+      {/* TOP NAVIGATION BAR */}
+      <div className="w-full bg-[#3a2a24] text-[#f4ece1] px-4 py-2.5 text-xs flex items-center justify-between border-b border-[#2a1c18]">
         <div className="flex items-center gap-2">
           <span className="text-[#e2c3c6]">✦</span>
-          <span className="tracking-wider uppercase font-medium">MYSTIC LAB / TEST DE BRUJA</span>
+          <span className="tracking-wider uppercase font-medium">MYSTIC LAB / ESCUELA MÁGICA</span>
         </div>
         <div className="flex items-center gap-2">
           {onBackToBlog && (
@@ -358,222 +428,509 @@ export const WitchTestPage: React.FC<WitchTestPageProps> = ({
         </button>
       </div>
 
-      {/* MAIN CONTAINER */}
-      <div className="max-w-[640px] mx-auto px-5 py-8 sm:py-12">
-        
-        {!isFinished && currentQ ? (
-          <div>
-            {/* INTRO HEADER */}
-            <div className="text-center mb-8">
-              <div className="text-[12px] tracking-[2px] text-[#7c2a34] font-medium mb-2 uppercase">
-                ✦ WITCH · TEST DE BRUJA ✦
+      {/* DUAL TEST SELECTOR TABS */}
+      <div className="max-w-xl mx-auto px-4 pt-6">
+        <div className="bg-[#ebdccb] p-1.5 rounded-full flex items-center border border-[#d8c5b0] shadow-xs">
+          <button
+            id="tab-witch-type-btn"
+            onClick={() => {
+              setActiveTest("WITCH_QUIZ");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className={`flex-1 py-2.5 px-3 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
+              activeTest === "WITCH_QUIZ"
+                ? "bg-[#7c2a34] text-[#f4ece1] shadow-sm"
+                : "text-[#5a463c] hover:text-[#3a2a24] hover:bg-[#e2d0bd]"
+            }`}
+          >
+            <span>🔮</span>
+            <span className="uppercase text-[11px] sm:text-xs">¿Qué Bruja Eres?</span>
+          </button>
+
+          <button
+            id="tab-arcano-birth-btn"
+            onClick={() => {
+              setActiveTest("ARCANO_BIRTH");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className={`flex-1 py-2.5 px-3 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
+              activeTest === "ARCANO_BIRTH"
+                ? "bg-[#7c2a34] text-[#f4ece1] shadow-sm"
+                : "text-[#5a463c] hover:text-[#3a2a24] hover:bg-[#e2d0bd]"
+            }`}
+          >
+            <span>🃏</span>
+            <span className="uppercase text-[11px] sm:text-xs">Arcano de Nacimiento</span>
+          </button>
+        </div>
+      </div>
+
+      {/* ======================================================== */}
+      {/* SECTION 1: TEST 1 - QUÉ TIPO DE BRUJA ERES */}
+      {/* ======================================================== */}
+      {activeTest === "WITCH_QUIZ" && (
+        <div className="max-w-[640px] mx-auto px-5 py-8 sm:py-10 animate-fadeIn">
+          
+          {!isWitchFinished && currentQ ? (
+            <div>
+              {/* INTRO HEADER */}
+              <div className="text-center mb-8">
+                <div className="text-[12px] tracking-[2px] text-[#7c2a34] font-medium mb-2 uppercase flex items-center justify-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>TEST DE AFINIDAD MÁGICA</span>
+                  <Sparkles className="w-3.5 h-3.5" />
+                </div>
+                <h1 className="font-cormorant text-3xl sm:text-4xl text-[#3a2a24] font-normal leading-tight">
+                  🔮 ¿Qué tipo de bruja eres?
+                </h1>
+                <p className="text-sm leading-relaxed text-[#5a463c] mt-3 max-w-lg mx-auto">
+                  Hay una forma de magia hacia la que pareces inclinarte naturalmente. Elige la opción que más te atraiga instintivamente en cada pregunta.
+                </p>
               </div>
-              <h1 className="font-cormorant text-3xl sm:text-4xl text-[#3a2a24] font-normal leading-tight">
-                🔮 ¿Qué tipo de bruja eres?
+
+              {/* PROGRESS BAR */}
+              <div className="h-1.5 bg-[#e6d5c2] rounded-full mb-2 overflow-hidden">
+                <div
+                  className="h-full bg-[#7c2a34] rounded-full transition-all duration-300"
+                  style={{ width: `${progressPct}%` }}
+                />
+              </div>
+              <div className="text-right text-[11.5px] text-[#9a8474] mb-6 font-medium">
+                Pregunta {step + 1} de {totalQuestions}
+              </div>
+
+              {/* QUESTION CARD */}
+              <div className="bg-[#fbf5ec] border border-[#e2d2bf] rounded-xl p-6 sm:p-8 shadow-sm">
+                <div className="font-cormorant text-2xl sm:text-[26px] text-[#3a2a24] font-semibold mb-2 flex items-center gap-2">
+                  <span>{currentQ.emoji}</span>
+                  <span>{currentQ.scenario}</span>
+                </div>
+                <p className="text-[14.5px] leading-relaxed text-[#5a463c] mb-4">
+                  {currentQ.setup}
+                </p>
+                <div className="font-cormorant italic text-lg sm:text-xl text-[#7c2a34] mb-5 font-medium">
+                  {currentQ.prompt}
+                </div>
+
+                {/* OPTIONS LIST */}
+                <div className="flex flex-col gap-2.5">
+                  {currentQ.options.map((opt) => (
+                    <button
+                      key={opt.letter}
+                      onClick={() => handleSelectWitchOption(opt.letter)}
+                      className="group flex items-start gap-3 p-3.5 sm:p-4 bg-white hover:bg-[#fdf8f2] border border-[#e6d5c2] hover:border-[#c8a4a8] rounded-lg cursor-pointer text-left transition-all duration-200 shadow-xs active:scale-[0.99]"
+                    >
+                      <span className="text-[13px] font-bold text-[#7c2a34] min-w-[18px] pt-0.5 group-hover:scale-110 transition-transform">
+                        {opt.letter}.
+                      </span>
+                      <span className="text-[13.5px] sm:text-[14px] leading-snug text-[#3a2a24] group-hover:text-[#1a1a1a]">
+                        {opt.text}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
+                {/* BACK BUTTON */}
+                {step > 0 && (
+                  <div className="mt-6 pt-4 border-t border-[#e6d5c2]/60">
+                    <button
+                      onClick={handlePreviousWitch}
+                      className="inline-flex items-center gap-1.5 text-xs tracking-wider text-[#7c2a34] hover:text-[#a8404c] font-medium border-b border-[#7c2a34]/40 hover:border-[#a8404c] transition-all cursor-pointer pb-0.5"
+                    >
+                      <ArrowLeft className="w-3 h-3" />
+                      <span>ANTERIOR</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            /* RESULT VIEW */
+            <div className="animate-fadeIn">
+              <div className="text-center mb-2 text-xs tracking-[2px] text-[#7c2a34] font-medium uppercase">
+                ✦ TU RESULTADO ✦
+              </div>
+              <h1 className="text-center font-cormorant text-3xl sm:text-4xl md:text-5xl text-[#3a2a24] font-normal mb-6 leading-tight">
+                {primaryResult.emoji} {primaryResult.name}
               </h1>
-              <p className="text-sm leading-relaxed text-[#5a463c] mt-3 max-w-lg mx-auto">
-                Hay una forma de magia hacia la que pareces inclinarte naturalmente. Elige la opción que más te atraiga instintivamente en cada pregunta.
-              </p>
-            </div>
 
-            {/* PROGRESS BAR */}
-            <div className="h-1.5 bg-[#e6d5c2] rounded-full mb-2 overflow-hidden">
-              <div
-                className="h-full bg-[#7c2a34] rounded-full transition-all duration-300"
-                style={{ width: `${progressPct}%` }}
-              />
-            </div>
-            <div className="text-right text-[11.5px] text-[#9a8474] mb-6 font-medium">
-              Pregunta {step + 1} de {totalQuestions}
-            </div>
+              {/* PRIMARY RESULT CARD */}
+              <div className="bg-[#fbf5ec] border border-[#e2d2bf] rounded-xl p-6 sm:p-8 shadow-sm flex flex-col gap-5">
+                <p className="text-[15px] sm:text-[15.5px] leading-relaxed text-[#5a463c]">
+                  {primaryResult.desc}
+                </p>
+                
+                <div className="border-t border-[#e6d5c2] pt-4">
+                  <span className="font-semibold text-xs tracking-wider uppercase text-[#7c2a34]">
+                    ✦ Tus fortalezas:
+                  </span>
+                  <p className="text-sm text-[#5a463c] mt-1">
+                    {primaryResult.fortalezas}
+                  </p>
+                </div>
 
-            {/* QUESTION CARD */}
-            <div className="bg-[#fbf5ec] border border-[#e2d2bf] rounded-xl p-6 sm:p-8 shadow-sm">
-              <div className="font-cormorant text-2xl sm:text-[26px] text-[#3a2a24] font-semibold mb-2 flex items-center gap-2">
-                <span>{currentQ.emoji}</span>
-                <span>{currentQ.scenario}</span>
-              </div>
-              <p className="text-[14.5px] leading-relaxed text-[#5a463c] mb-4">
-                {currentQ.setup}
-              </p>
-              <div className="font-cormorant italic text-lg sm:text-xl text-[#7c2a34] mb-5 font-medium">
-                {currentQ.prompt}
+                <div className="border-t border-[#e6d5c2] pt-4">
+                  <span className="font-semibold text-xs tracking-wider uppercase text-[#7c2a34]">
+                    ✦ Áreas para explorar:
+                  </span>
+                  <p className="text-sm text-[#5a463c] mt-1">
+                    {primaryResult.explora}
+                  </p>
+                </div>
               </div>
 
-              {/* OPTIONS LIST */}
-              <div className="flex flex-col gap-2.5">
-                {currentQ.options.map((opt) => (
-                  <button
-                    key={opt.letter}
-                    onClick={() => handleSelect(opt.letter)}
-                    className="group flex items-start gap-3 p-3.5 sm:p-4 bg-white hover:bg-[#fdf8f2] border border-[#e6d5c2] hover:border-[#c8a4a8] rounded-lg cursor-pointer text-left transition-all duration-200 shadow-xs active:scale-[0.99]"
-                  >
-                    <span className="text-[13px] font-bold text-[#7c2a34] min-w-[18px] pt-0.5 group-hover:scale-110 transition-transform">
-                      {opt.letter}.
-                    </span>
-                    <span className="text-[13.5px] sm:text-[14px] leading-snug text-[#3a2a24] group-hover:text-[#1a1a1a]">
-                      {opt.text}
-                    </span>
-                  </button>
-                ))}
-              </div>
-
-              {/* BACK BUTTON */}
-              {step > 0 && (
-                <div className="mt-6 pt-4 border-t border-[#e6d5c2]/60">
-                  <button
-                    onClick={handlePrevious}
-                    className="inline-flex items-center gap-1.5 text-xs tracking-wider text-[#7c2a34] hover:text-[#a8404c] font-medium border-b border-[#7c2a34]/40 hover:border-[#a8404c] transition-all cursor-pointer pb-0.5"
-                  >
-                    <ArrowLeft className="w-3 h-3" />
-                    <span>ANTERIOR</span>
-                  </button>
+              {/* SECONDARY & COMBOS */}
+              {secondaryResult && (
+                <div className="mt-5 bg-[#fbf5ec] border border-[#e2d2bf] rounded-xl p-5 sm:p-6 shadow-sm">
+                  <div className="text-[11.5px] tracking-[1.5px] text-[#7c2a34] font-semibold uppercase mb-1">
+                    ✦ Tu energía secundaria
+                  </div>
+                  <h3 className="font-cormorant text-xl text-[#3a2a24] font-medium mb-2">
+                    {secondaryResult.emoji} {secondaryResult.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5a463c] leading-relaxed">
+                    {secondaryResult.desc}
+                  </p>
                 </div>
               )}
-            </div>
-          </div>
-        ) : (
-          /* RESULT VIEW */
-          <div className="animate-fadeIn">
-            <div className="text-center mb-2 text-xs tracking-[2px] text-[#7c2a34] font-medium uppercase">
-              ✦ TU RESULTADO ✦
-            </div>
-            <h1 className="text-center font-cormorant text-3xl sm:text-4xl md:text-5xl text-[#3a2a24] font-normal mb-6 leading-tight">
-              {primaryResult.emoji} {primaryResult.name}
-            </h1>
 
-            {/* PRIMARY RESULT CARD */}
-            <div className="bg-[#fbf5ec] border border-[#e2d2bf] rounded-xl p-6 sm:p-8 shadow-sm flex flex-col gap-5">
-              <p className="text-[15px] sm:text-[15.5px] leading-relaxed text-[#5a463c]">
-                {primaryResult.desc}
+              {foundCombo && (
+                <div className="mt-5 bg-[#ebdccb] border border-[#d8c5b0] rounded-xl p-5 sm:p-6 shadow-sm">
+                  <div className="text-[11.5px] tracking-[1.5px] text-[#7c2a34] font-semibold uppercase mb-1 flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Tu combinación mágica</span>
+                  </div>
+                  <h3 className="font-cormorant text-xl text-[#3a2a24] font-semibold mb-2">
+                    ✦ {foundCombo.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5a463c] leading-relaxed">
+                    {foundCombo.desc}
+                  </p>
+                </div>
+              )}
+
+              {isEclectic && (
+                <div className="mt-5 bg-[#fbf5ec] border border-[#e2d2bf] rounded-xl p-5 shadow-sm text-xs sm:text-sm text-[#5a463c] italic leading-relaxed">
+                  🔮 Tus respuestas estuvieron muy repartidas entre varios tipos. Tienes un perfil <strong>ecléctico</strong>: tu práctica probablemente combine elementos de varias tradiciones sin necesidad de limitarte a una sola.
+                </div>
+              )}
+
+              <p className="text-center text-[12px] text-[#8c7464] italic mt-6">
+                ✨ No hay un resultado mejor que otro. El quiz describe afinidades simbólicas y espirituales.
               </p>
-              
-              <div className="pt-3 border-t border-[#e2d2bf]/60">
-                <div className="text-[11px] tracking-[1.5px] text-[#8a6a5c] font-semibold uppercase mb-1.5">
-                  TUS FORTALEZAS
-                </div>
-                <div className="text-[14px] sm:text-[14.5px] leading-relaxed text-[#3a2a24] capitalize">
-                  {primaryResult.fortalezas}
-                </div>
-              </div>
 
-              <div className="pt-3 border-t border-[#e2d2bf]/60">
-                <div className="text-[11px] tracking-[1.5px] text-[#8a6a5c] font-semibold uppercase mb-1.5">
-                  EXPLORA
-                </div>
-                <div className="text-[14px] sm:text-[14.5px] leading-relaxed text-[#3a2a24]">
-                  {primaryResult.explora}
-                </div>
-              </div>
-            </div>
-
-            {/* ECLECTIC NOTE (if top 3 are very close) */}
-            {isEclectic && (
-              <div className="mt-5 bg-[#faf2e5] border border-[#e6d5c2] p-5 rounded-xl shadow-xs -rotate-0.5">
-                <div className="font-caveat text-xl sm:text-[22px] leading-snug text-[#5a463c]">
-                  Tienes tres resultados muy cercanos: probablemente tengas un perfil ecléctico. Tu práctica natural consiste en combinar diferentes caminos en lugar de limitarte a uno solo.
-                </div>
-              </div>
-            )}
-
-            {/* SECONDARY RESULT & COMBO (if applicable) */}
-            {!isEclectic && secondaryResult && (
-              <div className="mt-5">
-                <div className="text-xs tracking-wider text-[#7c2a34] mb-2.5 font-semibold flex items-center gap-1.5">
+              {/* COMMUNITY & NEXT STEPS / 2 BOTONES DE COMUNIDAD Y PATREON */}
+              <div className="mt-8 bg-[#fbf5ec] border border-[#e2d2bf] rounded-2xl p-6 sm:p-7 text-center shadow-sm">
+                <div className="text-[11px] tracking-[2px] text-[#7c2a34] font-semibold uppercase mb-1.5 flex items-center justify-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>ENERGÍA SECUNDARIA: {secondaryResult.emoji} {secondaryResult.name}</span>
+                  <span>CONTINÚA TU CAMINO MÁGICO</span>
+                  <Sparkles className="w-3.5 h-3.5" />
                 </div>
-                <div className="bg-white border border-dashed border-[#ddc6b3] rounded-xl p-5 shadow-xs">
-                  {foundCombo ? (
-                    <div>
-                      <div className="font-cormorant italic text-lg sm:text-xl text-[#3a2a24] font-medium mb-1.5">
-                        {foundCombo.title}
-                      </div>
-                      <p className="text-sm leading-relaxed text-[#5a463c]">
-                        {foundCombo.desc}
-                      </p>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className="font-cormorant italic text-lg text-[#3a2a24] font-medium mb-1">
-                        Sinergia con {secondaryResult.name}
-                      </div>
-                      <p className="text-sm leading-relaxed text-[#5a463c]">
-                        {secondaryResult.desc}
-                      </p>
-                    </div>
-                  )}
+                <h3 className="font-cormorant text-2xl sm:text-3xl text-[#3a2a24] font-medium mb-2">
+                  Únete al Círculo de Mystic Lab
+                </h3>
+                <p className="text-sm text-[#5a463c] max-w-md mx-auto mb-6 leading-relaxed">
+                  Conéctate con nuestra comunidad, comparte tus lecturas y aprende a profundizar en tu práctica mágica:
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {/* 1. Botón WhatsApp */}
+                  <a
+                    id="witch-test-whatsapp-link"
+                    href={WHATSAPP_COMMUNITY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2.5 px-5 py-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-xl font-medium text-[12.5px] tracking-wider shadow-sm transition-all transform hover:-translate-y-0.5 active:scale-[0.98]"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-white/20" />
+                    <span>UNIRTE AL WHATSAPP ✦</span>
+                  </a>
+
+                  {/* 2. Botón Patreon */}
+                  <a
+                    id="witch-test-patreon-link"
+                    href={PATREON_POST_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2.5 px-5 py-4 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] rounded-xl font-medium text-[12.5px] tracking-wider shadow-sm transition-all transform hover:-translate-y-0.5 active:scale-[0.98]"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>CÓMO EMPEZAR EN PATREON ✦</span>
+                  </a>
                 </div>
               </div>
-            )}
 
-            {/* DISCLAIMER / FOOTNOTE */}
-            <p className="mt-6 text-[12.5px] leading-relaxed text-[#8a6a5c] text-center">
-              ✨ No hay un resultado mejor que otro. El quiz describe afinidades simbólicas y espirituales.
+              {/* ACTION BUTTONS */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-6">
+                <button
+                  onClick={handleRestartWitch}
+                  className="w-full sm:w-auto px-7 py-3.5 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] text-xs font-semibold tracking-widest rounded-full transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
+                >
+                  <RefreshCw className="w-3.5 h-3.5" />
+                  <span>VOLVER A HACER EL TEST ✦</span>
+                </button>
+
+                <button
+                  onClick={handleShareWitch}
+                  className="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-[#fbf5ec] border border-[#d4c3b0] text-[#3a2a24] text-xs font-semibold tracking-widest rounded-full transition-all cursor-pointer shadow-xs flex items-center justify-center gap-2"
+                >
+                  {copiedWitch ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
+                  <span>{copiedWitch ? "¡COPIADO AL PORTAPAPELES!" : "COMPARTIR RESULTADO"}</span>
+                </button>
+              </div>
+
+              {/* SWITCH TO ARCANO CTA */}
+              <div className="mt-8 text-center pt-6 border-t border-[#e2d2bf]/60">
+                <button
+                  onClick={() => {
+                    setActiveTest("ARCANO_BIRTH");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7c2a34] hover:text-[#a8404c] border-b border-[#7c2a34]/40 hover:border-[#a8404c] pb-0.5 cursor-pointer"
+                >
+                  <span>🃏 ¿Quieres conocer también tu Arcano de Nacimiento? Haz clic aquí ➔</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* SECTION 2: TEST 2 - ARCANO DE NACIMIENTO */}
+      {/* ======================================================== */}
+      {activeTest === "ARCANO_BIRTH" && (
+        <div className="max-w-[680px] mx-auto px-5 py-8 sm:py-10 animate-fadeIn">
+          
+          {/* HEADER INTRO */}
+          <div className="text-center mb-8">
+            <div className="text-[12px] tracking-[2px] text-[#7c2a34] font-medium mb-2 uppercase flex items-center justify-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>TEST NUMEROLÓGICO DEL TAROT</span>
+              <Sparkles className="w-3.5 h-3.5" />
+            </div>
+            <h1 className="font-cormorant text-3xl sm:text-4xl text-[#3a2a24] font-normal leading-tight">
+              🃏 ¿Cuál es tu Arcano de Nacimiento?
+            </h1>
+            <p className="text-sm leading-relaxed text-[#5a463c] mt-3 max-w-lg mx-auto">
+              Cada fecha de nacimiento está sintonizada con uno de los 22 Arcanos Mayores. Esta carta rige tu misión espiritual, tus dones innatos y tus principales desafíos evolutivos.
             </p>
-
-            {/* COMMUNITY & NEXT STEPS / 2 BOTONES DE COMUNIDAD Y PATREON */}
-            <div className="mt-8 bg-[#fbf5ec] border border-[#e2d2bf] rounded-2xl p-6 sm:p-7 text-center shadow-sm">
-              <div className="text-[11px] tracking-[2px] text-[#7c2a34] font-semibold uppercase mb-1.5 flex items-center justify-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>CONTINÚA TU CAMINO MÁGICO</span>
-                <Sparkles className="w-3.5 h-3.5" />
-              </div>
-              <h3 className="font-cormorant text-2xl sm:text-3xl text-[#3a2a24] font-medium mb-2">
-                Únete al Círculo de Mystic Lab
-              </h3>
-              <p className="text-sm text-[#5a463c] max-w-md mx-auto mb-6 leading-relaxed">
-                Conéctate con nuestra comunidad, comparte tus lecturas y aprende a profundizar en tu práctica mágica:
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                {/* 1. Botón WhatsApp */}
-                <a
-                  id="witch-test-whatsapp-link"
-                  href="https://chat.whatsapp.com/DPpoctnp402IIgEQ85jvdh?s=cl&p=a&mlu=4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2.5 px-5 py-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-xl font-medium text-[12.5px] tracking-wider shadow-sm transition-all transform hover:-translate-y-0.5 active:scale-[0.98]"
-                >
-                  <MessageCircle className="w-4 h-4 fill-white/20" />
-                  <span>UNIRTE AL WHATSAPP ✦</span>
-                </a>
-
-                {/* 2. Botón Patreon */}
-                <a
-                  id="witch-test-patreon-link"
-                  href="https://www.patreon.com/MysticLabs369/posts/como-empezar-en-167309757?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2.5 px-5 py-4 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] rounded-xl font-medium text-[12.5px] tracking-wider shadow-sm transition-all transform hover:-translate-y-0.5 active:scale-[0.98]"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>CÓMO EMPEZAR EN PATREON ✦</span>
-                </a>
-              </div>
-            </div>
-
-            {/* ACTION BUTTONS */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-6">
-              <button
-                onClick={handleRestart}
-                className="w-full sm:w-auto px-7 py-3.5 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] text-xs font-semibold tracking-widest rounded-full transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
-              >
-                <RefreshCw className="w-3.5 h-3.5" />
-                <span>VOLVER A HACER EL TEST ✦</span>
-              </button>
-
-              <button
-                onClick={handleShare}
-                className="w-full sm:w-auto px-5 py-3.5 bg-white hover:bg-[#fbf5ec] border border-[#7c2a34]/30 text-[#7c2a34] text-xs font-medium tracking-wider rounded-full transition-all cursor-pointer shadow-xs flex items-center justify-center gap-2"
-              >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
-                <span>{copied ? "¡Copiado al portapapeles!" : "Compartir resultado"}</span>
-              </button>
-            </div>
           </div>
-        )}
-      </div>
+
+          {/* DATE INPUT FORM */}
+          <div className="bg-[#fbf5ec] border border-[#e2d2bf] rounded-2xl p-6 sm:p-8 shadow-sm mb-8">
+            <div className="text-center mb-6">
+              <span className="text-xs font-semibold tracking-widest text-[#7c2a34] uppercase">
+                ✦ INGRESA TU FECHA DE NACIMIENTO ✦
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6">
+              {/* Día */}
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-[#7c2a34] font-semibold mb-1.5 text-center">
+                  Día
+                </label>
+                <select
+                  value={birthDay}
+                  onChange={(e) => setBirthDay(e.target.value)}
+                  className="w-full bg-white border border-[#d8c5b0] text-[#3a2a24] text-sm py-2.5 px-3 rounded-lg text-center font-medium focus:outline-hidden focus:border-[#7c2a34] shadow-2xs"
+                >
+                  {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Mes */}
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-[#7c2a34] font-semibold mb-1.5 text-center">
+                  Mes
+                </label>
+                <select
+                  value={birthMonth}
+                  onChange={(e) => setBirthMonth(e.target.value)}
+                  className="w-full bg-white border border-[#d8c5b0] text-[#3a2a24] text-sm py-2.5 px-2 rounded-lg text-center font-medium focus:outline-hidden focus:border-[#7c2a34] shadow-2xs"
+                >
+                  {MONTH_NAMES.map((mName, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      {mName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Año */}
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-[#7c2a34] font-semibold mb-1.5 text-center">
+                  Año
+                </label>
+                <select
+                  value={birthYear}
+                  onChange={(e) => setBirthYear(e.target.value)}
+                  className="w-full bg-white border border-[#d8c5b0] text-[#3a2a24] text-sm py-2.5 px-3 rounded-lg text-center font-medium focus:outline-hidden focus:border-[#7c2a34] shadow-2xs"
+                >
+                  {Array.from({ length: 85 }, (_, i) => 2026 - i).map((y) => (
+                    <option key={y} value={y}>
+                      {y}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* BOTÓN CALCULAR */}
+            <button
+              id="calculate-arcano-birth-btn"
+              onClick={handleCalculateArcano}
+              disabled={isCalculatingArcano}
+              className="w-full py-4 px-6 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] text-xs sm:text-sm font-semibold tracking-widest uppercase rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+            >
+              {isCalculatingArcano ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin text-[#e3b8bb]" />
+                  <span>{arcanoLoadingPhase}</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4" />
+                  <span>REVELAR MI ARCANO REGENTE ✦</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* ARCANO RESULT SECTION */}
+          {arcanoInfo && arcanoResultNumber && (
+            <div className="animate-fadeIn">
+              
+              {/* CARD REVEAL CONTAINER */}
+              <div className="bg-[#fbf5ec] border border-[#e2d2bf] rounded-2xl p-6 sm:p-8 shadow-sm mb-6">
+                <div className="text-center mb-4">
+                  <span className="text-[11px] tracking-[2px] uppercase text-[#7c2a34] font-semibold">
+                    ✦ TU ARCANO MAYOR REGENTE ✦
+                  </span>
+                  <h2 className="font-cormorant text-3xl sm:text-5xl text-[#3a2a24] font-normal mt-1 mb-2">
+                    {arcanoInfo.number} · {arcanoInfo.name}
+                  </h2>
+                  <p className="font-cormorant italic text-base sm:text-lg text-[#7c2a34] max-w-md mx-auto">
+                    "{arcanoInfo.keyEnergy}"
+                  </p>
+                </div>
+
+                {/* TAROT CARD ART */}
+                <div className="max-w-[240px] sm:max-w-[270px] mx-auto my-6 rounded-xl overflow-hidden shadow-lg border-2 border-[#c8a4a8] bg-[#2a1c18]">
+                  <img
+                    src={arcanoInfo.image}
+                    alt={arcanoInfo.name}
+                    className="w-full h-auto object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
+                {/* DETAILED INTERPRETATION */}
+                <div className="space-y-4 text-sm sm:text-[15px] leading-relaxed text-[#5a463c] pt-2">
+                  <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-[#e6d5c2]">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#7c2a34] mb-1.5 flex items-center gap-1.5">
+                      <Star className="w-3.5 h-3.5" />
+                      <span>Tu Esencia y Dones Arquetípicos</span>
+                    </h4>
+                    <p>{arcanoInfo.description}</p>
+                  </div>
+
+                  <div className="bg-[#ebdccb]/60 p-4 rounded-xl border border-[#d8c5b0] text-xs sm:text-[13.5px]">
+                    <span className="font-bold text-[#7c2a34] uppercase tracking-wider block mb-1">
+                      ✦ Clave de Integración Práctica:
+                    </span>
+                    <span>
+                      Medita con esta carta en tus momentos de duda. Tu arcano te recuerda que tus mayores talentos y tus mayores sombras provienen de la misma fuente de poder.
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* COMMUNITY & NEXT STEPS / 2 BOTONES DE COMUNIDAD Y PATREON */}
+              <div className="bg-[#fbf5ec] border border-[#e2d2bf] rounded-2xl p-6 sm:p-7 text-center shadow-sm mb-6">
+                <div className="text-[11px] tracking-[2px] text-[#7c2a34] font-semibold uppercase mb-1.5 flex items-center justify-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>CONTINÚA TU CAMINO MÁGICO</span>
+                  <Sparkles className="w-3.5 h-3.5" />
+                </div>
+                <h3 className="font-cormorant text-2xl sm:text-3xl text-[#3a2a24] font-medium mb-2">
+                  Únete al Círculo de Mystic Lab
+                </h3>
+                <p className="text-sm text-[#5a463c] max-w-md mx-auto mb-6 leading-relaxed">
+                  Conéctate con nuestra comunidad, comparte tu arcano y aprende a trabajar conscientemente con su energía:
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {/* 1. Botón WhatsApp */}
+                  <a
+                    id="arcano-test-whatsapp-link"
+                    href={WHATSAPP_COMMUNITY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2.5 px-5 py-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-xl font-medium text-[12.5px] tracking-wider shadow-sm transition-all transform hover:-translate-y-0.5 active:scale-[0.98]"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-white/20" />
+                    <span>UNIRTE AL WHATSAPP ✦</span>
+                  </a>
+
+                  {/* 2. Botón Patreon */}
+                  <a
+                    id="arcano-test-patreon-link"
+                    href={PATREON_POST_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2.5 px-5 py-4 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] rounded-xl font-medium text-[12.5px] tracking-wider shadow-sm transition-all transform hover:-translate-y-0.5 active:scale-[0.98]"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>CÓMO EMPEZAR EN PATREON ✦</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* ACTION BUTTONS */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+                <button
+                  onClick={handleResetArcano}
+                  className="w-full sm:w-auto px-7 py-3.5 bg-[#7c2a34] hover:bg-[#963541] text-[#f4ece1] text-xs font-semibold tracking-widest rounded-full transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
+                >
+                  <RefreshCw className="w-3.5 h-3.5" />
+                  <span>CALCULAR OTRA FECHA ✦</span>
+                </button>
+
+                <button
+                  onClick={handleShareArcano}
+                  className="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-[#fbf5ec] border border-[#d4c3b0] text-[#3a2a24] text-xs font-semibold tracking-widest rounded-full transition-all cursor-pointer shadow-xs flex items-center justify-center gap-2"
+                >
+                  {copiedArcano ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
+                  <span>{copiedArcano ? "¡COPIADO AL PORTAPAPELES!" : "COMPARTIR MI ARCANO"}</span>
+                </button>
+              </div>
+
+              {/* SWITCH TO WITCH QUIZ CTA */}
+              <div className="mt-8 text-center pt-6 border-t border-[#e2d2bf]/60">
+                <button
+                  onClick={() => {
+                    setActiveTest("WITCH_QUIZ");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7c2a34] hover:text-[#a8404c] border-b border-[#7c2a34]/40 hover:border-[#a8404c] pb-0.5 cursor-pointer"
+                >
+                  <span>🔮 ¿Quieres descubrir también qué tipo de bruja eres? Haz el test aquí ➔</span>
+                </button>
+              </div>
+
+            </div>
+          )}
+
+        </div>
+      )}
+
     </div>
   );
 };
